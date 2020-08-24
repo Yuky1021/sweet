@@ -5,7 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html lang="zxx">
+<!--<html lang="zxx">-->
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
 <title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Home :: W3layouts</title>
 <!-- for-mobile-apps -->
@@ -16,12 +17,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap -->
-<link href="css/font-awesome.css" rel="stylesheet"> <!-- Font awesome -->
-<link href="css/owl.carousel.css" rel="stylesheet"><!-- Clients -->
-<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" /><!-- Pop-up -->
-<link href="css/lsb.css" rel="stylesheet" type="text/css"><!-- gallery -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /><!-- Bootstrap -->
+<link href="../css/font-awesome.css" rel="stylesheet"> <!-- Font awesome -->
+<link href="../css/owl.carousel.css" rel="stylesheet"><!-- Clients -->
+<link href="../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" /><!-- Pop-up -->
+<link href="../css/lsb.css" rel="stylesheet" type="text/css"><!-- gallery -->
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -201,7 +202,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  <!--//middle-section -->
  <!--//mobile-app -->
-	
+<section class="w3ls-team text-center">
+	<div class="container">
+		<div class="tittle-agileinfo">
+			<h3>会 员 推 荐</h3>
+		</div>
+
+		<div class="team-row">
+			<span th:each="b : ${list}">
+				<div class="col-md-3 w3ls-team-grids">
+					<h5 th:text="${b.bmname}"></h5>
+					<p th:text="${b.soliloquy}"></p>
+					<div class="agileits-social">
+						<ul>
+							<!--<li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
+							<!--<li><a href="../single1.html"><i class="fa fa-twitter">详情信息</i></a></li>-->
+							<!--推荐使用 <a href="@{basic_message/findAllById(bmid=${b.bmid})}"></a>-->
+							<li><a th:href="@{'../basic_message/findAllById?bmid='+${b.bmid}}"><i class="fa fa-twitter">详情信息</i></a></li>
+							<!--<li><a th:href="/basic_message/findAllById?bmid=${b.bmid}"><i class="fa fa-twitter">详情信息</i></a></li>-->
+							<!--<li><a href="#"><i class="fa fa-rss"></i></a></li>-->
+						</ul>
+					</div>
+					<div class="team-img">
+						<img th:src="${b.pic}" alt="">
+					</div>
+				</div>
+			</span>
+		</div>
+
+	</div>
+</section>
  <!--//mobile-app -->
 <!-- testimonials -->
 	<div class="test" id="clients">
@@ -212,14 +242,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="test-gri1">
 			<div id="owl-demo2" class="owl-carousel">
 				<div class="test-grid1">
-					<img src="images/t1.jpg" alt="" class="img-r">
+					<img src="../images/t1.jpg" alt="" class="img-r">
 					<h4>Abelard & Heloise</h4>
 					<span>Couple 1</span>
 					<p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
 				</div>	
 				<div class="agile">
 					<div class="test-grid1">
-						<img src="images/t2.jpg" alt="" class="img-r">
+						<img src="../images/t2.jpg" alt="" class="img-r">
 						<h4>Bonnie & Clyde</h4>
 						<span>Couple 2</span>
 						<p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
@@ -227,7 +257,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="agile">
 					<div class="test-grid1">
-						<img src="images/t3.jpg" alt="" class="img-r">
+						<img src="../images/t3.jpg" alt="" class="img-r">
 						<h4>Jack & Sally</h4>
 						<span>Couple 3</span>
 						<p>Lorem ipsum dolor sit amet, Ut enim ad minim veniam, quis.Lorem ipsum dolor .</p>
@@ -247,9 +277,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul id="flexiselDemo1">	
 			<li>
 				<div class="wthree_gallery_grid">
-					<a href="images/g1.jpg" class="lsb-preview" data-lsb-group="header">
+					<a href="../images/g1.jpg" class="lsb-preview" data-lsb-group="header">
 						<div class="view second-effect">
-							<img src="images/g1.jpg" alt="" class="img-responsive" />
+							<img src="../images/g1.jpg" alt="" class="img-responsive" />
 							<div class="mask">
 								<p>Bonnie <i class="fa fa-heart-o" aria-hidden="true"></i> Clyde</p>
 							</div>
@@ -259,9 +289,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li>
 				<div class="wthree_gallery_grid">
-					<a href="images/g2.jpg" class="lsb-preview" data-lsb-group="header">
+					<a href="../images/g2.jpg" class="lsb-preview" data-lsb-group="header">
 						<div class="view second-effect">
-							<img src="images/g2.jpg" alt="" class="img-responsive" />
+							<img src="../images/g2.jpg" alt="" class="img-responsive" />
 							<div class="mask">
 								<p>Abelard <i class="fa fa-heart-o" aria-hidden="true"></i> Heloise</p>
 							</div>
@@ -271,9 +301,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li>
 				<div class="wthree_gallery_grid">
-					<a href="images/g3.jpg" class="lsb-preview" data-lsb-group="header">
+					<a href="../images/g3.jpg" class="lsb-preview" data-lsb-group="header">
 						<div class="view second-effect">
-							<img src="images/g3.jpg" alt="" class="img-responsive" />
+							<img src="../images/g3.jpg" alt="" class="img-responsive" />
 							<div class="mask">
 								<p>Henry <i class="fa fa-heart-o" aria-hidden="true"></i> Clare</p>
 							</div>
@@ -283,9 +313,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li>
 				<div class="wthree_gallery_grid">
-					<a href="images/g4.jpg" class="lsb-preview" data-lsb-group="header">
+					<a href="../images/g4.jpg" class="lsb-preview" data-lsb-group="header">
 						<div class="view second-effect">
-							<img src="images/g4.jpg" alt="" class="img-responsive" />
+							<img src="../images/g4.jpg" alt="" class="img-responsive" />
 							<div class="mask">
 								<p>Jack <i class="fa fa-heart-o" aria-hidden="true"></i> Sally</p>
 							</div>
@@ -295,9 +325,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li>
 				<div class="wthree_gallery_grid">
-					<a href="images/g5.jpg" class="lsb-preview" data-lsb-group="header">
+					<a href="../images/g5.jpg" class="lsb-preview" data-lsb-group="header">
 						<div class="view second-effect">
-							<img src="images/g5.jpg" alt="" class="img-responsive" />
+							<img src="../images/g5.jpg" alt="" class="img-responsive" />
 							<div class="mask">
 								<p>Henry <i class="fa fa-heart-o" aria-hidden="true"></i> Clare</p>
 							</div>
@@ -306,8 +336,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</li>
 		</ul>
-
-
 	</div>
 
 <!--//gallery-->
@@ -375,7 +403,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--/footer -->
 
 <!-- js -->
-<script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
+<script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
 <!-- flexisel -->
 		<script type="text/javascript">
 		$(window).load(function() {
@@ -404,19 +432,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 		});
 	</script>
-	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+	<script type="text/javascript" src="../js/jquery.flexisel.js"></script>
 <!-- //flexisel -->
 <!-- gallery-pop-up -->
-	<script src="js/lsb.min.js"></script>
+	<script src="../js/lsb.min.js"></script>
 	<script>
 	$(window).load(function() {
 		  $.fn.lightspeedBox();
 		});
 	</script>
 <!-- //gallery-pop-up -->
-<script src="js/SmoothScroll.min.js"></script>
+<script src="../js/SmoothScroll.min.js"></script>
 <!--responsive slider -->
-<script src="js/responsiveslides.min.js"></script>
+<script src="../js/responsiveslides.min.js"></script>
 							<script>
 								// You can also use "$(window).load(function() {"
 								$(function () {
@@ -439,7 +467,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							 </script>
 <!--//responsive slider -->
 <!--pop-up-box -->
-					<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+					<script src="../js/jquery.magnific-popup.js" type="text/javascript"></script>
 					<script>
 					$(document).ready(function() {
 					$('.popup-with-zoom-anim').magnificPopup({
@@ -477,7 +505,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- //smooth scrolling -->
 	<!-- for-Clients -->
-		<script src="js/owl.carousel.js"></script>
+		<script src="../js/owl.carousel.js"></script>
 			<!-- requried-jsfiles-for owl -->
 							        <script>
 									    $(document).ready(function() {
@@ -494,8 +522,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- //requried-jsfiles-for owl -->
 	<!-- //for-Clients -->
 	<!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="../js/move-top.js"></script>
+<script type="text/javascript" src="../js/easing.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -505,7 +533,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
 	
 
 </body>
