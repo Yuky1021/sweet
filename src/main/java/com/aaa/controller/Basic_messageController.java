@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,6 +36,7 @@ public class Basic_messageController {
     //跳转登录页面
     @RequestMapping("tologin")
     public String toLogin(HttpServletRequest request){
+        System.out.println("tologin------");
         final HttpSession session = request.getSession();
         final Object loginName = session.getAttribute("loginName");
         final Object loginPwd = session.getAttribute("loginPwd");
@@ -44,23 +46,32 @@ public class Basic_messageController {
     }
 
     @RequestMapping("Login")
-    public String Login(Basic_message bm, HttpServletRequest request){
+    public String Login(Basic_message bm, HttpServletRequest request,HttpServletResponse response,int checktf){
         //如果账号密码为空
         if (null == bm.getNumber() || null == bm.getPwd()) {
             return "redirect:/";
         }
+
         //查看账号密码是否正确
         final int i = basic_messageDao.login(bm.getNumber(),bm.getPwd());
-        System.out.println(i);
-
         //登录成功保存用户名密码到session
         if(i==1){
+            //存入session
             final HttpSession session = request.getSession();
             session.setAttribute("loginName", bm.getNumber());
             session.setAttribute("loginPwd", bm.getPwd());
+
+            //如果选了复选框
+            if(checktf==1) {
+                //存入cookie
+                Cookie NameCookie = new Cookie("lName", bm.getNumber());
+                Cookie PwdCookie = new Cookie("lPwd", bm.getPwd());
+                response.addCookie(NameCookie);
+                response.addCookie(PwdCookie);
+            }
             return "redirect:findAllById";
         }
-        return "redirect:/";
+        return "redirect:tologin";
     }
     //跳转注册页面
     @RequestMapping("toRegister")
@@ -75,6 +86,13 @@ public class Basic_messageController {
     }
 
 
+    // 注销登录
+    @RequestMapping("/loginout")
+    public String loginOut(HttpServletRequest request) {
+        //清空session
+        request.getSession().invalidate();
+        return "redirect:/";
+    }
 
 
 }

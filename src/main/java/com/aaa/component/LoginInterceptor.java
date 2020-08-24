@@ -22,7 +22,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         Object loginName = request.getSession().getAttribute("loginName");
         if (null == loginName || !(loginName instanceof String)) {
             // 未登录，重定向到登录页
-            response.sendRedirect("/");
+            System.out.println("重定向");
+            response.sendRedirect("/sweet/basic_message/tologin");
             return false;
         }
         String userName = (String) loginName;
