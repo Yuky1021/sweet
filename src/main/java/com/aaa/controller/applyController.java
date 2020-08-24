@@ -1,5 +1,6 @@
 package com.aaa.controller;
 
+import com.aaa.dao.activityDao;
 import com.aaa.dao.applyDao;
 import com.aaa.entity.apply;
 import org.springframework.stereotype.Controller;
@@ -17,13 +18,16 @@ public class applyController {
 
     @Resource
     applyDao applydao;
+    @Resource
+    activityDao activitydao;
 
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<apply> findAll(){
         System.out.println("findAll");
         return applydao.selectAll();
-    }
+
+}
 
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
