@@ -14,6 +14,7 @@ public class Class_vido {
     @Column
     private String info;
 
+
     public Integer getCvid() {
         return cvid;
     }

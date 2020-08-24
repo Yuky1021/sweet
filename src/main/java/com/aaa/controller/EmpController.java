@@ -17,6 +17,7 @@ import java.util.List;
 public class EmpController {
     @Resource
     EmpDao empDao;
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Emp> findAll(){

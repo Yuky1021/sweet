@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ComboDao  extends tk.mybatis.mapper.common.Mapper<Combo> {
 
+
 }

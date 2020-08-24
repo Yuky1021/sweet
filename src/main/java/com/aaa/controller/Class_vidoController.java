@@ -16,6 +16,7 @@ import java.util.List;
 public class Class_vidoController {
     @Resource
     Class_vidoDao class_vidoDao;
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Class_vido> findAll(){

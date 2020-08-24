@@ -16,6 +16,7 @@ import java.util.List;
 public class Profession_typeController {
     @Resource
     Profession_typeDao profession_typeDao;
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Profession_type> findAll(){

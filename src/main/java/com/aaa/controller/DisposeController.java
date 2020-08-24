@@ -17,6 +17,7 @@ import java.util.Map;
 public class DisposeController {
     @Resource
     DisposeDao disposeDao;
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){

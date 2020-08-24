@@ -18,7 +18,6 @@ public class Class_textController {
     @Resource
     Class_textDao class_textDao;
 
-
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Class_text> findAll(){

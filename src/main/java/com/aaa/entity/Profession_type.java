@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 
 public class Profession_type {
+
     @Id
     @Column
     private Integer ptid;

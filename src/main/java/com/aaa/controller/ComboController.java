@@ -18,6 +18,7 @@ import java.util.List;
 public class ComboController {
     @Resource
     ComboDao comboDao;
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Combo> findAll(){
