@@ -1,15 +1,29 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class activity {
+    @Id
+    @Column
     private Integer acid;
+    @Column
     private String title;
+    @Column
     private String achost;
+    @Column
     private String actime;
+    @Column
     private String acaddress;
+    @Column
     private Integer acpeople;
+    @Column
     private String actype;
+    @Column
     private String acrequest;
+    @Column
     private String flow;
+    @Column
     private String remark;
 
     public Integer getAcid() {

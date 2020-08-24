@@ -1,5 +1,8 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Basic_message {
     private Integer bmid;
     private String number;
