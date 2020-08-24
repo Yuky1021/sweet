@@ -1,12 +1,23 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class apply {
+    @Id
+    @Column
     private Integer apid;
+    @Column
     private String name;
+    @Column
     private Integer part;
+    @Column
     private String phone;
+    @Column
     private String wechat;
+    @Column
     private Integer acid;
+    @Column
     private Integer bmid;
 
 

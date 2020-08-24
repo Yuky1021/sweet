@@ -1,9 +1,17 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class admins {
+    @Id
+    @Column
     private Integer adid;
+    @Column
     private String adname;
+    @Column
     private String pwd;
+    @Column
     private Integer state;
 
     public Integer getAdid() {

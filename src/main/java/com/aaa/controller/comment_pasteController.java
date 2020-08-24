@@ -1,58 +1,49 @@
 package com.aaa.controller;
 
-import com.aaa.dao.Basic_messageDao;
-import com.aaa.dao.activityDao;
-import com.aaa.dao.applyDao;
-import com.aaa.entity.Basic_message;
-import com.aaa.entity.activity;
-import com.aaa.entity.apply;
+import com.aaa.dao.comment_pasteDao;
+import com.aaa.entity.comment_paste;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 @CrossOrigin
 @Controller
-@RequestMapping("apply")
-public class applyController {
-
+@RequestMapping("comment_paste")
+public class comment_pasteController {
     @Resource
-    applyDao applydao;
+    comment_pasteDao comment_pastedao;
 
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){
         System.out.println("findAll");
-        return applydao.findAll();
+        return comment_pastedao.findAll();
 
     }
 
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
     public int del(Integer id){
-        System.out.println(applydao.deleteByPrimaryKey(id));
-        System.out.println(id);
-        Integer count=applydao.deleteByPrimaryKey(id);
-        return count;
+        System.out.println("del");
+        return comment_pastedao.deleteByPrimaryKey(id);
     }
 
     @RequestMapping(value ="update",produces = "application/json")
     @ResponseBody
-    public int update(apply apply){
+    public int update(comment_paste comment_paste){
         System.out.println("update");
-        return applydao.updateByPrimaryKey(apply);
+        return comment_pastedao.updateByPrimaryKey(comment_paste);
     }
 
     @RequestMapping(value ="add",produces = "application/json")
     @ResponseBody
-    public int add(apply apply){
+    public int add(comment_paste comment_paste){
         System.out.println("add");
-        return applydao.insert(apply);
+        return comment_pastedao.insert(comment_paste);
     }
 }
