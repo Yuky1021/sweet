@@ -1,14 +1,27 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Choose_mate {
+    @Id
+    @Column
     private Integer cmid;
+    @Column
     private Integer lage;
+    @Column
     private Integer bage;
+    @Column
     private Integer height;
+    @Column
     private Integer education;
+    @Column
     private Integer marriage;
+    @Column
     private String nation;
+    @Column
     private Integer monthly;
+    @Column
     private Integer bmid;
 
     public Integer getCmid() {

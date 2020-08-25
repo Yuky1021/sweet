@@ -1,8 +1,15 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Media {
+    @Id
+    @Column
     private Integer meid;
+    @Column
     private String name;
+    @Column
     private String pic;
 
     public Integer getMeid() {

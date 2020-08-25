@@ -1,11 +1,21 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Pay_fees {
+    @Id
+    @Column
     private Integer pfid;
+    @Column
     private String peoject;
+    @Column
     private Integer money;
+    @Column
     private String paytime;
+    @Column
     private String ptime;
+    @Column
     private Integer bmid;
 
     public Integer getPfid() {

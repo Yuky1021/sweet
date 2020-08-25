@@ -1,11 +1,21 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class comment_paste {
+    @Id
+    @Column
     private Integer cpid;
+    @Column
     private String title;
+    @Column
     private String context;
+    @Column
     private String commention;
+    @Column
     private Integer spid;
+    @Column
     private Integer bmid;
 
     public Integer getCpid() {
