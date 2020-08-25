@@ -1,10 +1,14 @@
 package com.aaa.controller;
 
+import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.entity.Basic_message;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -44,7 +48,7 @@ public class Basic_messageController {
         System.out.println(loginPwd);
         return "login";
     }
-
+    //登录
     @RequestMapping("Login")
     public String Login(Basic_message bm, HttpServletRequest request,HttpServletResponse response,int checktf){
         //如果账号密码为空
@@ -96,11 +100,32 @@ public class Basic_messageController {
     public String toRegister(){
         return "register";
     }
-
+    //注册
     @RequestMapping("Register")
-    public String Register(){
-        System.out.println(2222222);
-        return "register";
+    public String Register(Basic_message bm){
+        String pwd=bm.getPwd();
+        String phone=bm.getPhone();
+
+        //生成账号
+        String number="20"+phone.substring(5);
+        //查找数据库中的数据条数
+        int count = basic_messageDao.BMcount() + 1;
+        number=number+count;
+        System.out.println("number:"+number);
+        //添加数据
+        final int i = basic_messageDao.AddNPP(number, phone, pwd);
+        if (i>0){System.out.println("成功"); }
+
+        return "tologin";
+    }
+
+    //获取验证码
+    @RequestMapping("getPhoneVerification")
+    @ResponseBody
+    public String getPhoneVerification(@Param("phone") String phone){
+        final String Vcode = PhoneCode.getPhonemsg(phone);
+        System.out.println(Vcode);
+        return Vcode;
     }
 
 
@@ -109,7 +134,7 @@ public class Basic_messageController {
     public String loginOut(HttpServletRequest request) {
         //清空session
         request.getSession().invalidate();
-        return "redirect:/";
+        return "redirect:tologin";
     }
 
 
