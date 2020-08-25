@@ -1,9 +1,17 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Success {
+    @Id
+    @Column
     private Integer seid;
+    @Column
     private String boyname;
+    @Column
     private String girlname;
+    @Column
     private String info;
 
     public Integer getSeid() {

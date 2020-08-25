@@ -1,10 +1,19 @@
 package com.aaa.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 public class Top {
+    @Id
+    @Column
     private Integer topid;
+    @Column
     private String tname;
+    @Column
     private Integer price;
+    @Column
     private String benefit;
+    @Column
     private Integer state;
 
     public Integer getTopid() {
