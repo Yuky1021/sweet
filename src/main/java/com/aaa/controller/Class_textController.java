@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("class_text")
 public class Class_textController {
+
     @Resource
     Class_textDao class_textDao;
 

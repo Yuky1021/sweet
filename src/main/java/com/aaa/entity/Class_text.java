@@ -12,7 +12,6 @@ public class Class_text {
     @Column
     private String info;
 
-
     public Integer getCtid() {
         return ctid;
     }

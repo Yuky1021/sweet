@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("class_vido")
 public class Class_vidoController {
+
     @Resource
     Class_vidoDao class_vidoDao;
 

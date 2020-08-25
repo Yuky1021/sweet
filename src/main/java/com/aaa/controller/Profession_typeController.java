@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("profession_type")
 public class Profession_typeController {
+
     @Resource
     Profession_typeDao profession_typeDao;
 

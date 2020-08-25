@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 
 public class Combo {
-
     @Id
     @Column
     private Integer coid;

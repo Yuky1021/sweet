@@ -15,6 +15,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("dispose")
 public class DisposeController {
+
     @Resource
     DisposeDao disposeDao;
 

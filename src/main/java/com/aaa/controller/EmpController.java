@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("emp")
 public class EmpController {
+
     @Resource
     EmpDao empDao;
 
