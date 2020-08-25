@@ -13,25 +13,23 @@ public class LoginConfiguration implements WebMvcConfigurer {
         LoginInterceptor loginInterceptor = new LoginInterceptor();
         InterceptorRegistration loginRegistry = registry.addInterceptor(loginInterceptor);
         // 拦截路径
-        loginRegistry.addPathPatterns("/**/findAllById");
-        loginRegistry.addPathPatterns("/**/listAll");
-
-
+        loginRegistry.addPathPatterns("/**");
         // 排除路径
-//        loginRegistry.excludePathPatterns("/**/Login");
-//        loginRegistry.excludePathPatterns("/**/tologin");
-//        loginRegistry.excludePathPatterns("/**/loginout");
-//        loginRegistry.excludePathPatterns("/**/toRegister");
-
-
-
-
+        loginRegistry.excludePathPatterns("/**/Login");
+        loginRegistry.excludePathPatterns("/**/tologin");
+        loginRegistry.excludePathPatterns("/**/loginout");
+        loginRegistry.excludePathPatterns("/**/toRegister");
+        //后台排除拦截资源
+        loginRegistry.excludePathPatterns("/**/admin/**");
+        loginRegistry.excludePathPatterns("/**/Activity/**");
+        loginRegistry.excludePathPatterns("/**/apply/**");
         // 排除资源请求-
         loginRegistry.excludePathPatterns("/**/*.css");
         loginRegistry.excludePathPatterns("/**/*.js");
         loginRegistry.excludePathPatterns("/**/*.png");
         loginRegistry.excludePathPatterns("/**/*.jpg");
         loginRegistry.excludePathPatterns("/**/*.html");
+
         loginRegistry.excludePathPatterns("/**/*.eot");
         loginRegistry.excludePathPatterns("/**/*.svg");
         loginRegistry.excludePathPatterns("/**/*.ttf");
