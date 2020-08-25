@@ -4,19 +4,34 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 
 public class Basic_message {
+    @Id
+    @Column
     private Integer bmid;
+    @Column
     private String number;
+    @Column
     private String bmname;
+    @Column
     private Integer age;
+    @Column
     private Integer weight;
+    @Column
     private Integer height;
+    @Column
     private Integer sex;
+    @Column
     private String phone;
+    @Column
     private String pwd;
+    @Column
     private String address;
+    @Column
     private String birthday;
+    @Column
     private Integer marriage;
+    @Column
     private Integer vip;
+    @Column
     private Integer state;
 
     public Integer getBmid() {
