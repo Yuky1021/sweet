@@ -26,6 +26,12 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("SELECT COUNT(bmid) num FROM basic_message WHERE phone=#{number} AND pwd=#{pwd}")
     public int PPlogin(@Param("number") String number,@Param("pwd") String pwd);
 
+    //根据电话查询id
+    @Select("SELECT bmid FROM basic_message WHERE phone=#{phone}")
+    public int getBmidByPhone(@Param("phone") String phone);
+    //根据账号查询id
+    @Select("SELECT bmid FROM basic_message WHERE number=#{number}")
+    public int getBmidByNumber(@Param("number") String number);
 
 
 

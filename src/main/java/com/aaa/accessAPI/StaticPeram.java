@@ -17,6 +17,6 @@ public class StaticPeram {
     // 必填:短信签名-可在短信控制台中找到
     final static String SignName = "甜蜜网验证码";    // 阿里云配置你自己的短信签名填入
     // 必填:短信模板-可在短信控制台中找到a
-    final static String TemplateCode = "SMS_200194243"; // 阿里云配置你自己的短信模板填入
+    final static String TemplateCode = "SMS_200179547"; // 阿里云配置你自己的短信模板填入
 
 }

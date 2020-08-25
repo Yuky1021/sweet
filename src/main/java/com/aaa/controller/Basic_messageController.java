@@ -64,6 +64,20 @@ public class Basic_messageController {
             session.setAttribute("loginName", bm.getNumber());
             session.setAttribute("loginPwd", bm.getPwd());
 
+            Cookie BmidCookie;
+            if(i==1){
+                final int bmid = basic_messageDao.getBmidByNumber(bm.getNumber());
+                System.out.println("bmid:"+bmid);
+                BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                response.addCookie(BmidCookie);
+            }
+            if(j==1){
+                final int bmid = basic_messageDao.getBmidByPhone(bm.getNumber());
+                System.out.println("bmid:"+bmid);
+                BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                response.addCookie(BmidCookie);
+            }
+
             //如果选了复选框
             if(checktf==1) {
                 //存入cookie
