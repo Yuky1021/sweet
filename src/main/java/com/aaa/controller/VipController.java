@@ -15,6 +15,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("vip")
 public class VipController {
+
     @Resource
     VipDao vipDao;
     @RequestMapping(value ="findAll",produces = "application/json")
