@@ -76,6 +76,7 @@ public class Basic_messageController {
         }
         return "redirect:tologin";
     }
+
     //跳转注册页面
     @RequestMapping("toRegister")
     public String toRegister(){

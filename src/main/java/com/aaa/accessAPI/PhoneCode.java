@@ -103,7 +103,7 @@ public class PhoneCode {
     }
 
     /**
-     * 生成6位随机数验证码
+     * 生成6位随机数验证码a
      * @return
      */
     public static String vcode(){

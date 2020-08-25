@@ -16,7 +16,7 @@ public class StaticPeram {
     final static String accessKeySecret = "D2sR5KEPY67tzWGuscNQcB5XPCZ4yh";// 你的accessKeySecret,填你自己的 上文配置所得 自行配置
     // 必填:短信签名-可在短信控制台中找到
     final static String SignName = "甜蜜网验证码";    // 阿里云配置你自己的短信签名填入
-    // 必填:短信模板-可在短信控制台中找到
+    // 必填:短信模板-可在短信控制台中找到a
     final static String TemplateCode = "SMS_200194243"; // 阿里云配置你自己的短信模板填入
 
 }
