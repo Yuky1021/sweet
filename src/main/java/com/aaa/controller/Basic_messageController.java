@@ -53,9 +53,12 @@ public class Basic_messageController {
         }
 
         //查看账号密码是否正确
-        final int i = basic_messageDao.login(bm.getNumber(),bm.getPwd());
+        //账号密码登录
+        final int i = basic_messageDao.UPlogin(bm.getNumber(),bm.getPwd());
+        //手机号密码登录
+        final int j = basic_messageDao.PPlogin(bm.getNumber(),bm.getPwd());
         //登录成功保存用户名密码到session
-        if(i==1){
+        if(i==1||j==1){
             //存入session
             final HttpSession session = request.getSession();
             session.setAttribute("loginName", bm.getNumber());

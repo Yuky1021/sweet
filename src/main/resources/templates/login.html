@@ -88,14 +88,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="col-md-8 login-form-w3-agile">
             <form action="Login" method="post">
-                <input type="hidden" name="checktf" id="checktf" value="0">
+                <input type="hidden" name="checktf" id="checktf" value="1">
                 <div class="w3_form_body_grid">
-                    <span>用户名</span>
-                    <input type="text" id="lname" name="number" placeholder="UserName" required="">
+                    <span>用户名/电话</span>
+                    <input type="text" id="lname" name="number" placeholder="请输入用户名/电话号" required="">
                 </div>
                 <div class="w3_form_body_grid">
                     <span>密码</span>
-                    <input type="password" id="lpwd" name="pwd" placeholder="Password" required="">
+                    <input type="password" id="lpwd" name="pwd" placeholder="请输入密码" required="">
                 </div>
                 <div class="agile_remember">
                     <div class="agile_remember_left">
@@ -224,11 +224,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $("#lname").val(name);
     $("#lpwd").val(pwd);
 
-
     function pdck(){
         let ck = $("#cktf");
         let isChecked = ck.prop("checked");
-        alert(isChecked);
         if(isChecked){
             $("#checktf").val("1")
         }else {

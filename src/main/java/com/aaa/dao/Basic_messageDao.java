@@ -19,9 +19,12 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("select bs.*,ds.soliloquy,ds.pic,ds.truename from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.bmid=#{bmid}")
     public List<Map<String,Object>> findAllById(@Param("bmid") Integer bmid);
 
-    //登录
+    //用户密码登录
     @Select("SELECT COUNT(bmid) num FROM basic_message WHERE number=#{number} AND pwd=#{pwd}")
-    public int login(@Param("number") String number,@Param("pwd") String pwd);
+    public int UPlogin(@Param("number") String number,@Param("pwd") String pwd);
+    //手机号密码登录
+    @Select("SELECT COUNT(bmid) num FROM basic_message WHERE phone=#{number} AND pwd=#{pwd}")
+    public int PPlogin(@Param("number") String number,@Param("pwd") String pwd);
 
 
 
