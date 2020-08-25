@@ -93,62 +93,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="col-md-8 login-form-w3-agile">
 			<form action="#" method="post">
 				<div class="w3_form_body_grid">
-					<span>Profile For</span>
-					<select id="w3_country" onchange="change_country(this.value)" class="frm-field required">
-						<option value="null">Select</option>
-						<option value="null">Myself</option>   
-						<option value="null">Son</option>   
-						<option value="null">Daughter</option>   
-						<option value="null">Brother</option>   
-						<option value="null">Sister</option>  
-						<option value="null">Relative</option>
-						<option value="null">Friend</option>						
-					</select>
+					<span>账号</span>
+					<input type="text" name="Number" placeholder="请输入您的账号,账号6-12位,由子母和数字组成" required>
 				</div>
-				<div class="w3_form_body_grid">
-					<span>Name</span>
-					<input type="text" name="Name" placeholder="Name" required="">
-				</div>
-				<div class="w3_form_body_grid">
-					<span>Gender</span>
-					<div class="w3_gender">
-						<div class="colr ert">
-							<label class="radio"><input type="radio" name="radio" checked=""><i></i>Male</label>
-						</div>
-						<div class="colr">
-							<label class="radio"><input type="radio" name="radio"><i></i>Female</label>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
+
 				<div class="w3_form_body_grid w3_form_body_grid1">
-					<span>Date Of Birth</span>
-					<input class="date" id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '2/08/2013';}" required="">
-				</div>
-				<div class="w3_form_body_grid">
-					<span>religion</span>
-					<select id="w3_country1" onchange="change_country(this.value)" class="frm-field required">
-						<option value="null">Hindu</option>  
-						<option value="null">Muslim</option>   
-						<option value="null">Christian</option>   
-						<option value="null">Sikh</option>   
-						<option value="null">Jain</option>   
-						<option value="null">Buddhist</option>
-						<option value="null">No Religious Belief</option>   						
-					</select>
-				</div>
-				<div class="w3_form_body_grid w3_form_body_grid1">
-					<span>Country</span>
-					<input type="text" name="Country" placeholder="Country" required="">
-				</div>
-				<div class="w3_form_body_grid">
-					<span>Email</span>
-					<input type="email" name="Email" placeholder="Email" required="">
-				</div>
-				<div class="w3_form_body_grid w3_form_body_grid1">
-					<span>Password</span>
-					<input type="password" name="Password" placeholder="Password" required="">
+					<span>密码</span>
+					<input type="password" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" required>
 				</div>
 				<input type="submit" value="Sign Up">
 			</form>
