@@ -15,7 +15,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("life_message")
 public class life_messageDaoController {
-
     @Resource
     life_messageDao life_messagedao;
 
