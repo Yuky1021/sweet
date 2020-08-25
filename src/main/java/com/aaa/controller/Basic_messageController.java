@@ -90,7 +90,7 @@ public class Basic_messageController {
                 response.addCookie(NameCookie);
                 response.addCookie(PwdCookie);
             }
-            return "redirect:findAllById";
+            return "redirect:listAll";
         }
         return "redirect:tologin";
     }

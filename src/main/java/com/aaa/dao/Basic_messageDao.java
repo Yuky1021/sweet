@@ -1,6 +1,7 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Basic_message;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -32,6 +33,14 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     //根据账号查询id
     @Select("SELECT bmid FROM basic_message WHERE number=#{number}")
     public int getBmidByNumber(@Param("number") String number);
+
+    //注册
+    @Insert("insert into basic_message(number,phone,pwd) values(#{number},#{phone},#{pwd})")
+    public int AddNPP(@Param("number") String number,@Param("phone") String phone,@Param("pwd") String pwd);
+
+    //查询数据条数
+    @Select("SELECT count(bmid) FROM basic_message")
+    public int BMcount();
 
 
 

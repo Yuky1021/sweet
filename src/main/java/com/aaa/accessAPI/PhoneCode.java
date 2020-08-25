@@ -99,7 +99,7 @@ public class PhoneCode {
             e.printStackTrace();
             return "由于系统维护，暂时无法注册！！！";
         }
-        return "true";
+        return code;
     }
 
     /**
