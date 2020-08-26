@@ -5,14 +5,18 @@ import com.aaa.entity.Basic_message;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
+@CrossOrigin
 @Controller
 @RequestMapping("basic_message")
 public class Basic_messageController {
@@ -20,9 +24,21 @@ public class Basic_messageController {
     @Resource
     Basic_messageDao basic_messageDao;
 
+    @RequestMapping(value ="ShowAll",produces = "application/json")
+    @ResponseBody
+    public List<Basic_message> ShowAll(){
+        System.out.println(basic_messageDao.selectAll());
+        return basic_messageDao.selectAll();
+    }
+
     @RequestMapping("listAll")
     public String listAll(Model model){
         model.addAttribute("list",basic_messageDao.findAll());
+        return "index";
+    }
+
+    @RequestMapping("s")
+    public String s(Model model){
         return "index";
     }
 
@@ -73,7 +89,7 @@ public class Basic_messageController {
         final int i = basic_messageDao.UPlogin(bm.getNumber(),bm.getPwd());
         //手机号密码登录
         final int j = basic_messageDao.PPlogin(bm.getNumber(),bm.getPwd());
-        //登录成功保存用户名密码到session中
+        //登录成功保存用户名密码到session
         if(i==1||j==1){
             //存入session
             final HttpSession session = request.getSession();
@@ -128,6 +144,5 @@ public class Basic_messageController {
         request.getSession().invalidate();
         return "redirect:/";
     }
-
 
 }
