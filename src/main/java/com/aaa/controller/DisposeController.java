@@ -1,5 +1,6 @@
 package com.aaa.controller;
 
+import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.DisposeDao;
 import com.aaa.entity.Dispose;
 import org.springframework.stereotype.Controller;
@@ -19,20 +20,20 @@ public class DisposeController {
 
     @Resource
     DisposeDao disposeDao;
+    @Resource
+    Basic_messageDao basic_messageDao;
     //前台添加
     @RequestMapping("tianjia")
     public String tianjia(Dispose dispose){
-        System.out.println("进入方法");
+        System.out.println("进入tianjia方法");
         Integer count=disposeDao.add(dispose);
-        System.out.println(disposeDao.add(dispose));
         System.out.println(count);
-        return "redirect:single1";
+        return "redirect:listAll";
     }
-    //前台查询举报类型
-    @RequestMapping("listTypes")
-    public String listTypes(Model model){
-        model.addAttribute("ts",disposeDao.listType());
-        return "contact";
+    @RequestMapping("listAll")
+    public String listAll(Model model){
+        model.addAttribute("list",basic_messageDao.findAll());
+        return "index";
     }
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
@@ -52,6 +53,7 @@ public class DisposeController {
         System.out.println("update");
         return disposeDao.updateByPrimaryKey(dispose);
     }
+
     @RequestMapping(value ="add",produces = "application/json")
     @ResponseBody
     public int add(Dispose dispose){

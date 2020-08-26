@@ -90,7 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 		<div class="tittle-agileinfo">
 			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<a href="../basic_message/findAllByIdt">举报此人</a>&nbsp;&nbsp;&nbsp;<a href="#" style="color: red;">关注</a>
+			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;<a href="#" style="color: red;">关注</a>
 		</div>
 		<div class="matches-main-agileinfo">
 			<!--<div class="col-md-6 profile1">
@@ -102,6 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:380px">
 				<ul>
 					<li><span>年龄:<p th:text="${l.age}"></p></span></li>
+					<li><span>性别:<p th:text="${l.sex==0?'女':'男'}"></p></span></li>
 					<li><span>ID:<p th:text="${l.number}"></p></span></li>
 					<li><span>学历:<p th:text="${l.education}"></p></span></li>
 					<!--<li><span>婚姻状况:<p th:text="${l.marriage==0?'未婚':'已婚'}"></p></span></li>-->

@@ -93,23 +93,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-6 regstr-r-w3-agileits">
 				<div class="form-bg-w3ls">
 					<h3 class="subhead-agileits white-w3ls">举报该用户</h3>
-					<form action="../dispose/add" method="post" id="fm">
+					<form action="../dispose/tianjia" method="post" id="fm">
 						<span th:each="t : ${typess}">
 							<!--被举报人id-->
-							<input type="hidden" th:value="${t.dmid}">
+							<input type="hidden" name="bid" th:value="${t.dmid}" id="bjbid">
 						</span>
 						<!--举报人id-->
-						<input type="hidden" id="jbid">
+						<input type="hidden" name="bmid" id="jbid">
 						<p style="color: white">举报类型:</p>
-						<select name="reason" style="width: 310px; height: 45px" id="lx">
-							<option>请选择</option>
+						<select name="types" style="width: 310px; height: 45px" id="lx">
+							<option value="0">请选择</option>
 							<option value="1">色情</option>
 							<option value="2">骚扰信息</option>
 							<option value="3">诈骗钱财</option>
 							<option value="4">其他</option>
 						</select>
 						<textarea name="reason" placeholder="请填写举报理由，详细描述你所遇到的情况，以便客服人员快速为你进行处理" required="" id="yuanyin"></textarea>
-						<input type="button" value="取消" style="width: 80px;height: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;<input type="button" value="提交" style="width: 80px;height: 40px;" onclick="tijiao()">
+						<input type="button" value="取消" style="width: 80px;height: 40px;" onclick="tiao()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="提交" style="width: 80px;height: 40px;" onclick="tijiao()">
 					</form>
 				</div>
 				</div>
@@ -234,11 +234,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
 	}
 	let d=GetCookie("bmid");
+	/*alert("举报人id:"+d);*/
 	$("#jbid").val(d);
 	function tijiao() {
-		let yy=$("#yuanyin").val();
-		$("#")
 		alert(1);
+		let yy=$("#yuanyin").val();
+		let l=$("#lx").val();
+		let bjb=$("#bjbid").val();
+		/*alert("原因:"+yy);
+		alert("类型:"+l);
+		alert("被举报Id:"+bjb);*/
+		if(yy==null || yy=='' || yy==undefined){
+			alert("举报原因不能为空");
+		}else if(l==0){
+			alert("举报类型不能为空  请选择")
+		} else{
+			let f=$("#fm").submit();
+			if(f!=null){
+				alert("举报成功");
+			}
+		}
+	}
+	function tiao() {
+		alert("tiao");
+		window.location.href="listAll";
 	}
 </script>
 <!-- script for responsive tabs -->						
@@ -299,6 +318,7 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
+
 </script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>

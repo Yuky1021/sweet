@@ -15,10 +15,7 @@ public interface DisposeDao extends tk.mybatis.mapper.common.Mapper<Dispose> {
     List<Map<String,Object>> listAll();
 
     //添加
-    @Insert("insert into dispose values(#{bid},#{types},#{reason},#{bmid})")
-    Integer add(@Param("dispose") Dispose dispose);
+    @Insert("insert into dispose (bid,types,reason,bmid) values(#{bid},#{types},#{reason},#{bmid})")
+    Integer add(Dispose dispose);
 
-    //前台查询举报类型
-    @Select("select types from dispose")
-    List<Dispose> listType();
 }
