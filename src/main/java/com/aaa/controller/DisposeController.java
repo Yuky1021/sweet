@@ -22,7 +22,10 @@ public class DisposeController {
     //前台添加
     @RequestMapping("tianjia")
     public String tianjia(Dispose dispose){
+        System.out.println("进入方法");
         Integer count=disposeDao.add(dispose);
+        System.out.println(disposeDao.add(dispose));
+        System.out.println(count);
         return "redirect:single1";
     }
     //前台查询举报类型

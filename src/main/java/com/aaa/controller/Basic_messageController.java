@@ -26,11 +26,6 @@ public class Basic_messageController {
         return "index";
     }
 
-    @RequestMapping("s")
-    public String s(Model model){
-        return "index";
-    }
-
     @RequestMapping("c")
     public String c(Model model){
         model.addAttribute("list",basic_messageDao.findAll());
@@ -43,6 +38,14 @@ public class Basic_messageController {
         model.addAttribute("listId",basic_messageDao.findAllById(bmid));
         System.out.println(basic_messageDao.findAllById(bmid));
         return "single1";
+    }
+
+    @RequestMapping("findAllByIdt")
+    public String findAllByIdt(Model model,@Param("bmid") Integer bmid){
+        System.out.println("bid:"+bmid);
+        model.addAttribute("typess",basic_messageDao.findAllById(bmid));
+        System.out.println(basic_messageDao.findAllById(bmid));
+        return "contact";
     }
 
     //   重定向:redirect
