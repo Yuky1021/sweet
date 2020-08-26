@@ -1,14 +1,11 @@
 package com.aaa.controller;
 
-import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.entity.Basic_message;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -29,14 +26,26 @@ public class Basic_messageController {
         return "index";
     }
 
+    @RequestMapping("s")
+    public String s(Model model){
+        return "index";
+    }
+
+    @RequestMapping("c")
+    public String c(Model model){
+        model.addAttribute("list",basic_messageDao.findAll());
+        return "login";
+    }
+
     @RequestMapping("findAllById")
-    public String findAllById(Model model,Integer bmid){
+    public String findAllById(Model model,@Param("bmid") Integer bmid){
+        System.out.println("bid:"+bmid);
         model.addAttribute("listId",basic_messageDao.findAllById(bmid));
         System.out.println(basic_messageDao.findAllById(bmid));
         return "single1";
     }
 
-//   重定向:redirect
+    //   重定向:redirect
     //跳转登录页面
     @RequestMapping("tologin")
     public String toLogin(HttpServletRequest request){
@@ -48,7 +57,7 @@ public class Basic_messageController {
         System.out.println(loginPwd);
         return "login";
     }
-    //登录
+
     @RequestMapping("Login")
     public String Login(Basic_message bm, HttpServletRequest request,HttpServletResponse response,int checktf){
         //如果账号密码为空
@@ -85,6 +94,7 @@ public class Basic_messageController {
             //如果选了复选框
             if(checktf==1) {
                 //存入cookie
+
                 Cookie NameCookie = new Cookie("lName", bm.getNumber());
                 Cookie PwdCookie = new Cookie("lPwd", bm.getPwd());
                 response.addCookie(NameCookie);
@@ -100,32 +110,11 @@ public class Basic_messageController {
     public String toRegister(){
         return "register";
     }
-    //注册
+
     @RequestMapping("Register")
-    public String Register(Basic_message bm){
-        String pwd=bm.getPwd();
-        String phone=bm.getPhone();
-
-        //生成账号
-        String number="20"+phone.substring(5);
-        //查找数据库中的数据条数
-        int count = basic_messageDao.BMcount() + 1;
-        number=number+count;
-        System.out.println("number:"+number);
-        //添加数据
-        final int i = basic_messageDao.AddNPP(number, phone, pwd);
-        if (i>0){System.out.println("成功"); }
-
-        return "tologin";
-    }
-
-    //获取验证码
-    @RequestMapping("getPhoneVerification")
-    @ResponseBody
-    public String getPhoneVerification(@Param("phone") String phone){
-        final String Vcode = PhoneCode.getPhonemsg(phone);
-        System.out.println(Vcode);
-        return Vcode;
+    public String Register(){
+        System.out.println(2222222);
+        return "register";
     }
 
 
@@ -134,7 +123,7 @@ public class Basic_messageController {
     public String loginOut(HttpServletRequest request) {
         //清空session
         request.getSession().invalidate();
-        return "redirect:tologin";
+        return "redirect:/";
     }
 
 
