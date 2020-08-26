@@ -27,7 +27,6 @@ public interface Choose_mateDao extends tk.mybatis.mapper.common.Mapper<Choose_m
             "where cmid=#{cm.cmid}")
     public Integer update(@Param("cm") Choose_mate choose_mate);
 
-
     @Select("select c.cmid,c.lage,c.bage,c.height,c.education,c.marriage,c.nation,c.monthly,b.bmname from choose_mate c left join basic_message b on c.bmid=b.bmid")
     List<Map<String,Object>> findAll();
 
