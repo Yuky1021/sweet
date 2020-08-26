@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,7 +16,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
+@CrossOrigin
 @Controller
 @RequestMapping("basic_message")
 public class Basic_messageController {
@@ -27,6 +30,13 @@ public class Basic_messageController {
     public String listAll(Model model){
         model.addAttribute("list",basic_messageDao.findAll());
         return "index";
+    }
+
+    @RequestMapping(value ="ShowAll",produces = "application/json")
+    @ResponseBody
+    public List<Basic_message> ShowAll(){
+        System.out.println(basic_messageDao.selectAll());
+        return basic_messageDao.selectAll();
     }
 
     @RequestMapping("findAllById")
