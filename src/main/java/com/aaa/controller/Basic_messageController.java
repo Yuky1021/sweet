@@ -70,7 +70,7 @@ public class Basic_messageController {
         final int i = basic_messageDao.UPlogin(bm.getNumber(),bm.getPwd());
         //手机号密码登录
         final int j = basic_messageDao.PPlogin(bm.getNumber(),bm.getPwd());
-        //登录成功保存用户名密码到session
+        //登录成功保存用户名密码到session中
         if(i==1||j==1){
             //存入session
             final HttpSession session = request.getSession();
