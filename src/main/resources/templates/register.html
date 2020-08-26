@@ -31,6 +31,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
     <!--//fonts-->
 
+    <!--引入toastr   已在jy.js中引入过了-->
+    <!--<link href="../css/toastr.min.css" rel="stylesheet" type="text/css" />-->
 </head>
 <body>
 <!--banner start here-->
@@ -101,19 +103,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <form id="reForm" action="Register" method="post">
                 <div class="w3_form_body_grid">
                     <span>手机号</span>
-                    <input id="Phone" type="text" name="Phone" placeholder="请输入您的手机号" required>
+                    <input id="Phone" onblur="Phonejy()" type="text" name="Phone" placeholder="请输入您的手机号" required />
                 </div>
                 <div class="w3_form_body_grid w3_form_body_grid1">
                     <span>密码</span>
-                    <input type="password" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" required>
+                    <input id="Pwdd" type="password" onblur="Pwdjy()" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" required />
                 </div>
                 <div class="w3_form_body_grid">
-                    <input type="text" id="VCD" style="margin-left: 95px" name="Vcode" placeholder="请输入您的验证码" required>
+                    <input type="text" id="VCD" style="margin-left: 97px" name="Vcode" placeholder="请输入您的验证码" required />
                     <span class="sim-button button12" id="getVcode" style="margin-top: 0px;width: 100px;height: 50px;line-height: 22px;text-align: center">
                         获取验证码
                     </span>
                 </div>
-                <input type="submit" value="Sign Up">
+                <input type="submit" value="Sign Up" />
             </form>
             <h4>Continue With</h4>
             <div class="social_icons agileinfo_social_asd">
@@ -266,22 +268,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- start-smoth-scrolling -->
 <!-- Calendar -->
 <script src="../js/jquery-ui.js"></script>
+
+<script src="../js/jy.js"></script>
 <script>
+
+    let i=30;
+    let ttm;
+    //定时器方法 按钮30秒倒计时后可用
+    function  time30() {
+        $("#getVcode").html("请"+i+"秒后重试");
+        if(i>0){
+            i--;
+        }else{
+            $("#getVcode").html("获取验证码");
+            $("#getVcode").css("pointer-events","auto");
+            window.clearInterval(ttm);
+            i=30;
+        }
+    }
+    //校验手机号
+    function Phonejy(){
+        let p=$("#Phone").val();
+        //判断是否为空
+        if(!isNull(p)){return false;}
+        //判断手机号格式是否正确
+        if(!isPhone(p)){return false;}
+        //判断手机号是否已注册
+        let f=0;
+        //设置为同步
+        $.ajaxSettings.async = false;
+        $.post("isPhone",
+            {phone: p},
+            function (data) {
+                f=data;
+            },);
+        //恢复为异步
+        $.ajaxSettings.async = true;
+        if(f>0){
+            toastr.warning('手机号已存在,请用其他手机注册');
+            return false;
+        }
+        return true;
+    }
+
+    function Pwdjy(){
+        let param = $("#Pwdd").val();
+        if(!isPwd(param)){
+            return false;
+        }
+        return true;
+    }
+
     $(function () {
         $("#datepicker").datepicker();
         let Vcode;
-        let flag;
+        let flag=false;
         //发送手机验证码
         $("#getVcode").click(function () {
             let ph=$("#Phone").val();
             //判断内容不为空
-            if(ph!=null && ph!='') {
+            if(Phonejy()) {
                 $.post("getPhoneVerification",
                     {phone: ph},
                     function (data) {
                         Vcode = data;
                     });
+                //发送后设置按钮为不可用(设置鼠标点击事件不可用)
+                $("#getVcode").css("pointer-events","none");
+                //设置30秒后按钮可用
+                ttm=window.setInterval(time30,1000);
             }
+
         });
 
         //判断验证码是否正确
@@ -294,10 +351,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         //总校验
         $("#reForm").submit( function () {
-            if(!flag){
-                return false;
+            if(Phonejy()&&Pwdjy()){
+                return true;
             }
-            return true;
+            return false;
         } );
 
     });

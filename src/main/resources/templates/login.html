@@ -19,7 +19,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
     <!--//fonts-->
 
+    <!--引入toastr  已封装如jy.js-->
+    <!--<link href="../css/toastr.min.css" rel="stylesheet" type="text/css" />-->
 
+
+    <style>
+        .toast-center-center {
+            top: 50%;
+            left: 50%;
+            margin-top: -30px;
+            margin-left: -150px;
+        }
+    </style>
 </head>
 <body>
 
@@ -43,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- navbar-header -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">主页</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="matches.html">Matches</a></li>
                         <li class="dropdown menu__item">
@@ -59,8 +70,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"> </div>
             </nav>
             <div class="header-right-w3ls">
-                <a href="login.html">Log In</a>
-                <a href="register.html">Register</a>
+                <a href="tologin">登录</a>
+                <a href="toRegister">注册</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -73,9 +84,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="w3l_agileits_breadcrumbs_inner">
             <ul>
-                <li><a href="index.html">Home</a><span>&#187;</span></li>
+                <li><a href="index.html">主页</a><span>&#187;</span></li>
 
-                <li>Login</li>
+                <li>登录</li>
             </ul>
         </div>
     </div>
@@ -84,14 +95,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="login elite-app">
     <div class="container">
         <div class="tittle-agileinfo">
-            <h3>Login Now</h3>
+            <h3>登录</h3>
         </div>
         <div class="col-md-8 login-form-w3-agile">
             <form action="Login" method="post">
                 <input type="hidden" name="checktf" id="checktf" value="1">
                 <div class="w3_form_body_grid">
                     <span>用户名/电话</span>
-                    <input type="text" id="lname" name="number" placeholder="请输入用户名/电话号" maxlength="15" required>
+                    <input type="text" onblur="namejy()" id="lname" name="number" placeholder="请输入用户名/电话号" maxlength="15" required>
                 </div>
                 <div class="w3_form_body_grid">
                     <span>密码</span>
@@ -108,7 +119,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <input type="submit" value="Sign In">
+                <input type="submit" value="登录">
             </form>
             <h4>Continue With</h4>
             <div class="social_icons agileinfo_social_asd">
@@ -140,7 +151,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li><i class="fa fa-check" aria-hidden="true"></i>Pellentesque</li>
             </ul>
             <h5>Don't have an account?<i class="fa fa-hand-o-down" aria-hidden="true"></i></h5>
-            <div class="sim-button button12"><a href="register.html">Register</a></div>
+            <div class="sim-button button12"><a href="toRegister">注册</a></div>
         </div>
     </div>
 </div>
@@ -206,11 +217,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
 </div>
+
+
 <!--/footer -->
 
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
 
+<script src="../js/jy.js"></script>
 <script type="text/javascript">
     function GetCookie(name) {
         var ck = document.cookie;
@@ -233,6 +247,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             $("#checktf").val("0")
         }
     }
+
+    //校验
+
+
+    function namejy(){
+        let nval = $("#lname").val();
+        if(!isNull(nval)){
+            return false;
+        }
+        return true;
+    }
+    //密码校验
+    function pwdjy() {
+        let pval = $("#lpwd").val();
+        if(!isNull(pval)){
+            return false;
+        }
+        return true;
+    }
+
 
 
 </script>
@@ -269,6 +303,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     });
 </script>
+
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
 

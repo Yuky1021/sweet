@@ -116,7 +116,7 @@ public class Basic_messageController {
         final int i = basic_messageDao.AddNPP(number, phone, pwd);
         if (i>0){System.out.println("成功"); }
 
-        return "tologin";
+        return "redirect:tologin";
     }
 
     //获取验证码
@@ -128,6 +128,14 @@ public class Basic_messageController {
         return Vcode;
     }
 
+    //注册校验:查看手机号是否重复
+    @RequestMapping("isPhone")
+    @ResponseBody
+    public String isPhone(@Param("phone") String phone){
+        final int pt = basic_messageDao.isPhoneTrue(phone);
+        System.out.println(pt);
+        return Integer.toString(pt);
+    }
 
     // 注销登录
     @RequestMapping("/loginout")

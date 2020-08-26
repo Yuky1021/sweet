@@ -42,6 +42,7 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("SELECT count(bmid) FROM basic_message")
     public int BMcount();
 
-
-
+    //查询手机号是否重复
+    @Select("SELECT count(bmid) FROM basic_message where phone=#{phone}")
+    int isPhoneTrue(@Param("phone") String phone);
 }
