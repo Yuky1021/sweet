@@ -4,10 +4,15 @@ import com.aaa.dao.Choose_mateDao;
 import com.aaa.entity.Choose_mate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
+@CrossOrigin
 @Controller
 @RequestMapping("choose_mate")
 public class Choose_mateController {
@@ -32,5 +37,13 @@ public class Choose_mateController {
         return "";
     }
 
+
+    @RequestMapping(value ="findAll",produces = "application/json")
+    @ResponseBody
+    public List<Map<String,Object>> findAll(){
+        System.out.println("findAll");
+        return choose_mateDao.findAll();
+
+    }
 
 }
