@@ -37,6 +37,7 @@ public class Choose_mateController {
         return "";
     }
 
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){
