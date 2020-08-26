@@ -15,9 +15,18 @@ spring:
   resources: # 静态资源路径
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/,classpath:/css/,classpath:/css1/,classpath:/fonts/,classpath:/fonts1/,classpath:/images/,classpath:/images1/,classpath:/js/,classpath:/js1/,classpath:/plugins/,classpath:/styles/
 
+  devtools:
+    restart:
+      enabled: true #设置开启热部署
+      additional-exclude: src/main/java #重启目录
+      exclude: templates/**
+  freemarker:
+    cache: false #页面不加载缓存，修改即时生效
+
   thymeleaf:
     cache: false  # 使用模板缓存
     suffix: .html
     encoding: UTF-8
     prefix: classpath:/templates/
     mode: HTML5
+

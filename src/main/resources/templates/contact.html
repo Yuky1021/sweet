@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Single :: W3layouts</title>
+<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Contact :: W3layouts</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -57,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<li><a href="icons.html">Icons</a></li>
 										</ul>
 									</li>
-									<li><a href="contact.html">Contact</a></li>
+									<li><a href="contact.html" class="active">Contact</a></li>
 								</ul>
 							</div>
 							<div class="clearfix"> </div>	
@@ -79,97 +79,86 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul>
 				<li><a href="index.html">Home</a><span>&#187;</span></li>
 									
-				<li>Single</li>
+				<li>举报</li>
 				</ul>
 		</div>
 	</div>
 </div>
 <!-- //breadcrumbs -->
-<div class="matches elite-app">
-	<span th:each="l : ${listId}">
+<div class="login elite-app contact-page">
 		<div class="container">
 		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<a href="../basic_message/findAllByIdt">举报此人</a>&nbsp;&nbsp;&nbsp;<a href="#" style="color: red;">关注</a>
-		</div>
-		<div class="matches-main-agileinfo">
-			<!--<div class="col-md-6 profile1">
+					<h3>举报</h3>
+				</div>
+				<div class="col-md-6 regstr-r-w3-agileits">
+				<div class="form-bg-w3ls">
+					<h3 class="subhead-agileits white-w3ls">举报该用户</h3>
+					<form action="../dispose/add" method="post" id="fm">
+						<span th:each="t : ${typess}">
+							<!--被举报人id-->
+							<input type="hidden" th:value="${t.dmid}">
+						</span>
+						<!--举报人id-->
+						<input type="hidden" id="jbid">
+						<p style="color: white">举报类型:</p>
+						<select name="reason" style="width: 310px; height: 45px" id="lx">
+							<option>请选择</option>
+							<option value="1">色情</option>
+							<option value="2">骚扰信息</option>
+							<option value="3">诈骗钱财</option>
+							<option value="4">其他</option>
+						</select>
+						<textarea name="reason" placeholder="请填写举报理由，详细描述你所遇到的情况，以便客服人员快速为你进行处理" required="" id="yuanyin"></textarea>
+						<input type="button" value="取消" style="width: 80px;height: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;<input type="button" value="提交" style="width: 80px;height: 40px;" onclick="tijiao()">
+					</form>
+				</div>
+				</div>
+				<div class="col-md-6 contact-agileits-w3layouts">
+					<div id="horizontalTab">
+							<ul class="resp-tabs-list">
+							<li>
+								<h6>California</h6>
+							</li>
+							<li>
+								<h6>USA</h6>
+							</li>
+							<li>
+								<h6>New York</h6>
+							</li>
+							<li>
+								<h6>UK</h6>
+							</li>
+							</ul>
+							<div class="resp-tabs-container">
+							<div class="tab1">
+								<p class="para-agileits-w3layouts"><span>Location : </span>1600 Exposition Blvd, Sacramento, CA 95815, USA</p>
+								<p class="para-agileits-w3layouts"><span>Call Us : </span>505-606-5432</p>
+								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99824.8709286373!2d-121.33074619389458!3d38.567705354191816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x280fd5261e96d7e6!2sCalifornia+State+Fair!5e0!3m2!1sen!2sin!4v1490439507422"></iframe>
+							</div>
 
-			</div>-->
-			<div>
-				<img th:src="${l.pic}">
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:380px">
-				<ul>
-					<li><span>年龄:<p th:text="${l.age}"></p></span></li>
-					<li><span>ID:<p th:text="${l.number}"></p></span></li>
-					<li><span>学历:<p th:text="${l.education}"></p></span></li>
-					<!--<li><span>婚姻状况:<p th:text="${l.marriage==0?'未婚':'已婚'}"></p></span></li>-->
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>身高:<p th:text="${l.height}"></p></span></li>
-					<li><span>工资:<p th:text="${l.monthly}"></p></span></li>
-					<li><span>地址:<p th:text="${l.address}"></p></span></li>
-					<!--<li><span>To View Her Photo</span> <a href="Register.html">Register Free</a></li>-->
-					<li><a href="Register.html">打招呼</a> <a href="Register.html">发消息</a></li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="about-person">
-				<h6>内心独白:</h6>
-				<p class="para-agileits-w3layouts"><span>Hi!, Iam <span th:text="${l.truename}"></span></span><p th:if="${l.soliloquy} == null ">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p><p>Wish to get a heart white head not to separate</p></p>
-			</div>
+							<div class="tab2">
+								<p class="para-agileits-w3layouts"><span>Location : </span>25095 Blue Ravine Rd, Folsom, CA 95630, USA</p>
+								<p class="para-agileits-w3layouts"><span>Call Us : </span>032-625-4592</p>
+								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3114.2088705425613!2d-121.12137568485247!3d38.6900461667452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ae480c563ff67%3A0xd5aa0569c974a0a6!2sMexquite+Mexican+Restaurant!5e0!3m2!1sen!2sin!4v1490439685562"></iframe>
+							</div>
+							<div class="tab3">
+								<p class="para-agileits-w3layouts"><span>Location : </span>253 Church St, New York, NY 10013, USA</p>
+								<p class="para-agileits-w3layouts"><span>Call Us : </span>077-961-5426</p>
+								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.0051536537085!2d-74.00760038479508!3d40.7179030451917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a2016ad0821%3A0xa6bb46d566a740b7!2sKori+Tribeca!5e0!3m2!1sen!2sin!4v1490440032827"></iframe>
+							</div>
+							<div class="tab4">
+								<p class="para-agileits-w3layouts"><span>Location : </span>Sacramento, Welwyn, UK</p>
+								<p class="para-agileits-w3layouts"><span>Call Us : </span>505-792-2654</p>
+								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
+								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39445.20117152928!2d-0.23465869969804293!3d51.83675868651679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487624b0caefa34f%3A0x246a752af1fed599!2sWelwyn%2C+UK!5e0!3m2!1sen!2sin!4v1490439907190"></iframe>
+							</div>
+							</div>
+					</div>
+				</div>
 		</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>工作 生活</h3>
-				<ul>
-					<li><span>买房情况</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}"></p></li>
-					<li><span>买车情况</span><p th:text="${l.buycar==0?'未买车':'已买车'}"></p></li>
-					<li><span>是否抽烟</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}"></p></li>
-					<li><span>是否喝酒</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}"></p></li>
-					<li><span>喜欢的城市</span><p th:text="${l.city}"></p></li>
-					<li><span>喜欢的书</span><p th:text="${l.book}"></p></li>
-					<li><span>爱好</span><p th:text="${l.hobby}"></p></li>
-				</ul>
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>择偶 条件</h3>
-				<ul>
-					<li><span>最大年龄</span><p th:text="${l.lage}"></p></li>
-					<li><span>最小年龄</span><p th:text="${l.bage}"></p></li>
-					<li><span>身高</span><p th:text="${l.height}"></p></li>
-					<li><span>学历</span><p th:text="${l.education}"></p></li>
-					<!--<li><span>婚姻状况</span><p th:text="${l.marriage}"></p></li>-->
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>月收入</span><p th:text="${l.monthly}"></p></li>
-				</ul>
-			</div>
-			<!--<div class="col-md-6 person-info-agileits-w3layouts">
-				<h3>What She Is Looking For</h3>
-				<ul>
-					<li><span>Age</span>: 26-28</li>
-					<li><span>Marital Status</span>: Single</li>
-					<li><span>Complexion</span>: Fair</li>
-					<li><span>height</span>: 5'7'' - 5'9''</li>
-					<li><span>Caste</span>: Doesn't Matter</li>
-					<li><span>Religion</span>: Lorem Ipsum</li>
-					<li><span>Drink</span>: Never Drinks</li>
-					<li><span>Diet</span>: Non-Veg</li>
-				</ul>
-			</div>-->
-		</div>
-	</span>
 </div>
 <!--login-inner-->
 <!-- footer -->
@@ -202,7 +191,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 				<div class="sim-button button12"><a href="contact.html">联系我们</a></div>
-				<h2>我们致力于提供卓越的服务</h2>
+				<h2>我们致力于提供卓越的服务.</h2>
 			</div>
 		</div>
 		<!-- footer-button-info -->
@@ -237,6 +226,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+<script type="text/javascript">
+	function GetCookie(name) {
+		var ck = document.cookie;
+		var exp1 = new RegExp(name + "=.*?(?=;|$)");
+		var mch = ck.match(exp1);
+		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
+	}
+	let d=GetCookie("bmid");
+	$("#jbid").val(d);
+	function tijiao() {
+		let yy=$("#yuanyin").val();
+		$("#")
+		alert(1);
+	}
+</script>
 <!-- script for responsive tabs -->						
 <script src="../js/easy-responsive-tabs.js"></script>
 <script>
@@ -260,6 +264,7 @@ width: 'auto',
 fit: true
 });
 });
+
 </script>
 <!-- script for responsive tabs -->		
 
@@ -294,11 +299,6 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
-</script>
-<script type="text/css">
-	/*#info{
-		float:right;
-	}*/
 </script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>

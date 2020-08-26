@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.dao.DisposeDao;
 import com.aaa.entity.Dispose;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,21 @@ public class DisposeController {
 
     @Resource
     DisposeDao disposeDao;
-
+    //前台添加
+    @RequestMapping("tianjia")
+    public String tianjia(Dispose dispose){
+        System.out.println("进入方法");
+        Integer count=disposeDao.add(dispose);
+        System.out.println(disposeDao.add(dispose));
+        System.out.println(count);
+        return "redirect:single1";
+    }
+    //前台查询举报类型
+    @RequestMapping("listTypes")
+    public String listTypes(Model model){
+        model.addAttribute("ts",disposeDao.listType());
+        return "contact";
+    }
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){

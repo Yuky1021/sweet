@@ -17,7 +17,10 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     public List<Map<String,Object>> findAll();
 
     //根据ID查询
-    @Select("select bs.*,ds.soliloquy,ds.pic,ds.truename from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.bmid=#{bmid}")
+    /*@Select("select ds.*,bs.* from details_message ds left join basic_message bs on ds.bmid=bs.bmid where bs.bmid=#{bmid}")
+    public List<Map<String,Object>> findAllById(@Param("bmid") Integer bmid);*/
+    /*@Select("select ds.*,bs.*,cm.* from details_message ds left join basic_message bs on ds.bmid=bs.bmid left join choose_mate cm on bs.bmid=cm.bmid where ds.bmid=#{bmid}")*/
+    @Select("select ds.*,bs.*,cm.*,lm.* from details_message ds left join basic_message bs on ds.bmid=bs.bmid left join choose_mate cm on bs.bmid=cm.bmid left join life_message lm on bs.bmid=lm.bmid where ds.bmid=#{bmid}")
     public List<Map<String,Object>> findAllById(@Param("bmid") Integer bmid);
 
     //用户密码登录

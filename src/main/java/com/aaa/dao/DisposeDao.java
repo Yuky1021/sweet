@@ -1,7 +1,9 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Dispose;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -12,4 +14,11 @@ public interface DisposeDao extends tk.mybatis.mapper.common.Mapper<Dispose> {
     @Select("select d.dsid,b.bmname,d.reason,bm.bmname,d.state,d.way,d.dtime,e.ename from dispose d  left join basic_message b on b.bmid=d.bid join basic_message bm on bm.bmid=d.bmid left join emp e on e.emid=d.emid ")
     List<Map<String,Object>> listAll();
 
+    //添加
+    @Insert("insert into dispose values(#{bid},#{types},#{reason},#{bmid})")
+    Integer add(@Param("dispose") Dispose dispose);
+
+    //前台查询举报类型
+    @Select("select types from dispose")
+    List<Dispose> listType();
 }
