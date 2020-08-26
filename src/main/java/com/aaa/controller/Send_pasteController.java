@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.dao.Send_pasteDao;
 import com.aaa.entity.Send_paste;
+import com.aaa.entity.comment_paste;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,13 @@ public class Send_pasteController {
     public int add(Send_paste send_paste){
         System.out.println("add");
         return send_pasteDao.insert(send_paste);
+    }
+
+    @RequestMapping(value ="listByID",produces = "application/json")
+    @ResponseBody
+    public List<Map<String,Object>> listByID(Integer id){
+        System.out.println("listByID");
+        return send_pasteDao.listByID(id);
     }
 }
 
