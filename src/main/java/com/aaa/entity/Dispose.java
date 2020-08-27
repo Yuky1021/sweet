@@ -10,9 +10,7 @@ public class Dispose {
     @Column
     private Integer bid;
     @Column
-    private Integer types;
-    @Column
-    private String reason;
+    private Integer reason;
     @Column
     private Integer bmid;
     @Column
@@ -21,8 +19,20 @@ public class Dispose {
     private Integer way;
     @Column
     private String dtime;
-    @Column
-    private Integer emid;
+
+    @Override
+    public String toString() {
+        return "Dispose{" +
+                "dsid=" + dsid +
+                ", bid=" + bid +
+                ", reason=" + reason +
+                ", bmid=" + bmid +
+                ", state=" + state +
+                ", way=" + way +
+                ", dtime='" + dtime + '\'' +
+                ", emid=" + emid +
+                '}';
+    }
 
     public Integer getDsid() {
         return dsid;
@@ -40,19 +50,11 @@ public class Dispose {
         this.bid = bid;
     }
 
-    public Integer getTypes() {
-        return types;
-    }
-
-    public void setTypes(Integer types) {
-        this.types = types;
-    }
-
-    public String getReason() {
+    public Integer getReason() {
         return reason;
     }
 
-    public void setReason(String reason) {
+    public void setReason(Integer reason) {
         this.reason = reason;
     }
 
@@ -95,19 +97,6 @@ public class Dispose {
     public void setEmid(Integer emid) {
         this.emid = emid;
     }
-
-    @Override
-    public String toString() {
-        return "Dispose{" +
-                "dsid=" + dsid +
-                ", bid=" + bid +
-                ", types=" + types +
-                ", reason='" + reason + '\'' +
-                ", bmid=" + bmid +
-                ", state=" + state +
-                ", way=" + way +
-                ", dtime='" + dtime + '\'' +
-                ", emid=" + emid +
-                '}';
-    }
+    @Column
+    private Integer emid;
 }
