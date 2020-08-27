@@ -326,7 +326,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         //发送手机验证码
         $("#getVcode").click(function () {
             let ph=$("#Phone").val();
-            //判断内容不为空
+            //进行手机号校验
             if(Phonejy()) {
                 $.post("getPhoneVerification",
                     {phone: ph},
@@ -351,7 +351,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         //总校验
         $("#reForm").submit( function () {
-            if(Phonejy()&&Pwdjy()){
+            let Tcode = $("#VCD").val();
+            if (Tcode==Vcode){
+                flag=true;
+            }
+            if(Phonejy()&&Pwdjy()&&flag){
                 return true;
             }
             return false;

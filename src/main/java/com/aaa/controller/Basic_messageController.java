@@ -1,5 +1,6 @@
 package com.aaa.controller;
 
+import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.entity.Basic_message;
 import org.apache.ibatis.annotations.Param;
@@ -139,12 +140,35 @@ public class Basic_messageController {
     }
 
     @RequestMapping("Register")
-    public String Register(){
-        System.out.println(2222222);
-        return "register";
+    public String Register(Basic_message bm){
+        //生成账号
+        String number="20";
+        String p=bm.getPhone();
+        number=number+p.substring(5);
+        final int i = basic_messageDao.BMcount();
+        number=number+i;
+
+        //注册
+        basic_messageDao.AddNPP(number,p,bm.getPwd());
+        return "redirect:tologin";
     }
 
 
+    //查询手机号是否重复
+    @RequestMapping("isPhone")
+    @ResponseBody
+    public String isPhone(String phone){
+        final int phoneTrue = basic_messageDao.isPhoneTrue(phone);
+        return Integer.toString(phoneTrue);
+    }
+    //获取验证码
+    @RequestMapping("getPhoneVerification")
+    @ResponseBody
+    public String getPhoneVerification(String phone){
+        final String Vcode = PhoneCode.getPhonemsg(phone);
+        System.out.println(Vcode);
+        return Vcode;
+    }
     // 注销登录
     @RequestMapping("/loginout")
     public String loginOut(HttpServletRequest request) {

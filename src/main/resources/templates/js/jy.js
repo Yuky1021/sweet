@@ -10,6 +10,8 @@ document.body.appendChild(new_element);
 //引入js
 document.write("<script src='../js/toastr.min.js'></script>");
 document.write("<script language='javascript' src='../jquery-3.2.1.min.js'></script>");
+
+//弹框位置方法
 function TopCenter() {
     //自定义弹出框位置
     toastr.options = {
@@ -27,6 +29,18 @@ function isNull(param){
     return true;
 }
 
+//特殊字符校验
+function isTeshuzi(param){
+    TopCenter();
+    //判断密码中是否有特殊字符
+    var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+    if(pattern.test(param)){
+        toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+        return false;
+    }
+    return true
+}
+
 //密码校验
 function isPwd(param) {
     TopCenter();
@@ -40,9 +54,7 @@ function isPwd(param) {
         return false;
     }
     //判断密码中是否有特殊字符
-    var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
-    if(pattern.test(param)){
-        toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+    if(!isTeshuzi(param)){
         return false;
     }
     return true
