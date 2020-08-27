@@ -136,7 +136,6 @@ public class Basic_messageController {
                 BmidCookie=new Cookie("bmid",Integer.toString(bmid));
                 response.addCookie(BmidCookie);
             }
-
             //如果选了复选框
             if(checktf==1) {
                 //存入cookie

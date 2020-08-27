@@ -12,7 +12,7 @@ import java.util.Map;
 @Mapper
 public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_message> {
 
-    //查询数据
+    //查询
     @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid limit 4")
     public List<Map<String,Object>> findAll();
     //前台找男友
