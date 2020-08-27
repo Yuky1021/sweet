@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Login :: W3layouts</title>
     <!-- for-mobile-apps -->
@@ -232,14 +232,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="modal-body">
                 <!--主体内容-->
-                <form role="form" action="" method="post">
+                <form role="form" action="Zhzzmm" method="post" id="modform">
                     <div class="form-group">
                         <label for="modPhone">电话</label>
-                        <input type="text" class="form-control" id="modPhone" placeholder="请输入电话">
+                        <input type="text" maxlength="11" name="modPhone" onblur="Phonejy()" style="color: black!important" class="form-control"  id="modPhone" placeholder="请输入电话">
                     </div>
                     <div class="form-group">
                         <label for="modyzm">验证码</label>
-                        <input type="text" class="form-control" id="modyzm" placeholder="请输入验证码">
+                        <input type="password" maxlength="6" style="color: black!important"  class="form-control" id="modyzm" placeholder="请输入验证码">
                         <span class="btn btn-success" id="getVcode">获取验证码</span>
                     </div>
                     <button type="submit" class="btn btn-default">提交</button>
@@ -252,7 +252,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
+<span id="phonesfzc" th:text="${Eorr}"></span>
 <!--/footer -->
 
 <!-- js -->
@@ -283,8 +283,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
 
     //校验
-
-
+    //用户名校验
     function namejy(){
         let nval = $("#lname").val();
         if(!isNull(nval)){
@@ -298,6 +297,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         if(!isNull(pval)){
             return false;
         }
+        return true;
+    }
+    //电话校验
+    function Phonejy(){
+        //判断手机号格式是否正确
+        let p = $("#modPhone").val();
+        if(!isPhone(p)){return false;}
         return true;
     }
 
@@ -320,16 +326,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(function () {
         let Vcode;
         let flag=false;
+
         //发送手机验证码
         $("#getVcode").click(function () {
             let ph=$("#modPhone").val();
-            alert(ph);
             //判断内容不为空
-            if(Phonejy()) {
+            if(isPhone(ph)) {
                 $.post("getPhoneVerification",
                     {phone: ph},
                     function (data) {
-                        alert(data);
                         Vcode = data;
                     });
                 //发送后设置按钮为不可用(设置鼠标点击事件不可用)
@@ -338,6 +343,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 ttm=window.setInterval(time30,1000);
             }
         });
+
+        $("#modform").submit(function () {
+            let Tcode = $("#modyzm").val();
+            if (Tcode==Vcode){
+                flag=true;
+            }else {
+                toastr.warning("验证码错误");
+            }
+            if(Phonejy()&&flag){
+                return true;
+            }
+            return false;
+        });
+
+        //判断手机号是否注册过
+        let tf = $("#phonesfzc").html();
+        TopCenter();
+        if(tf==null||tf==""){
+        }else {toastr.warning(tf)};
+
     })
 
 </script>

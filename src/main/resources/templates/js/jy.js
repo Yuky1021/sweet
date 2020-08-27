@@ -63,6 +63,11 @@ function isPwd(param) {
 //手机号校验
 function isPhone(param){
     TopCenter();
+    //判断手机号是否为空
+    if(!isNull(param)){
+        return false;
+    }
+    //判断手机格式
     if(param.length!=11){
         toastr.warning("手机号格式错误");
         return false;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Elite Match Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- //for-mobile-apps -->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/jquery-ui.css"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+</head>
+<body>
+<div class="panel panel-default" style="width: 500px;margin: auto auto;margin-top: 40px">
+    <div class="panel-heading">
+        <h1 class="panel-title" style="text-align: center;font-size: 25px">
+            请记住您的账号密码
+        </h1>
+    </div>
+    <div class="panel-body" style="height: 320px;padding-top: 80px;font-size:30px">
+        <table align="center">
+            <tr>
+                <td style="margin-right: 20px">账号:</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${bm.number}" style="color: greenyellow"></span></td>
+            </tr>
+            <tr style="margin-top: 20px">
+                <td style="margin-right: 20px">密码:</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;<span th:text="${bm.pwd}" style="color: greenyellow"></span></td>
+            </tr>
+            <tr style="text-align: center;margin-top: 20px" >
+                <td colspan="2"><a href="tologin">返回</a></td>
+            </tr>
+        </table>
+        <br>
+    </div>
+</div>
+</body>
+</html>
