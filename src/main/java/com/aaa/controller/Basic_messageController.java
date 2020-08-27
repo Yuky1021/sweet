@@ -170,6 +170,20 @@ public class Basic_messageController {
         System.out.println(Vcode);
         return Vcode;
     }
+    //找回账号密码
+    @RequestMapping("Zhzzmm")
+    public String Zhzzmm(@Param("modPhone") String modPhone,Model mo){
+        final List<Basic_message> bm = basic_messageDao.SelByPhone(modPhone);
+        //如果查询账号大于0
+        if(bm.size()>0){
+            final Basic_message bm1 = bm.get(0);
+            mo.addAttribute("bm",bm1);
+            return "numberAndpwd";
+        }
+        mo.addAttribute("Eorr","该手机号未注册");
+        return "login";
+    }
+
     // 注销登录
     @RequestMapping("/loginout")
     public String loginOut(HttpServletRequest request) {
