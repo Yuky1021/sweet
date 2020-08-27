@@ -35,6 +35,7 @@ public class Basic_messageController {
     @RequestMapping("listAll")
     public String listAll(Model model){
         model.addAttribute("list",basic_messageDao.findAll());
+        System.out.println(basic_messageDao.findAll());
         return "index";
     }
 

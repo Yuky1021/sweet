@@ -4,9 +4,10 @@ import com.aaa.entity.Choose_mate;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
-public interface Choose_mateDao {
+public interface Choose_mateDao extends tk.mybatis.mapper.common.Mapper<Choose_mate> {
 
     @Select("select * from choose_mate")
     public List<Choose_mate> listAll();
@@ -25,5 +26,8 @@ public interface Choose_mateDao {
             "    bmid=#{cm.bmid}" +
             "where cmid=#{cm.cmid}")
     public Integer update(@Param("cm") Choose_mate choose_mate);
+
+    @Select("select c.cmid,c.lage,c.bage,c.height,c.education,c.marriage,c.nation,c.monthly,b.bmname from choose_mate c left join basic_message b on c.bmid=b.bmid")
+    List<Map<String,Object>> findAll();
 
 }

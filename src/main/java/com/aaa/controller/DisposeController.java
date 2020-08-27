@@ -35,12 +35,14 @@ public class DisposeController {
         model.addAttribute("list",basic_messageDao.findAll());
         return "index";
     }
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){
-        System.out.println("findAll()");
+        System.out.println(disposeDao.listAll());
         return disposeDao.listAll();
     }
+
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
     public int del(Integer id){

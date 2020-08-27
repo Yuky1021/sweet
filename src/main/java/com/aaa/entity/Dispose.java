@@ -24,20 +24,13 @@ public class Dispose {
     @Column
     private Integer emid;
 
+
     public Integer getDsid() {
         return dsid;
     }
 
     public void setDsid(Integer dsid) {
         this.dsid = dsid;
-    }
-
-    public Integer getBid() {
-        return bid;
-    }
-
-    public void setBid(Integer bid) {
-        this.bid = bid;
     }
 
     public Integer getTypes() {
@@ -55,6 +48,16 @@ public class Dispose {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    public Integer getBid() {
+        return bid;
+    }
+
+    public void setBid(Integer bid) {
+        this.bid = bid;
+    }
+
+
 
     public Integer getBmid() {
         return bmid;
