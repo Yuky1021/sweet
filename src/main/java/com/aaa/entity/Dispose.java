@@ -10,7 +10,9 @@ public class Dispose {
     @Column
     private Integer bid;
     @Column
-    private Integer reason;
+    private Integer types;
+    @Column
+    private String reason;
     @Column
     private Integer bmid;
     @Column
@@ -19,20 +21,9 @@ public class Dispose {
     private Integer way;
     @Column
     private String dtime;
+    @Column
+    private Integer emid;
 
-    @Override
-    public String toString() {
-        return "Dispose{" +
-                "dsid=" + dsid +
-                ", bid=" + bid +
-                ", reason=" + reason +
-                ", bmid=" + bmid +
-                ", state=" + state +
-                ", way=" + way +
-                ", dtime='" + dtime + '\'' +
-                ", emid=" + emid +
-                '}';
-    }
 
     public Integer getDsid() {
         return dsid;
@@ -40,6 +31,22 @@ public class Dispose {
 
     public void setDsid(Integer dsid) {
         this.dsid = dsid;
+    }
+
+    public Integer getTypes() {
+        return types;
+    }
+
+    public void setTypes(Integer types) {
+        this.types = types;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public Integer getBid() {
@@ -50,13 +57,7 @@ public class Dispose {
         this.bid = bid;
     }
 
-    public Integer getReason() {
-        return reason;
-    }
 
-    public void setReason(Integer reason) {
-        this.reason = reason;
-    }
 
     public Integer getBmid() {
         return bmid;
@@ -97,6 +98,19 @@ public class Dispose {
     public void setEmid(Integer emid) {
         this.emid = emid;
     }
-    @Column
-    private Integer emid;
+
+    @Override
+    public String toString() {
+        return "Dispose{" +
+                "dsid=" + dsid +
+                ", bid=" + bid +
+                ", types=" + types +
+                ", reason='" + reason + '\'' +
+                ", bmid=" + bmid +
+                ", state=" + state +
+                ", way=" + way +
+                ", dtime='" + dtime + '\'' +
+                ", emid=" + emid +
+                '}';
+    }
 }

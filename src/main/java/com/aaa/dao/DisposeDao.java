@@ -11,14 +11,11 @@ import java.util.Map;
 
 @Mapper
 public interface DisposeDao extends tk.mybatis.mapper.common.Mapper<Dispose> {
-    @Select("select d.dsid,b.bmname,d.reason,bm.bmname,d.state,d.way,d.dtime,e.ename from dispose d  left join basic_message b on b.bmid=d.bid join basic_message bm on bm.bmid=d.bmid left join emp e on e.emid=d.emid ")
+    @Select("select d.dsid,b.bmname as bname,d.types,d.reason,bm.bmname,d.state,d.way,d.dtime,e.ename from dispose d left join basic_message b on b.bmid=d.bid left join basic_message bm on bm.bmid=d.bmid left join emp e on e.emid=d.emid")
     List<Map<String,Object>> listAll();
 
     //添加
-    @Insert("insert into dispose values(#{bid},#{types},#{reason},#{bmid})")
-    Integer add(@Param("dispose") Dispose dispose);
+    @Insert("insert into dispose (bid,types,reason,bmid) values(#{bid},#{types},#{reason},#{bmid})")
+    Integer add(Dispose dispose);
 
-    //前台查询举报类型
-    @Select("select types from dispose")
-    List<Dispose> listType();
 }

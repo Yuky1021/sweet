@@ -34,8 +34,17 @@ public class Basic_messageController {
     @RequestMapping("listAll")
     public String listAll(Model model){
         model.addAttribute("list",basic_messageDao.findAll());
+        System.out.println(basic_messageDao.findAll());
         return "index";
     }
+
+    //前台找男友
+    @RequestMapping("zhaoboy")
+    public String zhaoboy(Model model){
+        model.addAttribute("boys",basic_messageDao.zhaoboy());
+        return "boyfriend";
+    }
+
 
     @RequestMapping("s")
     public String s(Model model){
