@@ -1,6 +1,5 @@
 package com.aaa.controller;
 
-import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.entity.Basic_message;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -24,7 +24,21 @@ public class Basic_messageController {
 
     @Resource
     Basic_messageDao basic_messageDao;
-
+    public void setpics( List<Map<String,Object>> l){
+        for (Map<String,Object> a : l
+        ) {
+            String p=a.get("pic").toString();
+            String s = a.get("soliloquy").toString();
+            System.out.println("图片:"+p);
+            System.out.println("内心独白:"+s);
+            if(p==null || p.equals("")){
+                a.put("pic","../images/timg3.jpg");
+            }
+            if(s==null || s.equals("")){
+                a.put("soliloquy","暂未填写内心独白");
+            }
+        }
+    }
     @RequestMapping(value ="ShowAll",produces = "application/json")
     @ResponseBody
     public List<Basic_message> ShowAll(){
@@ -34,8 +48,9 @@ public class Basic_messageController {
 
     @RequestMapping("listAll")
     public String listAll(Model model){
-        model.addAttribute("list",basic_messageDao.findAll());
-        System.out.println(basic_messageDao.findAll());
+        List<Map<String,Object>> l=basic_messageDao.findAll();
+        setpics(l);
+        model.addAttribute("list",l);
         return "index";
     }
 
@@ -61,7 +76,9 @@ public class Basic_messageController {
     @RequestMapping("findAllById")
     public String findAllById(Model model,@Param("bmid") Integer bmid){
         System.out.println("bid:"+bmid);
-        model.addAttribute("listId",basic_messageDao.findAllById(bmid));
+        List<Map<String,Object>> fid=basic_messageDao.findAllById(bmid);
+        setpics(fid);
+        model.addAttribute("listId",fid);
         System.out.println(basic_messageDao.findAllById(bmid));
         return "single1";
     }
@@ -141,48 +158,11 @@ public class Basic_messageController {
     }
 
     @RequestMapping("Register")
-    public String Register(Basic_message bm){
-        //生成账号
-        String number="20";
-        String p=bm.getPhone();
-        number=number+p.substring(5);
-        final int i = basic_messageDao.BMcount();
-        number=number+i;
-
-        //注册
-        basic_messageDao.AddNPP(number,p,bm.getPwd());
-        return "redirect:tologin";
+    public String Register(){
+        System.out.println(2222222);
+        return "register";
     }
 
-
-    //查询手机号是否重复
-    @RequestMapping("isPhone")
-    @ResponseBody
-    public String isPhone(String phone){
-        final int phoneTrue = basic_messageDao.isPhoneTrue(phone);
-        return Integer.toString(phoneTrue);
-    }
-    //获取验证码
-    @RequestMapping("getPhoneVerification")
-    @ResponseBody
-    public String getPhoneVerification(String phone){
-        final String Vcode = PhoneCode.getPhonemsg(phone);
-        System.out.println(Vcode);
-        return Vcode;
-    }
-    //找回账号密码
-    @RequestMapping("Zhzzmm")
-    public String Zhzzmm(@Param("modPhone") String modPhone,Model mo){
-        final List<Basic_message> bm = basic_messageDao.SelByPhone(modPhone);
-        //如果查询账号大于0
-        if(bm.size()>0){
-            final Basic_message bm1 = bm.get(0);
-            mo.addAttribute("bm",bm1);
-            return "numberAndpwd";
-        }
-        mo.addAttribute("Eorr","该手机号未注册");
-        return "login";
-    }
 
     // 注销登录
     @RequestMapping("/loginout")
