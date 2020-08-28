@@ -1,6 +1,8 @@
 package com.aaa.controller;
 
+import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
+import com.aaa.dao.ForeignKeyAddDao;
 import com.aaa.entity.Basic_message;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,14 @@ public class Basic_messageController {
 
     @Resource
     Basic_messageDao basic_messageDao;
+    @Resource
+    ForeignKeyAddDao fkd;
+
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
-            String p=a.get("pic").toString();
-            String s = a.get("soliloquy").toString();
+            Object p=a.get("pic");
+            Object s = a.get("soliloquy");
             System.out.println("图片:"+p);
             System.out.println("内心独白:"+s);
             if(p==null || p.equals("")){
@@ -90,7 +95,6 @@ public class Basic_messageController {
         System.out.println(basic_messageDao.findAllById(bmid));
         return "contact";
     }
-
     //   重定向:redirect
     //跳转登录页面
     @RequestMapping("tologin")
@@ -136,6 +140,7 @@ public class Basic_messageController {
                 BmidCookie=new Cookie("bmid",Integer.toString(bmid));
                 response.addCookie(BmidCookie);
             }
+
             //如果选了复选框
             if(checktf==1) {
                 //存入cookie
@@ -157,12 +162,59 @@ public class Basic_messageController {
     }
 
     @RequestMapping("Register")
-    public String Register(){
-        System.out.println(2222222);
-        return "register";
+    public String Register(Basic_message bm){
+        //生成账号
+        String number="20";
+        String p=bm.getPhone();
+        number=number+p.substring(5);
+        final int i = basic_messageDao.BMcount();
+        number=number+i;
+
+        //注册
+        basic_messageDao.AddNPP(number,p,bm.getPwd());
+        final List<Basic_message> bm2 = basic_messageDao.SelByPhone(p);
+        System.out.println("bm2:"+bm2);
+        String bmid=bm2.get(0).getBmid().toString();
+        System.out.println(bmid);
+        //生成关联的信息表外键列
+        fkd.IFKchoose_mate(bmid);
+        fkd.IFKdetails_message(bmid);
+        fkd.IFKlife_message(bmid);
+        fkd.IFKvip(bmid);
+
+
+        return "redirect:tologin";
     }
 
 
+    //查询手机号是否重复
+    @RequestMapping("isPhone")
+    @ResponseBody
+    public String isPhone(String phone){
+        final int phoneTrue = basic_messageDao.isPhoneTrue(phone);
+        return Integer.toString(phoneTrue);
+    }
+    //获取验证码
+    @RequestMapping("getPhoneVerification")
+    @ResponseBody
+    public String getPhoneVerification(String phone){
+        final String Vcode = PhoneCode.getPhonemsg(phone);
+        System.out.println(Vcode);
+        return Vcode;
+    }
+    //找回账号密码
+    @RequestMapping("Zhzzmm")
+    public String Zhzzmm(@Param("modPhone") String modPhone,Model mo){
+        final List<Basic_message> bm = basic_messageDao.SelByPhone(modPhone);
+        //如果查询账号大于0
+        if(bm.size()>0){
+            final Basic_message bm1 = bm.get(0);
+            mo.addAttribute("bm",bm1);
+            return "numberAndpwd";
+        }
+        mo.addAttribute("Eorr","该手机号未注册");
+        return "login";
+    }
     // 注销登录
     @RequestMapping("/loginout")
     public String loginOut(HttpServletRequest request) {
@@ -171,4 +223,11 @@ public class Basic_messageController {
         return "redirect:/";
     }
 
+    //显示个人中心
+    @RequestMapping("/GeRen")
+    public String GeRen(HttpServletRequest request) {
+        //清空session
+        request.getSession().invalidate();
+        return "GeRen";
+    }
 }

@@ -51,6 +51,6 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     int isPhoneTrue(@Param("phone") String phone);
 
     //根据手机号查询信息
-    @Select("SELECT number,pwd FROM basic_message where phone=#{phone}")
+    @Select("SELECT bmid,number,pwd FROM basic_message where phone=#{phone}")
     List<Basic_message> SelByPhone(@Param("phone") String phone);
 }
