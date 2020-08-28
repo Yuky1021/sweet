@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Mapper
 public interface MessageDao extends tk.mybatis.mapper.common.Mapper<Message> {
-    @Select("select me.meid,bm.bmname,bg.bmname,me.context from message me left join basic_message bm on bm.bmid=me.one left join basic_message bg on bg.bmid=me.tow")
+    @Select("select me.meid,bm.bmname as bname,bg.bmname,me.context from message me left join basic_message bm on bm.bmid=me.one left join basic_message bg on bg.bmid=me.tow")
     List<Map<String,Object>> listAll();
 }
