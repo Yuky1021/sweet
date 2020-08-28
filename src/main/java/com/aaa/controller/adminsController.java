@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -20,8 +21,8 @@ public class adminsController {
 
     @RequestMapping("login")
     @ResponseBody
-    public List<admins> login(admins admin){
-        System.out.println(adminsdao.select(admin));
-        return adminsdao.select(admin);
+    public List<Map<String,Object>> login(String adname, String pwd){
+        System.out.println(adminsdao.login(adname,pwd));
+        return adminsdao.login(adname,pwd);
     }
 }

@@ -51,6 +51,13 @@ public class Basic_messageController {
         return basic_messageDao.selectAll();
     }
 
+    @RequestMapping(value ="ShowBystate",produces = "application/json")
+    @ResponseBody
+    public List<Basic_message> ShowBystate(){
+        System.out.println(basic_messageDao.findAllByStart());
+        return basic_messageDao.findAllByStart();
+    }
+
     @RequestMapping("listAll")
     public String listAll(Model model){
         List<Map<String,Object>> l=basic_messageDao.findAll();

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @Controller
@@ -19,6 +20,12 @@ public class EmpController {
     @Resource
     EmpDao empDao;
 
+    @RequestMapping(value ="login",produces = "application/json")
+    @ResponseBody
+    public List<Map<String,Object>> login(String ename,String epwd){
+        System.out.println(empDao.login(ename,epwd));
+        return empDao.login(ename,epwd);
+    }
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Emp> findAll(){
