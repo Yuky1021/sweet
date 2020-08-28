@@ -1,6 +1,7 @@
 package com.aaa.controller;
 
 import com.aaa.dao.MediaDao;
+import com.aaa.entity.Media;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,4 +31,27 @@ public class MediaController {
         return mediaDao.findAll();
 
     }
+
+    @RequestMapping(value ="add",produces = "application/json")
+    @ResponseBody
+    public int add(Media media){
+        System.out.println("add");
+        return mediaDao.insert(media);
+    }
+
+    @RequestMapping(value ="update",produces = "application/json")
+    @ResponseBody
+    public int update(Media media){
+        System.out.println("update");
+        return mediaDao.updateByPrimaryKey(media);
+    }
+
+    @RequestMapping(value ="del",produces = "application/json")
+    @ResponseBody
+    public int del(Integer id){
+        System.out.println("del");
+        return mediaDao.deleteByPrimaryKey(id);
+    }
+
+
 }

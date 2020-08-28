@@ -50,4 +50,11 @@ public class EmpController {
         System.out.println("update");
         return empDao.updateByPrimaryKey(emp);
     }
+
+    @RequestMapping(value ="findBYState",produces = "application/json")
+    @ResponseBody
+    public List<Emp> findBYState(){
+        System.out.println(empDao.findByState());
+        return empDao.findByState();
+    }
 }

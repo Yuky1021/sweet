@@ -237,4 +237,12 @@ public class Basic_messageController {
         request.getSession().invalidate();
         return "GeRen";
     }
+
+    @RequestMapping(value ="update",produces = "application/json")
+    @ResponseBody
+    public int update(Basic_message basic_message){
+        System.out.println("update");
+        return basic_messageDao.updateByPrimaryKey(basic_message);
+    }
+
 }
