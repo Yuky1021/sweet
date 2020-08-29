@@ -2,6 +2,9 @@ package com.aaa.controller;
 
 import com.aaa.dao.life_messageDao;
 import com.aaa.entity.life_message;
+import com.aaa.util.PageHelpers;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,20 @@ public class life_messageDaoController {
         System.out.println("findAll");
         return life_messagedao.listAll();
     }
+
+//    @RequestMapping(value ="findAll",produces = "application/json")
+//    @ResponseBody
+//    public PageHelpers<Map<String,Object>> findAll(PageHelpers<Map<String,Object>> ph){
+//        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+//        List<Map<String,Object>> lift_messages = life_messagedao.listAll();
+//        ph.setRows(lift_messages);
+//        PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(lift_messages);
+//        int pages = pageInfo.getPages();
+//        ph.setLastPage(pages);
+//        ph.setTotalCount(life_messagedao.totalCount());
+//        System.out.println("totalCount:"+life_messagedao.totalCount());
+//        return ph;
+//    }
 
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
