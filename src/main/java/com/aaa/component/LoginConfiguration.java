@@ -15,7 +15,7 @@ public class LoginConfiguration implements WebMvcConfigurer {
         // 拦截路径
 
         loginRegistry.addPathPatterns("/**/findAllById");
-//        loginRegistry.addPathPatterns("/**/listAll");
+//        loginRegistry.addPathPatterns("/**/SelDetails");
 
 
         // 排除路径

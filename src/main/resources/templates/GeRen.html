@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -51,14 +51,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
-            <a href="#" target="myframe" class="list-group-item active">商品管理</a>
-            <a href="#" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">一级分类</a>
-            <a href="#" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">二级分类</a>
-            <a href="#" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">商品列表</a>
+            <a class="list-group-item active">商品管理</a>
+            <a href="#"  target="myframe" class="list-group-item"><img src="../images/tubiao1.png">基本信息</a>
+            <a href="../Details_message/SelDetails" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">详细信息</a>
+            <a href="#" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">生活信息</a>
+            <a href="#" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">择偶标准</a>
+
         </div>
         <div class="col-sm-10">
-            <a href="https://v.qq.com/" target="myframe">腾讯视频</a>
-            <iframe name="myframe" src="#" width="900" height="500" frameborder="0" scrolling="no"></iframe>
+            <iframe name="myframe" src="../Details_message/SelDetails" width="1110" height="540" frameborder="0" scrolling="Yes"></iframe>
         </div>
     </div>
 </div>

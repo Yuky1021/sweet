@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户详细信息</title>
+
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/><!-- Bootstrap -->
+    <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+    <script type='text/javascript' src='../js/bootstrap-3.1.1.min.js'></script>
+    <script type="text/javascript">
+
+        //触发隐藏的file表单
+        function makeThisfile(){
+            $('#thisfile').click();
+        }
+        $(function () {
+            //file表单选中文件时,让file表单的val展示到showname这个展示框
+            $('#thisfile').change(function(){
+                let filepath=$('#thisfile').val();
+                $('#showname').val($('#thisfile').val());
+                $("#idpic").attr("src",URL.createObjectURL($("#thisfile")[0].files[0]));
+            })
+
+            //设置所有文本框/按钮/下拉框为不可用
+            $("input[type='text']").attr("disabled","true");
+            $("select").attr("disabled","true");
+            $("#browse").attr("disabled","true");
+            $("button").attr("disabled","true");
+            $("textarea").attr("disabled","true");
+
+            //给修改按钮设置单击事件
+            $("#xiugai").click(function () {
+                alert(1);
+                //设置所有文本框/按钮/下拉框为可用
+                $("input[type='text']").removeAttr("disabled");
+                $("select").removeAttr("disabled");
+                $("#browse").removeAttr("disabled");
+                $("button").removeAttr("disabled");
+                $("textarea").removeAttr("disabled");
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+
+
+
+
+<form role="form" action="UpdDetails" method="post" style="margin-left:200px;">
+    <input type="hidden" name="dmid" th:value="${Dlist.dmid}">
+    <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
+
+    <div class="form-group">
+        <label for="truename">真实名称</label>
+        <input type="text" name="truename" th:value="${Dlist.truename}" class="form-control" id="truename" style="width: 500px">
+    </div>
+    <div class="form-group">
+        <label for="natives">籍贯</label>
+        <input type="text" name="natives" th:value="${Dlist.natives}" class="form-control" id="natives" style="width: 500px">
+    </div>
+
+    <div class="form-group">
+        <label for="nation">民族</label>
+        <select class="form-control" id="nation" name="nation" style="width: 500px">
+            <option value="" th:selected="${Dlist.nation==''}">请选择</option>
+            <option value="汉族" th:selected="${Dlist.nation=='汉族'}">汉族</option>
+            <option value="回族" th:selected="${Dlist.nation=='回族'}">回族</option>
+            <option value="其他" th:selected="${Dlist.nation=='其他'}">其他</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="children">有无子嗣</label>
+        <select class="form-control" id="children" name="children" style="width: 500px">
+            <option value="0" th:selected="${Dlist.children=='0'}">无</option>
+            <option value="1" th:selected="${Dlist.children=='1'}">有</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="education">学历</label>
+        <input type="text" name="education" th:value="${Dlist.education}" class="form-control" id="education" style="width: 500px">
+    </div>
+
+    <div class="form-group">
+        <label for="constellation">星座</label>
+        <select class="form-control" id="constellation" name="constellation" style="width: 500px">
+            <option value="" th:selected="${Dlist.constellation==''}">请选择</option>
+            <option value="水瓶座" th:selected="${Dlist.constellation=='水瓶座'}">水瓶座</option>
+            <option value="双鱼座" th:selected="${Dlist.constellation=='双鱼座'}">双鱼座</option>
+            <option value="白羊座" th:selected="${Dlist.constellation=='白羊座'}">白羊座</option>
+            <option value="金牛座" th:selected="${Dlist.constellation=='金牛座'}">金牛座</option>
+            <option value="双子座" th:selected="${Dlist.constellation=='双子座'}">双子座</option>
+            <option value="巨蟹座" th:selected="${Dlist.constellation=='巨蟹座'}">巨蟹座</option>
+            <option value="狮子座" th:selected="${Dlist.constellation=='狮子座'}">狮子座</option>
+            <option value="处女座" th:selected="${Dlist.constellation=='处女座'}">处女座</option>
+            <option value="天秤座" th:selected="${Dlist.constellation=='天秤座'}">天秤座</option>
+            <option value="天蝎座" th:selected="${Dlist.constellation=='天蝎座'}">天蝎座</option>
+            <option value="射手座" th:selected="${Dlist.constellation=='射手座'}">射手座</option>
+            <option value="摩羯座" th:selected="${Dlist.constellation=='摩羯座'}">摩羯座</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="monthly">月收入</label>
+        <input type="text" name="monthly" th:value="${Dlist.monthly}" class="form-control" id="monthly" style="width: 500px">
+    </div>
+
+    <div class="form-group">
+        <label for="Idcard">身份证</label>
+        <input type="text" name="Idcard" th:value="${Dlist.Idcard}" class="form-control" id="Idcard"style="width: 500px">
+    </div>
+    <div class="form-group">
+        <label for="thisfile">上传身份证照片</label><br>
+        <!-- 真正的文件上传表单 -->
+        <input th:value="${Dlist.pic}" type="file" id="thisfile" style="display: none" />
+        <!-- 用于展示上传文件名的表单 暂时把name放在这里 修改好文件上传记得改------------------------------------------------------------------>
+        <input name="pic" id="showname" th:value="${Dlist.pic}" class="form-control input-large" type="text" style="width:440px;display: inline-block">
+        <!-- 点击触发表单按钮 -->
+        <a class="btn btn-success" onclick="makeThisfile()" id="browse">浏览</a>
+    </div>
+    <div class="form-group">
+    <img id="idpic" th:src="${Dlist.pic}" width="500" height="300">
+    </div>
+
+    <div class="form-group">
+        <label for="soliloquy">内心独白</label>
+        <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
+        <textarea name="soliloquy" th:text="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 500px"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">提交</button>
+    <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+</form>
+
+</body>
+</html>

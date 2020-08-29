@@ -127,17 +127,19 @@ public class Basic_messageController {
             session.setAttribute("loginName", bm.getNumber());
             session.setAttribute("loginPwd", bm.getPwd());
 
-            Cookie BmidCookie;
+
             if(i==1){
                 final int bmid = basic_messageDao.getBmidByNumber(bm.getNumber());
                 System.out.println("bmid:"+bmid);
-                BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                Cookie BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
             }
             if(j==1){
                 final int bmid = basic_messageDao.getBmidByPhone(bm.getNumber());
                 System.out.println("bmid:"+bmid);
-                BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                Cookie BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
             }
 
@@ -226,8 +228,7 @@ public class Basic_messageController {
     //显示个人中心
     @RequestMapping("/GeRen")
     public String GeRen(HttpServletRequest request) {
-        //清空session
-        request.getSession().invalidate();
+        System.out.println("个人中心get");
         return "GeRen";
     }
 }
