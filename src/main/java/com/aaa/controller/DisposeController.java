@@ -53,7 +53,7 @@ public class DisposeController {
     @ResponseBody
     public int update(Dispose dispose){
         System.out.println("update");
-        return disposeDao.updateByPrimaryKey(dispose);
+        return disposeDao.update(dispose);
     }
 
     @RequestMapping(value ="add",produces = "application/json")

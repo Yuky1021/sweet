@@ -4,6 +4,9 @@ import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.ForeignKeyAddDao;
 import com.aaa.entity.Basic_message;
+import com.aaa.util.PageHelpers;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +32,27 @@ public class Basic_messageController {
     @Resource
     ForeignKeyAddDao fkd;
 
+
+    @ResponseBody
+    public List<Basic_message> ShowAll(){
+        System.out.println(basic_messageDao.selectAll());
+        return basic_messageDao.selectAll();
+    }
+
+//    @RequestMapping(value ="ShowAll",produces = "application/json")
+//    @ResponseBody
+//    public PageHelpers<Basic_message> findAll(PageHelpers<Basic_message> ph){
+//        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+//        List<Basic_message> basic_messages = basic_messageDao.selectAll();
+//        ph.setRows(basic_messages);
+//        PageInfo<Basic_message> pageInfo = new PageInfo<Basic_message>(basic_messages);
+//        int pages = pageInfo.getPages();
+//        ph.setLastPage(pages);
+//        ph.setTotalCount(basic_messageDao.totalCount());
+//        System.out.println("totalCount:"+basic_messageDao.totalCount());
+//        return ph;
+//    }
+
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
@@ -44,11 +68,13 @@ public class Basic_messageController {
             }
         }
     }
-    @RequestMapping(value ="ShowAll",produces = "application/json")
+
+
+    @RequestMapping(value ="ShowBystate",produces = "application/json")
     @ResponseBody
-    public List<Basic_message> ShowAll(){
-        System.out.println(basic_messageDao.selectAll());
-        return basic_messageDao.selectAll();
+    public List<Basic_message> ShowBystate(){
+        System.out.println(basic_messageDao.findAllByStart());
+        return basic_messageDao.findAllByStart();
     }
 
     @RequestMapping("listAll")
@@ -231,4 +257,12 @@ public class Basic_messageController {
         System.out.println("个人中心get");
         return "GeRen";
     }
+
+    @RequestMapping(value ="update",produces = "application/json")
+    @ResponseBody
+    public int update(Basic_message basic_message){
+        System.out.println("update");
+        return basic_messageDao.updateByPrimaryKey(basic_message);
+    }
+
 }

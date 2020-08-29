@@ -9,6 +9,6 @@ import java.util.Map;
 
 @Mapper
 public interface AttentionDao extends tk.mybatis.mapper.common.Mapper<Attention> {
-    @Select("select att.attid,bm.bmname,bg.bmname from attention att left join basic_message bm on bm.bmid=att.baid left join basic_message bg on bg.bmid=att.aid")
+    @Select("select att.attid,bm.bmname as bname,bg.bmname from attention att left join basic_message bm on bm.bmid=att.baid left join basic_message bg on bg.bmid=att.aid")
     List<Map<String,Object>> listAll();
 }
