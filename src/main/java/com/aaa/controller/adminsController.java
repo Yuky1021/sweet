@@ -25,4 +25,19 @@ public class adminsController {
         System.out.println(adminsdao.login(adname,pwd));
         return adminsdao.login(adname,pwd);
     }
+
+    @RequestMapping(value ="findByName",produces = "application/json")
+    @ResponseBody
+    public List<admins> findByName(String adname){
+        System.out.println(adminsdao.findByName(adname));
+        return adminsdao.findByName(adname);
+    }
+
+    @RequestMapping(value ="updatePwd",produces = "application/json")
+    @ResponseBody
+    public int updatePwd(admins admin){
+        System.out.println(admin);
+        System.out.println(adminsdao.update(admin));
+        return adminsdao.update(admin);
+    }
 }

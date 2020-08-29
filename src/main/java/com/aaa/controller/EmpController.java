@@ -57,4 +57,12 @@ public class EmpController {
         System.out.println(empDao.findByState());
         return empDao.findByState();
     }
+
+    @RequestMapping(value ="findByName",produces = "application/json")
+    @ResponseBody
+    public List<Emp> findByName(String ename){
+        System.out.println(ename);
+        System.out.println(empDao.findByName(ename));
+        return empDao.findByName(ename);
+    }
 }
