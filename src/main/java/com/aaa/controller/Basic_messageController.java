@@ -4,9 +4,6 @@ import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.ForeignKeyAddDao;
 import com.aaa.entity.Basic_message;
-import com.aaa.util.PageHelpers;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,33 +28,11 @@ public class Basic_messageController {
     Basic_messageDao basic_messageDao;
     @Resource
     ForeignKeyAddDao fkd;
-
-
-    @ResponseBody
-    public List<Basic_message> ShowAll(){
-        System.out.println(basic_messageDao.selectAll());
-        return basic_messageDao.selectAll();
-    }
-
-//    @RequestMapping(value ="ShowAll",produces = "application/json")
-//    @ResponseBody
-//    public PageHelpers<Basic_message> findAll(PageHelpers<Basic_message> ph){
-//        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
-//        List<Basic_message> basic_messages = basic_messageDao.selectAll();
-//        ph.setRows(basic_messages);
-//        PageInfo<Basic_message> pageInfo = new PageInfo<Basic_message>(basic_messages);
-//        int pages = pageInfo.getPages();
-//        ph.setLastPage(pages);
-//        ph.setTotalCount(basic_messageDao.totalCount());
-//        System.out.println("totalCount:"+basic_messageDao.totalCount());
-//        return ph;
-//    }
-
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
-            Object p=a.get("pic");
-            Object s = a.get("soliloquy");
+            String p=a.get("pic").toString();
+            String s = a.get("soliloquy").toString();
             System.out.println("图片:"+p);
             System.out.println("内心独白:"+s);
             if(p==null || p.equals("")){
@@ -68,7 +43,12 @@ public class Basic_messageController {
             }
         }
     }
-
+    @RequestMapping(value ="ShowAll",produces = "application/json")
+    @ResponseBody
+    public List<Basic_message> ShowAll(){
+        System.out.println(basic_messageDao.selectAll());
+        return basic_messageDao.selectAll();
+    }
 
     @RequestMapping(value ="ShowBystate",produces = "application/json")
     @ResponseBody
@@ -92,6 +72,14 @@ public class Basic_messageController {
         return "boyfriend";
     }
 
+    //前台找女友
+    @RequestMapping("zhaogirl")
+    public String zhaogirl(Model model){
+        List<Map<String,Object>> gs=basic_messageDao.zhaogirl();
+        setpics(gs);
+        model.addAttribute("girls",gs);
+        return "girlfriend";
+    }
 
     @RequestMapping("s")
     public String s(Model model){
@@ -121,6 +109,7 @@ public class Basic_messageController {
         System.out.println(basic_messageDao.findAllById(bmid));
         return "contact";
     }
+
     //   重定向:redirect
     //跳转登录页面
     @RequestMapping("tologin")
@@ -152,8 +141,6 @@ public class Basic_messageController {
             final HttpSession session = request.getSession();
             session.setAttribute("loginName", bm.getNumber());
             session.setAttribute("loginPwd", bm.getPwd());
-
-
             if(i==1){
                 final int bmid = basic_messageDao.getBmidByNumber(bm.getNumber());
                 System.out.println("bmid:"+bmid);

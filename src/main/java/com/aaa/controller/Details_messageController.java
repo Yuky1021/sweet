@@ -20,7 +20,6 @@ public class Details_messageController {
     @Resource
     Details_messageDao dm;
 
-
     //根据cookie中Id查询详细信息
     @RequestMapping("SelDetails")
     public String SelDetails(HttpServletRequest request, Model model){

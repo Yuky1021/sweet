@@ -1,13 +1,19 @@
 package com.aaa.controller;
 
+import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.MessageDao;
 import com.aaa.entity.Message;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +23,24 @@ import java.util.Map;
 public class MessageController {
     @Resource
     MessageDao messageDao;
+    @Resource
+    Basic_messageDao basic_messageDao;
+    //图片和内心独白校验
+    public void setpics( List<Map<String,Object>> l){
+        for (Map<String,Object> a : l
+        ) {
+            Object p=a.get("pic");
+            Object s = a.get("soliloquy");
+            System.out.println("图片:"+p);
+            System.out.println("内心独白:"+s);
+            if(p==null || p.equals("")){
+                a.put("pic","../images/timg3.jpg");
+            }
+            if(s==null || s.equals("")){
+                a.put("soliloquy","暂未填写内心独白,暂未填写内心独白");
+            }
+        }
+    }
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){
@@ -35,10 +59,68 @@ public class MessageController {
         System.out.println("update");
         return messageDao.updateByPrimaryKey(message);
     }
-    @RequestMapping(value ="add",produces = "application/json")
+    //前台主页面查询
+    @RequestMapping("listAll")
+    public String listAll(Model model){
+        List<Map<String,Object>> l=basic_messageDao.findAll();
+        setpics(l);
+        model.addAttribute("list",l);
+        return "index";
+    }
+    //前台发送消息
+    @RequestMapping("add")
+    public String add(Message message){
+        System.out.println("进入前台发送消息方法");
+        Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = format.format(date);
+        System.out.println("时间:"+str);
+        message.setFtime(str);
+        message.setMstate(1);
+        Integer count=messageDao.insert(message);
+        return "redirect:listAll";
+    }
+    //前台消息列表查询
+    @RequestMapping("qlists")
+    public String qlists(HttpServletRequest request,Model model){
+        try{
+            String bmid="0";
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null && cookies.length > 0){
+                for (Cookie cookie : cookies){
+                    System.out.println(cookie.getName());
+                    if(cookie.getName().equals("bmid")){
+                        bmid=cookie.getValue();
+                    }
+                }
+            }
+            System.out.println("bmid:"+bmid);
+            final List<Map<String,Object>> maps;
+            System.out.println(!bmid.equals("0"));
+            if(!bmid.equals("0")) {
+                maps = messageDao.qlists(bmid);
+                System.out.println("maps:"+maps);
+            }else {maps=null;}
+
+            for (Map<String,Object> m:
+                    maps) {
+
+
+            }
+
+            model.addAttribute("qs",maps);
+            System.out.println("消息列表查询:"+maps);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "lists";
+    }
+    //前台查看消息
+    @RequestMapping("infos")
     @ResponseBody
-    public int add(Message message){
-        System.out.println("add");
-        return messageDao.insert(message);
+    public List<Message> infos(String tow){
+        System.out.println("进入前台查看消息");
+        List<Message> s=messageDao.infos(tow);
+        return s;
     }
 }

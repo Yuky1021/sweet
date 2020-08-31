@@ -16,15 +16,12 @@ public class Message {
     @Column
     private String context;
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "meid=" + meid +
-                ", one=" + one +
-                ", tow=" + tow +
-                ", context='" + context + '\'' +
-                '}';
-    }
+    @Column
+    private Integer mstate;
+
+    @Column
+    private String ftime;
+
 
     public Integer getMeid() {
         return meid;
@@ -56,5 +53,33 @@ public class Message {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public Integer getMstate() {
+        return mstate;
+    }
+
+    public void setMstate(Integer mstate) {
+        this.mstate = mstate;
+    }
+
+    public String getFtime() {
+        return ftime;
+    }
+
+    public void setFtime(String ftime) {
+        this.ftime = ftime;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "meid=" + meid +
+                ", one=" + one +
+                ", tow=" + tow +
+                ", context='" + context + '\'' +
+                ", mstate=" + mstate +
+                ", ftime='" + ftime + '\'' +
+                '}';
     }
 }

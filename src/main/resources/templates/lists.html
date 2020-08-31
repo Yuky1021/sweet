@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Single :: W3layouts</title>
+<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Codes :: W3layouts</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +18,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for-mobile-apps -->
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/font-awesome.css" rel="stylesheet">
-<link href="../css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
@@ -51,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li><a href="about.html">About</a></li>
 									<li><a href="matches.html">Matches</a></li>
 									<li class="dropdown menu__item">
-										<a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">Pages<span class="caret"></span></a>
+										<a href="#" class="dropdown-toggle menu__link active"  data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">Pages<span class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li><a href="codes.html">Short Codes</a></li>
 											<li><a href="icons.html">Icons</a></li>
@@ -72,7 +71,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--//home-->
 <!--banner end here-->
-
 <!-- breadcrumbs -->
 <div class="w3l_agileits_breadcrumbs">
    <div class="container">
@@ -80,85 +78,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul>
 				<li><a href="index.html">Home</a><span>&#187;</span></li>
 									
-				<li>Single</li>
+				<li>Codes</li>
 				</ul>
 		</div>
 	</div>
 </div>
 <!-- //breadcrumbs -->
-<span th:each="l : ${listId}">
-<div class="matches elite-app">
-		<div class="container">
-		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;<a href="#" style="color: red;">关注</a>
+<!-- typography -->
+<div class="typography elite-app">
+	<div class="container">
+	<div class="tittle-agileinfo">
+		<h3>消 息 列 表</h3>
+	</div>
+		<div class="bs-docs-example wow fadeInUp animated" data-wow-delay=".5s">
+			<table class="table table-hover">
+					<span th:each="q : ${qs}">
+					<tbody>
+						<tr style="height: 100px">
+						  <td><img th:src="${q.pic}" style="height: 110px;width: 110px;"></td>
+							<td><h5 style="font-weight: bold">昵称:</h5><p th:text="${q.bmname}"></p><h5 style="font-weight: bold">年龄:</h5><p th:text="${q.age}"></p><h5 style="font-weight: bold">身高:</h5><p th:text="${q.height}"></p></td>
+							<td><p style="padding-bottom: 15px;padding-top: 15px">快速找到对象</p><a href="#"><span class="label label-info" style="padding-bottom: 5px">点击查看</span></a></td>
+						  <td><p style="padding-bottom: 15px;padding-top: 15px"><span th:text="${q.ct}"></span>条未读</p><a data-toggle="modal" href="#Infos" onclick="xinxis()"><span class="label label-info">点击查看</span></a></td>
+						</tr>
+					</tbody>
+					</span>
+			</table>
 		</div>
-		<div class="matches-main-agileinfo">
-			<!--<div class="col-md-6 profile1">
-
-			</div>-->
-			<div>
-				<img th:src="${l.pic}">
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:380px">
-				<ul>
-					<li><span>年龄:<p th:text="${l.age}"></p></span></li>
-					<li><span>性别:<p th:text="${l.sex==0?'女':'男'}"></p></span></li>
-					<li><span>ID:<p th:text="${l.number}"></p></span></li>
-					<li><span>学历:<p th:text="${l.education}"></p></span></li>
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>身高:<p th:text="${l.height}"></p></span></li>
-					<li><span>工资:<p th:text="${l.monthly}"></p></span></li>
-					<li><span>地址:<p th:text="${l.address}"></p></span></li>
-					<li><a href="#">打招呼</a> <a data-toggle="modal" href="#FaMessage" >发消息</a></li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="about-person">
-				<h6>内心独白:</h6>
-				<p class="para-agileits-w3layouts"><span>Hi!, Iam <span th:text="${l.truename}"></span></span><p th:if="${l.soliloquy} == null ">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p><p>Wish to get a heart white head not to separate</p></p>
-			</div>
-		</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>工作 生活</h3>
-				<ul>
-					<li><span>买房情况</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}"></p></li>
-					<li><span>买车情况</span><p th:text="${l.buycar==0?'未买车':'已买车'}"></p></li>
-					<li><span>是否抽烟</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}"></p></li>
-					<li><span>是否喝酒</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}"></p></li>
-					<li><span>喜欢的城市</span><p th:text="${l.city}"></p></li>
-					<li><span>喜欢的书</span><p th:text="${l.book}"></p></li>
-					<li><span>爱好</span><p th:text="${l.hobby}"></p></li>
-				</ul>
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>择偶 条件</h3>
-				<ul>
-					<li><span>最大年龄</span><p th:text="${l.lage}"></p></li>
-					<li><span>最小年龄</span><p th:text="${l.bage}"></p></li>
-					<li><span>身高</span><p th:text="${l.height}"></p></li>
-					<li><span>学历</span><p th:text="${l.education}"></p></li>
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>月收入</span><p th:text="${l.monthly}"></p></li>
-				</ul>
-			</div>
-		</div>
-
+	</div>
 </div>
 <!--模态框-->
-<div class="modal fade" id="FaMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="Infos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -171,27 +120,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="modal-body">
 				<!--主体内容-->
-				<form role="form" action="../message/add" method="post" id="messagefm">
-					<!--当前用户-->
-					<input type="hidden" name="one" id="dqid">
-					<!--发送的用户-->
-					<input type="hidden" name="tow" th:value="${l.dmid}" id="fsid">
+				<form role="form" action="../message/add" method="post" id="Infofm">
+					<span th:each="q : ${qs}">
+						<!--<span th:text="${q.bmname}"></span>:-->
+						<!--<p th:text="${q.context}" style="padding: 0px 0px 0px;color: #3a87ad"></p>-->
+						<!--<p th:text="${q.ftime}" style="padding: 0px 0px 0px"></p>-->
+						<div id="con"></div>
+						<!--当前用户-->
+						<input type="hidden" name="one" id="dqid">
+						<!--回复的用户-->
+						<input type="hidden" name="tow" th:value="${q.dmid}" id="hfid">
+					</span>
 					<div class="form-group">
 						<!--<label for="modPhone">内容</label>-->
-						<textarea name="context" maxlength="100" id="context" placeholder="请输入你要发送的内容" style="width: 563px;height: 100px"></textarea>
+						<textarea name="context" maxlength="100" id="context" placeholder="请输入你要回复的内容" style="width: 563px;height: 100px"></textarea>
 					</div>
 					<!--<button type="submit" class="btn btn-default">发送</button>-->
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="send()">发送</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="reply()">回复</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-</span>
-<!--login-inner-->
+
+<!-- //typography -->
 <!-- footer -->
 <div class="w3l_footer">
 	<div class="container">
@@ -222,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 				<div class="sim-button button12"><a href="contact.html">联系我们</a></div>
-				<h2>我们致力于提供卓越的服务</h2>
+				<h2>我们致力于提供卓越的服务.</h2>
 			</div>
 		</div>
 		<!-- footer-button-info -->
@@ -257,36 +212,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
-<!-- script for responsive tabs -->						
-<script src="../js/easy-responsive-tabs.js"></script>
-<script>
-$(document).ready(function () {
-$('#horizontalTab').easyResponsiveTabs({
-type: 'default', //Types: default, vertical, accordion           
-width: 'auto', //auto or any width like 600px
-fit: true,   // 100% fit in a container
-closed: 'accordion', // Start closed if in accordion view
-activate: function(event) { // Callback function if tab is switched
-var $tab = $(this);
-var $info = $('#tabInfo');
-var $name = $('span', $info);
-$name.text($tab.text());
-$info.show();
-}
-});
-$('#verticalTab').easyResponsiveTabs({
-type: 'vertical',
-width: 'auto',
-fit: true
-});
-});
-</script>
-<!-- script for responsive tabs -->		
 
+<style type="text/css">
+	td{
+		text-align: center;
+        line-height: 100px;
+	}
+</style>
 
 <script src="../js/SmoothScroll.min.js"></script>
 <!-- smooth scrolling -->
 	<script type="text/javascript">
+
 		$(document).ready(function() {
 		/*
 			var defaults = {
@@ -298,6 +235,27 @@ fit: true
 		*/								
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
+		//查看信息
+		function xinxis() {
+			let h=$("#hfid").val();
+			let ss;
+			$.ajaxSettings.async = false;
+			$.post("infos",
+					{"tow":h},
+					function (data) {
+						ss=data;
+					}
+			);
+			$.ajaxSettings.async = true;
+			let c=$("#con");
+			let str="";
+			for (let i=0;i<ss.length;i++){
+				let t=ss[i].context;
+				let f=ss[i].ftime;
+				str=str+"<p style=\"padding: 0px 0px 0px;color: #3a87ad\">"+t+"</p><p style=\"padding: 0px 0px 0px\">"+f+"</p>";
+			}
+			c.html(str);
+		}
 	</script>
 	
 	
@@ -307,6 +265,7 @@ fit: true
 	<!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/move-top.js"></script>
 <script type="text/javascript" src="../js/easing.js"></script>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -314,6 +273,7 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
+
 	//获取当前登录人id
 	function GetCookie(name) {
 		var ck = document.cookie;
@@ -323,26 +283,21 @@ fit: true
 	}
 	let d=GetCookie("bmid");
 	$("#dqid").val(d);
-	function send() {
+	function reply() {
 		/*alert(1);*/
-		/*alert("登录人id:"+d);*/
-		let f=$("#fsid").val();
+		/*let h=$("#hfid").val();*/
+		/*alert("当前登录人Id:"+d);
+		alert("回复人id:"+h);*/
 		let c=$("#context").val();
-		/*alert("要发送的id:"+f);
-		alert("要发送的内容:"+c);*/
-		if(c==undefined || c==null || c==''){
-			alert("消息不能为空")
+		if(c==null || c=='' || c==undefined){
+			alert("回复信息不能为空");
 		}else {
-			$("#messagefm").submit();
-			alert("发送成功")
+			$("#Infofm").submit();
+			alert("回复成功");
 		}
-
 	}
-</script>
-<script type="text/css">
-	/*#info{
-		float:right;
-	}*/
+
+
 </script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
