@@ -64,7 +64,6 @@ public class Basic_messageController {
         }
     }
 
-
     @RequestMapping(value ="ShowBystate",produces = "application/json")
     @ResponseBody
     public List<Basic_message> ShowBystate(){

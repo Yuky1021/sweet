@@ -12,6 +12,8 @@ import java.util.Map;
 @Mapper
 public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_message> {
 
+
+    //count
     @Select("select count(bmid) from basic_message")
     public int totalCount();
 

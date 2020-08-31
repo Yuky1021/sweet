@@ -30,7 +30,7 @@ public class EmpController {
         System.out.println(empDao.login(ename,epwd));
         return empDao.login(ename,epwd);
     }
-
+    //分页
     @RequestMapping(value ="findAll",produces =" application/json")
     @ResponseBody
     public PageHelpers<Emp> findAll(PageHelpers<Emp> ph){

@@ -22,6 +22,7 @@ public interface EmpDao extends tk.mybatis.mapper.common.Mapper<Emp> {
     @Update("update emp set ename=#{ename},epwd=#{epwd},truename=#{truename},sex=#{sex},phone=#{phone},address=#{address},state=0 where emid=#{emid}")
     int update(Emp emp);
 
+    //count
     @Select("select count(emid) from emp")
     public int totalCount();
 

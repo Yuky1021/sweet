@@ -28,6 +28,7 @@ public class Profession_typeController {
 //        return profession_typeDao.selectAll();
 //    }
 
+    //分页
     @RequestMapping(value ="findAll",produces =" application/json")
     @ResponseBody
     public PageHelpers<Profession_type> findAll(PageHelpers<Profession_type> ph){
