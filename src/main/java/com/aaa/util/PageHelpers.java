@@ -6,7 +6,7 @@ public class PageHelpers<T> {
     //当前页
     private Integer pageNum = 1;
     //    每页多少条
-    private Integer pageSize = 3;
+    private Integer pageSize = 7;
     //    尾页
     private Integer lastPage;
     //   每页的数据

@@ -31,26 +31,26 @@ public class EmpController {
         return empDao.login(ename,epwd);
     }
 
-//    @RequestMapping(value ="findAll",produces =" application/json")
-//    @ResponseBody
-//    public PageHelpers<Emp> findAll(PageHelpers<Emp> ph){
-//        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
-//        List<Emp> emps = empDao.selectAll();
-//        ph.setRows(emps);
-//        PageInfo<Emp> pageInfo = new PageInfo<Emp>(emps);
-//        int pages = pageInfo.getPages();
-//        ph.setLastPage(pages);
-//        ph.setTotalCount(empDao.totalCount());
-//        System.out.println("totalCount:"+empDao.totalCount());
-//        return ph;
-//    }
-
-    @RequestMapping(value ="findAll",produces = "application/json")
+    @RequestMapping(value ="findAll",produces =" application/json")
     @ResponseBody
-    public List<Emp> findAll(){
-        System.out.println("findAll");
-        return empDao.selectAll();
+    public PageHelpers<Emp> findAll(PageHelpers<Emp> ph){
+        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+        List<Emp> emps = empDao.selectAll();
+        ph.setRows(emps);
+        PageInfo<Emp> pageInfo = new PageInfo<Emp>(emps);
+        int pages = pageInfo.getPages();
+        ph.setLastPage(pages);
+        ph.setTotalCount(empDao.totalCount());
+        System.out.println("totalCount:"+empDao.totalCount());
+        return ph;
     }
+
+//    @RequestMapping(value ="findAll",produces = "application/json")
+//    @ResponseBody
+//    public List<Emp> findAll(){
+//        System.out.println("findAll");
+//        return empDao.selectAll();
+//    }
     @RequestMapping(value ="add",produces = "application/json")
     @ResponseBody
     public int add(Emp emp){

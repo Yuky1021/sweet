@@ -2,6 +2,9 @@ package com.aaa.controller;
 
 import com.aaa.dao.Profession_typeDao;
 import com.aaa.entity.Profession_type;
+import com.aaa.util.PageHelpers;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +21,25 @@ public class Profession_typeController {
     @Resource
     Profession_typeDao profession_typeDao;
 
-    @RequestMapping(value ="findAll",produces = "application/json")
+//    @RequestMapping(value ="findAll",produces = "application/json")
+//    @ResponseBody
+//    public List<Profession_type> findAll(){
+//        System.out.println("findAll");
+//        return profession_typeDao.selectAll();
+//    }
+
+    @RequestMapping(value ="findAll",produces =" application/json")
     @ResponseBody
-    public List<Profession_type> findAll(){
-        System.out.println("findAll");
-        return profession_typeDao.selectAll();
+    public PageHelpers<Profession_type> findAll(PageHelpers<Profession_type> ph){
+        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+        List<Profession_type> profession_types = profession_typeDao.selectAll();
+        ph.setRows(profession_types);
+        PageInfo<Profession_type> pageInfo = new PageInfo<Profession_type>(profession_types);
+        int pages = pageInfo.getPages();
+        ph.setLastPage(pages);
+        ph.setTotalCount(profession_typeDao.totalCount());
+        System.out.println("totalCount:"+profession_typeDao.totalCount());
+        return ph;
     }
     @RequestMapping(value ="add",produces = "application/json")
     @ResponseBody
