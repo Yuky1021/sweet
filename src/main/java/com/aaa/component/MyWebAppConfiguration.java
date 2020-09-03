@@ -16,6 +16,20 @@ public class MyWebAppConfiguration extends WebMvcConfigurationSupport {
          * @Date： Create in 14:08 2017/12/20
          */
         registry.addResourceHandler("/path/**").addResourceLocations("file:\\D:\\image\\");
+        registry.addResourceHandler("/TV/**").addResourceLocations("file:\\D:\\classVido\\");
+
+        registry.addResourceHandler("/js/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\js\\");
+        registry.addResourceHandler("/js1/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\js1\\");
+        registry.addResourceHandler("/css/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\css\\");
+        registry.addResourceHandler("/css1/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\css1\\");
+        registry.addResourceHandler("/images/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\images\\");
+        registry.addResourceHandler("/images1/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\images1\\");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\fonts\\");
+        registry.addResourceHandler("/fonts1/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\fonts1\\");
+        registry.addResourceHandler("/plugins/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\plugins\\");
+        registry.addResourceHandler("/styles/**").addResourceLocations("file:\\D:\\S1\\sweet\\src\\main\\resources\\templates\\styles\\");
+
+
         super.addResourceHandlers(registry);
     }
 
