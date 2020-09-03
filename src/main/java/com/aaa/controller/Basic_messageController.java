@@ -252,4 +252,38 @@ public class Basic_messageController {
         return basic_messageDao.updateByPrimaryKey(basic_message);
     }
 
+    //根据cookie中Id查询详细信息
+    @RequestMapping("Selmate")
+    public String SelBasic(HttpServletRequest request, Model model){
+        String bmid="0";
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length > 0){
+            for (Cookie cookie : cookies){
+                System.out.println(cookie.getName());
+                if(cookie.getName().equals("bmid")){
+                    bmid=cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:"+bmid);
+        final List<Basic_message> basic_message;
+        System.out.println(!bmid.equals("0"));
+        if(!bmid.equals("0")) {
+            basic_message = basic_messageDao.SelbyBmid(bmid);
+        }else {basic_message=null;}
+        System.out.println("查看全部信息"+basic_message);
+        model.addAttribute("Dlist",basic_message.get(0));
+        return "basic_message";
+    }
+
+    //修改个人基本信息
+    @RequestMapping("UpdBasic")
+    public String UpdBasic(Basic_message det) {
+        System.out.println("修改详细信息get");
+        System.out.println(det);
+        final int i = basic_messageDao.updateByPrimaryKey(det);
+        System.out.println(i);
+        if(i>0){System.out.println("UpdateYes");}
+        return "redirect:Selmate";
+    }
 }

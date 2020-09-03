@@ -30,4 +30,8 @@ public interface Choose_mateDao extends tk.mybatis.mapper.common.Mapper<Choose_m
     @Select("select c.cmid,c.lage,c.bage,c.height,c.education,c.marriage,c.nation,c.monthly,b.bmname from choose_mate c left join basic_message b on c.bmid=b.bmid")
     List<Map<String,Object>> findAll();
 
+    //客户择偶标准表查询id
+    @Select("select * from choose_mate where bmid=#{bmid}")
+    List<Choose_mate> SelbyBmid(@Param("bmid") String bmid);
+
 }

@@ -14,7 +14,7 @@ public class Choose_mate {
     @Column
     private Integer height;
     @Column
-    private Integer education;
+    private String education;
     @Column
     private Integer marriage;
     @Column
@@ -56,12 +56,20 @@ public class Choose_mate {
         this.height = height;
     }
 
-    public Integer getEducation() {
+    public String getEducation() {
         return education;
     }
 
-    public void setEducation(Integer education) {
+    public void setEducation(String education) {
         this.education = education;
+    }
+
+    public Integer getMonthly() {
+        return monthly;
+    }
+
+    public void setMonthly(Integer monthly) {
+        this.monthly = monthly;
     }
 
     public Integer getMarriage() {
@@ -80,14 +88,6 @@ public class Choose_mate {
         this.nation = nation;
     }
 
-    public Integer getMonthly() {
-        return monthly;
-    }
-
-    public void setMonthly(Integer monthly) {
-        this.monthly = monthly;
-    }
-
     public Integer getBmid() {
         return bmid;
     }
@@ -103,7 +103,7 @@ public class Choose_mate {
                 ", lage=" + lage +
                 ", bage=" + bage +
                 ", height=" + height +
-                ", education=" + education +
+                ", education='" + education + '\'' +
                 ", marriage=" + marriage +
                 ", nation='" + nation + '\'' +
                 ", monthly=" + monthly +

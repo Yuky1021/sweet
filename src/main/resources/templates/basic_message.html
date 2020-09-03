@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>basic_message</title>
+    <!--*导入bootstarp的css-->
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" media="all"/>
+    <link href="../css/toastr.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--*先导入jQuery-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <!--*再导入以jQuery为基础的bootstrap的js-->
+    <script src="../js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/toastr.min.js"></script>
+    <script type="text/javascript">
+        //非空校验
+        function isNull(param){
+            if(param==null||param==""){
+                toastr.warning("内容不可为空");
+                return false;
+            }
+            return true;
+        }
+        //名称校验
+        function mc(){
+            let val=$("#bmname").val();
+            //调用方法判断是否为空
+            if (!isNull(val)){
+                return false;
+            }
+            return true;
+        }
+        //s手机号校验
+        function sjh(){
+            let val=$("#phone").val();
+            let re = /^1[3456789]\d{9}$/;
+                //调用方法判断是否为空
+            if (!isNull(val)){
+                return false;
+            }
+            if (!re.test(val)) {
+                toastr.warning("手机号格式错误");
+                return false;
+            }
+            return true;
+        }
+
+        $(function () {
+            //自定义弹出框位置
+            toastr.options = {
+                "positionClass": "toast-top-center"//弹出窗的位置上方居中
+            };
+            /*toastr.warning("弹出框居中");*/
+            //总校验
+            $("#bzjy").submit( function () {
+                alert(1);
+                if(mc()&&sjh()){
+                    return true;
+                }
+                return false;
+            })
+      })
+
+        $(function () {
+            //设置所有文本框/按钮/下拉框为不可用
+            $("input[type='text']").attr("disabled","true");
+            $("select").attr("disabled","true");
+            $("button").attr("disabled","true");
+
+            //给修改按钮设置单击事件
+            $("#xiugai").click(function () {
+                alert(1);
+                //设置所有文本框/按钮/下拉框为可用
+                $("input[type='text']").removeAttr("disabled");
+                $("select").removeAttr("disabled");
+                $("button").removeAttr("disabled");
+
+                $("#number").attr("disabled","true");
+                $("#vip").attr("disabled","true");
+
+            })
+        })
+    </script>
+</head>
+<body>
+<!--<span th:text="${Dlist}"></span>-->
+
+
+<form role="form" id="bzjy"action="UpdBasic" method="post" style="margin-left:200px;">
+    <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
+    <input type="hidden" name="state" th:value="${Dlist.state}">
+    <input type="hidden" name="birthday" th:value="${Dlist.birthday}">
+    <input type="hidden" name="pwd" th:value="${Dlist.pwd}">
+    <input type="hidden" name="age" th:value="${Dlist.age}">
+    <input type="hidden" name="vip" th:value="${Dlist.vip}">
+    <input type="hidden" name="number" th:value="${Dlist.number}">
+
+    <div class="form-group">
+        <label for="vip">您是</label>
+        <input type="text" th:value="${Dlist.vip==0?'会员':'非会员'}" class="form-control" id="vip" style="width: 210px;display: inline-block">
+        <label for="number">账号是</label>
+        <input type="text" th:value="${Dlist.number}" class="form-control" id="number" style="width: 210px;display: inline-block ">
+    </div>
+    <div class="form-group">
+        <label for="bmname">名称</label>
+        <input type="text" onblur="mc()" name="bmname" th:value="${Dlist.bmname}" class="form-control" id="bmname" style="width: 500px" maxlength="8">
+    </div>
+    <div class="form-group">
+        <label for="marriage">婚姻状态</label>
+        <select class="form-control" id="marriage" name="marriage" style="width: 500px">
+            <option value="0" th:selected="${Dlist.marriage==0}">未婚</option>
+            <option value="1" th:selected="${Dlist.marriage==1}">离婚</option>
+            <option value="2" th:selected="${Dlist.marriage==2}">丧偶</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="weight">体重</label>
+        <select class="form-control" id="weight" name="weight" style="width: 500px">
+            <option value="0" th:selected="${Dlist.weight==0}">不限</option>
+            <option value="35" th:selected="${Dlist.weight==35}">35公斤左右</option>
+            <option value="40" th:selected="${Dlist.weight==40}">40公斤左右</option>
+            <option value="45" th:selected="${Dlist.weight==45}">45公斤左右</option>
+            <option value="50" th:selected="${Dlist.weight==50}">50公斤左右</option>
+            <option value="55" th:selected="${Dlist.weight==55}">55公斤左右</option>
+            <option value="60" th:selected="${Dlist.weight==60}">60公斤左右</option>
+            <option value="65" th:selected="${Dlist.weight==65}">65公斤左右</option>
+            <option value="70" th:selected="${Dlist.weight==70}">70公斤左右</option>
+            <option value="75" th:selected="${Dlist.weight==75}">75公斤左右</option>
+            <option value="80" th:selected="${Dlist.weight==80}">80公斤左右</option>
+            <option value="85" th:selected="${Dlist.weight==85}">85公斤左右</option>
+            <option value="90" th:selected="${Dlist.weight==90}">90公斤左右</option>
+            <option value="95" th:selected="${Dlist.weight==95}">95公斤左右</option>
+            <option value="100" th:selected="${Dlist.weight==100}">100公斤左右</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="height">身高</label>
+        <select class="form-control" id="height" name="height" style="width: 500px">
+            <option value="0" th:selected="${Dlist.height==0}">不限</option>
+            <option value="140" th:selected="${Dlist.height==140}">140cm以上</option>
+            <option value="150" th:selected="${Dlist.height==150}">150cm以上</option>
+            <option value="160" th:selected="${Dlist.height==160}">160cm以上</option>
+            <option value="170" th:selected="${Dlist.height==170}">170cm以上</option>
+            <option value="180" th:selected="${Dlist.height==180}">180cm以上</option>
+            <option value="190" th:selected="${Dlist.height==190}">190cm以上</option>
+            <option value="200" th:selected="${Dlist.height==200}">200cm以上</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="sex">性别</label>
+        <select class="form-control" id="sex" name="sex" style="width: 500px">
+            <option value="0" th:selected="${Dlist.sex==0}">女</option>
+            <option value="1" th:selected="${Dlist.sex==1}">男</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="phone">手机号</label>
+        <input type="text" onblur="sjh()" name="phone" th:value="${Dlist.phone}" class="form-control" id="phone" style="width: 500px" maxlength="11">
+    </div>
+    <div class="form-group">
+        <label for="address">工作地区</label>
+        <select class="form-control" id="address" name="address" style="width: 500px">
+            <option value="郑州" th:selected="${Dlist.address=='郑州'}">郑州</option>
+            <option value="金水区" th:selected="${Dlist.address=='金水区'}">金水区</option>
+            <option value="中原区" th:selected="${Dlist.address=='中原区'}">中原区</option>
+            <option value="二七区" th:selected="${Dlist.address=='二七区'}">二七区</option>
+            <option value="管城区" th:selected="${Dlist.address=='巩义市'}">管城区</option>
+            <option value="惠济区" th:selected="${Dlist.address=='惠济区'}">惠济区</option>
+            <option value="上街区" th:selected="${Dlist.address=='上街区'}">上街区</option>
+            <option value="新郑市" th:selected="${Dlist.address=='新郑市'}">新郑市</option>
+            <option value="巩义市" th:selected="${Dlist.address=='巩义市'}">巩义市</option>
+            <option value="新密市" th:selected="${Dlist.address=='新密市'}">新密市</option>
+            <option value="登封市" th:selected="${Dlist.address=='登封市'}">登封市</option>
+            <option value="荥阳市" th:selected="${Dlist.address=='荥阳市'}">荥阳市</option>
+            <option value="中牟县" th:selected="${Dlist.address=='中牟县'}">中牟县</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">提交</button>
+    <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+</form>
+
+</body>
+</html>

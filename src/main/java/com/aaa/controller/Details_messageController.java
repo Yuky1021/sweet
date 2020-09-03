@@ -82,6 +82,6 @@ public class Details_messageController {
         final int i = dm.updateByPrimaryKey(det);
         System.out.println("i: "+i);
         if(i>0){System.out.println("UpdateYes");}
-        return "redirect:/basic_message/GeRen";
+        return "redirect:SelDetails";
     }
 }

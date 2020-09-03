@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>choose_mate</title>
+    <!--*导入bootstarp的css-->
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <!--*先导入jQuery-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <!--*再导入以jQuery为基础的bootstrap的js-->
+    <script src="../js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //设置所有文本框/按钮/下拉框为不可用
+            $("input[type='text']").attr("disabled","true");
+            $("select").attr("disabled","true");
+            $("button").attr("disabled","true");
+
+            //给修改按钮设置单击事件
+            $("#xiugai").click(function () {
+                alert(1);
+                //设置所有文本框/按钮/下拉框为可用
+                $("input[type='text']").removeAttr("disabled");
+                $("select").removeAttr("disabled");
+                $("button").removeAttr("disabled");
+            })
+        })
+    </script>
+
+</head>
+<body>
+<!--<span th:text="${Dlist}"></span>-->
+<form role="form" action="UpdChoose" method="post" style="margin-left:200px;">
+    <input type="hidden" name="cmid" th:value="${Dlist.cmid}">
+    <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
+    <div class="form-group">
+        <label for="lage">年龄</label><br>
+        <select class="form-control" id="lage" name="lage" style="width: 245px; display: inline-block">
+            <option value="0" th:selected="${Dlist.lage==0}">不限</option>
+            <option value="20" th:selected="${Dlist.lage==20}">20岁以上</option>
+            <option value="30" th:selected="${Dlist.lage==30}">30岁以上</option>
+            <option value="40" th:selected="${Dlist.lage==40}">40岁以上</option>
+            <option value="50" th:selected="${Dlist.lage==50}">50岁以上</option>
+            <option value="60" th:selected="${Dlist.lage==60}">60岁以上</option>
+            <option value="70" th:selected="${Dlist.lage==70}">70岁以上</option>
+        </select>
+
+        <select class="form-control" id="bage" name="bage" style="width: 245px; display: inline-block">
+            <option value="0" th:selected="${Dlist.bage==0}">不限</option>
+            <option value="30" th:selected="${Dlist.bage==30}">30岁以下</option>
+            <option value="40" th:selected="${Dlist.bage==40}">40岁以下</option>
+            <option value="50" th:selected="${Dlist.bage==50}">50岁以下</option>
+            <option value="60" th:selected="${Dlist.bage==60}">60岁以下</option>
+            <option value="70" th:selected="${Dlist.bage==70}">70岁以下</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="height">身高</label>
+        <select class="form-control" id="height" name="height" style="width: 500px">
+            <option value="0" th:selected="${Dlist.height==0}">不限</option>
+            <option value="140" th:selected="${Dlist.height==140}">140以上</option>
+            <option value="150" th:selected="${Dlist.height==150}">150以上</option>
+            <option value="160" th:selected="${Dlist.height==160}">160以上</option>
+            <option value="170" th:selected="${Dlist.height==170}">170以上</option>
+            <option value="180" th:selected="${Dlist.height==180}">180以上</option>
+            <option value="190" th:selected="${Dlist.height==190}">190以上</option>
+            <option value="200" th:selected="${Dlist.height==200}">200以上</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="monthly">月收入</label>
+        <select class="form-control" id="monthly" name="monthly" style="width: 500px">
+            <option value="0" th:selected="${Dlist.monthly==0}">不限</option>
+            <option value="2000" th:selected="${Dlist.monthly==2000}">3000元以下</option>
+            <option value="3000" th:selected="${Dlist.monthly==3000}">3000-4000</option>
+            <option value="4000" th:selected="${Dlist.monthly==4000}">4000-5000</option>
+            <option value="5000" th:selected="${Dlist.monthly==5000}">5000-6000</option>
+            <option value="6000" th:selected="${Dlist.monthly==6000}">6000-8000</option>
+            <option value="8000" th:selected="${Dlist.monthly==8000}">8000-10000</option>
+            <option value="10000" th:selected="${Dlist.monthly==10000}">10000-20000</option>
+            <option value="20000" th:selected="${Dlist.monthly==20000}">20000-50000</option>
+            <option value="50000" th:selected="${Dlist.monthly==50000}">50000元以上</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="education">学历</label>
+        <select class="form-control" id="education" name="education" style="width: 500px">
+            <option value="不限" th:selected="${Dlist.education=='不限'}">不限</option>
+            <option value="高中" th:selected="${Dlist.education=='高中'}">高中</option>
+            <option value="中专" th:selected="${Dlist.education=='中专'}">中专</option>
+            <option value="大专" th:selected="${Dlist.education=='大专'}">大专</option>
+            <option value="本科" th:selected="${Dlist.education=='本科'}">本科</option>
+            <option value="硕士" th:selected="${Dlist.education=='硕士'}">硕士</option>
+            <option value="博士" th:selected="${Dlist.education=='博士'}">博士</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="marriage">婚姻状态</label>
+        <select class="form-control" id="marriage" name="marriage" style="width: 500px">
+            <option value="0" th:selected="${Dlist.marriage==0}">未婚</option>
+            <option value="1" th:selected="${Dlist.marriage==1}">离婚</option>
+            <option value="2" th:selected="${Dlist.marriage==2}">丧偶</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="nation">民族</label>
+        <select class="form-control" id="nation" name="nation" style="width: 500px">
+            <option value="不限" th:selected="${Dlist.nation=='不限'}">不限</option>
+            <option value="汉族" th:selected="${Dlist.nation=='汉族'}">汉族</option>
+            <option value="回族" th:selected="${Dlist.nation=='回族'}">回族</option>
+            <option value="其他" th:selected="${Dlist.nation=='其他'}">其他</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">提交</button>
+    <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+</form>
+
+</body>
+</html>

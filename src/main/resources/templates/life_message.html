@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <title>life_message</title>
+    <!--*导入bootstarp的css-->
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" media="all"/>
+    <!--*先导入jQuery-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <!--*再导入以jQuery为基础的bootstrap的js-->
+    <script src="../js/bootstrap-3.1.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //设置所有文本框/按钮/下拉框为不可用
+            $("input[type='text']").attr("disabled","true");
+            $("select").attr("disabled","true");
+            $("button").attr("disabled","true");
+
+            //给修改按钮设置单击事件
+            $("#xiugai").click(function () {
+                alert(1);
+                //设置所有文本框/按钮/下拉框为可用
+                $("input[type='text']").removeAttr("disabled");
+                $("select").removeAttr("disabled");
+                $("button").removeAttr("disabled");
+            })
+        })
+    </script>
+
+</head>
+<body>
+<!--<span th:text="${Dlist}"></span>-->
+<form role="form" action="UpdLife" method="post" style="margin-left:200px;">
+    <input type="hidden" name="lmid" th:value="${Dlist.lmid}">
+    <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
+    <div class="form-group">
+        <label for="ptid">职业类型</label><br>
+        <select class="form-control" id="ptid" name="ptid" style="width: 500px; display: inline-block">
+            <option value="0" th:selected="${Dlist.ptid==0}">不限</option>
+            <option value="1" th:selected="${Dlist.ptid==1}">销售</option>
+            <option value="2" th:selected="${Dlist.ptid==2}">客户服务</option>
+            <option value="3" th:selected="${Dlist.ptid==3}">计算机/互联网</option>
+            <option value="4" th:selected="${Dlist.ptid==4}">通信/电子</option>
+            <option value="5" th:selected="${Dlist.ptid==5}">生产/制造</option>
+            <option value="6" th:selected="${Dlist.ptid==6}">物流/仓储</option>
+            <option value="7" th:selected="${Dlist.ptid==7}">商贸/采购</option>
+            <option value="8" th:selected="${Dlist.ptid==8}">人事/行政</option>
+            <option value="9" th:selected="${Dlist.ptid==9}">高级管理</option>
+            <option value="10" th:selected="${Dlist.ptid==10}">广告/市场</option>
+            <option value="11" th:selected="${Dlist.ptid==11}">传媒/艺术</option>
+            <option value="12" th:selected="${Dlist.ptid==12}">生物/制药</option>
+            <option value="13" th:selected="${Dlist.ptid==13}">医疗/护理</option>
+            <option value="14" th:selected="${Dlist.ptid==14}">金融/银行/保险</option>
+            <option value="15" th:selected="${Dlist.ptid==15}">建筑/房地产</option>
+            <option value="16" th:selected="${Dlist.ptid==16}">咨询/顾问</option>
+            <option value="17" th:selected="${Dlist.ptid==17}">法律</option>
+            <option value="18" th:selected="${Dlist.ptid==18}">财会/审计</option>
+            <option value="19" th:selected="${Dlist.ptid==19}">教育/科研</option>
+            <option value="20" th:selected="${Dlist.ptid==20}">服务业</option>
+            <option value="21" th:selected="${Dlist.ptid==21}">交通运输</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="buyhouse">买房情况</label>
+        <select class="form-control" id="buyhouse" name="buyhouse" style="width: 500px">
+            <option value="1" th:selected="${Dlist.buyhouse==1}">未购买</option>
+            <option value="0" th:selected="${Dlist.buyhouse==0}">已购买</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="buycar">买车情况</label>
+        <select class="form-control" id="buycar" name="buycar" style="width: 500px">
+            <option value="1" th:selected="${Dlist.buycar==1}">未购买</option>
+            <option value="0" th:selected="${Dlist.buycar==0}">已购买</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="smoking">是否抽烟</label>
+        <select class="form-control" id="smoking" name="smoking" style="width: 500px">
+            <option value="1" th:selected="${Dlist.smoking==1}">不抽烟</option>
+            <option value="0" th:selected="${Dlist.smoking==0}">抽烟</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="drink">是否喝酒</label>
+        <select class="form-control" id="drink" name="drink" style="width: 500px">
+            <option value="1" th:selected="${Dlist.drink==1}">不喝酒</option>
+            <option value="0" th:selected="${Dlist.drink==0}">喝酒</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="city">喜欢的城市</label>
+        <select class="form-control" id="city" name="city" style="width: 500px">
+            <option value="郑州" th:selected="${Dlist.city=='郑州'}">郑州</option>
+            <option value="北京" th:selected="${Dlist.city=='北京'}">北京</option>
+            <option value="上海" th:selected="${Dlist.city=='上海'}">上海</option>
+            <option value="广州" th:selected="${Dlist.city=='广州'}">广州</option>
+            <option value="深圳" th:selected="${Dlist.city=='深圳'}">深圳</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="hobby">业余爱好</label>
+        <input type="text" name="hobby" th:value="${Dlist.hobby}" class="form-control" id="hobby" style="width: 500px" maxlength="20">
+    </div>
+    <div class="form-group">
+        <label for="book">喜欢的书</label>
+        <input type="text" name="book" th:value="${Dlist.book}" class="form-control" id="book" style="width: 500px" maxlength="20">
+    </div>
+    <button type="submit" class="btn btn-success">提交</button>
+    <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+</form>
+
+</body>
+</html>
