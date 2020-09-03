@@ -31,14 +31,14 @@ public class Basic_messageController {
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
-            String p=a.get("pic").toString();
-            String s = a.get("soliloquy").toString();
+            Object p=a.get("pic");
+            Object s = a.get("soliloquy");
             System.out.println("图片:"+p);
             System.out.println("内心独白:"+s);
-            if(p==null || p.equals("")){
+            if(p==null){
                 a.put("pic","../images/timg3.jpg");
             }
-            if(s==null || s.equals("")){
+            if(s==null){
                 a.put("soliloquy","暂未填写内心独白");
             }
         }
@@ -68,7 +68,9 @@ public class Basic_messageController {
     //前台找男友
     @RequestMapping("zhaoboy")
     public String zhaoboy(Model model){
-        model.addAttribute("boys",basic_messageDao.zhaoboy());
+        List<Map<String, Object>> gs = basic_messageDao.zhaoboy();
+        setpics(gs);
+        model.addAttribute("boys",gs);
         return "boyfriend";
     }
 
