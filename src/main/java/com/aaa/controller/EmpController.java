@@ -23,6 +23,12 @@ public class EmpController {
     @Resource
     EmpDao empDao;
 
+    @RequestMapping(value ="back",produces = "application/json")
+    public String back(){
+        System.out.println("back");
+        return "login";
+    }
+
 
     @RequestMapping(value ="login",produces = "application/json")
     @ResponseBody
@@ -67,6 +73,7 @@ public class EmpController {
     @ResponseBody
     public int update(Emp emp){
         System.out.println("update");
+        System.out.println(empDao.updateByPrimaryKey(emp));
         return empDao.updateByPrimaryKey(emp);
     }
 

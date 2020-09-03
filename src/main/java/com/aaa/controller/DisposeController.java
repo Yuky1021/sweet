@@ -42,6 +42,14 @@ public class DisposeController {
         return disposeDao.listAll();
     }
 
+    @RequestMapping(value ="findByState",produces = "application/json")
+    @ResponseBody
+    public List<Map<String,Object>> findByState(){
+        System.out.println(disposeDao.findByState());
+        return disposeDao.findByState();
+    }
+
+
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
     public int del(Integer id){
