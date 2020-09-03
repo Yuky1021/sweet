@@ -12,6 +12,9 @@ spring:
   jackson:
     date-format: 'yyyy-MM-dd' #格式化json
 
+
+
+
   resources: # 静态资源路径
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/,classpath:/css/,classpath:/css1/,classpath:/fonts/,classpath:/fonts1/,classpath:/images/,classpath:/images1/,classpath:/js/,classpath:/js1/,classpath:/plugins/,classpath:/styles/
 
@@ -29,4 +32,9 @@ spring:
     encoding: UTF-8
     prefix: classpath:/templates/
     mode: HTML5
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
 

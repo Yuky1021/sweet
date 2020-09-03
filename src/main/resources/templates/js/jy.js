@@ -7,6 +7,7 @@ new_element.setAttribute("rel","stylesheet");
 new_element.setAttribute("type","text/css");
 new_element.setAttribute("href","../css/toastr.min.css");
 document.body.appendChild(new_element);
+
 //引入js
 document.write("<script src='../js/toastr.min.js'></script>");
 document.write("<script language='javascript' src='../jquery-3.2.1.min.js'></script>");

@@ -1,6 +1,9 @@
 package com.aaa.entity;
 
+import javax.persistence.Id;
+
 public class Details_message {
+    @Id
     private Integer dmid;
     private String natives;
     private String truename;

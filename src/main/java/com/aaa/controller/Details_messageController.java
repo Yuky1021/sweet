@@ -6,12 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @CrossOrigin
 @Controller
@@ -42,12 +47,40 @@ public class Details_messageController {
         model.addAttribute("Dlist",details_messages.get(0));
         return "details";
     }
-    //修改个人详细信息
+    //修改个人详细信息(文件上传)
     @RequestMapping("UpdDetails")
-    public String UpdDetails(Details_message det) {
+    public String UpdDetails(Details_message det,@RequestParam("file") MultipartFile file,String filesrc){
+
+        System.out.println("进入上传");
+        // 判断是否为空文件
+        if (!file.isEmpty()) {
+            // 文件类型
+            String contentType = file.getContentType();
+            // springmvc处理后的文件名
+            String fileName = file.getName();
+            // 重命名上传的文件名
+            String origFileName = new Date().getTime() + ".jpg";
+            System.out.println("origFileName:  " + "/sweet/path/"+origFileName);
+            // 文件大小
+            Long fileSize = file.getSize();
+            det.setPic("/sweet/path/"+origFileName);
+
+            // 保存文件
+            // 这里直接使用transferTo
+            try {
+                file.transferTo(new File("d://image//" + origFileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            det.setPic(filesrc);
+        }
+
+
         System.out.println("修改详细信息get");
         System.out.println(det);
         final int i = dm.updateByPrimaryKey(det);
+        System.out.println("i: "+i);
         if(i>0){System.out.println("UpdateYes");}
         return "redirect:/basic_message/GeRen";
     }

@@ -4,22 +4,81 @@
     <meta charset="UTF-8">
     <title>用户详细信息</title>
 
-    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/><!-- Bootstrap -->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/toastr.min.css" rel="stylesheet" type="text/css" media="all"/>
+
     <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
     <script type='text/javascript' src='../js/bootstrap-3.1.1.min.js'></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="../js/toastr.min.js"></script>
+
+
+    <script>
+        //非空校验
+        function isNull(param){
+            if(param==null||param==""){
+                toastr.warning("内容不可为空");
+                return false;
+            }
+            return true;
+        }
+
+        //非空异常校验
+        function isNullTeshu(val){
+            //调用方法判断是否为空
+            if(!isNull(val)){
+                return false;
+            }
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+            if(pattern.test(val)){
+                toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+                return false;
+            }
+            return true;
+        }
+
+        //姓名校验
+        function namejy(){
+            let val = $("#truename").val();
+            if(!isNullTeshu(val)){
+                return false;
+            }
+            return true;
+        }
+
+        //籍贯校验
+        function jiguanjy(){
+            let val = $("#natives").val();
+            if(!isNullTeshu(val)){
+                return false;
+            }
+            return true;
+        }
+
+        //身份证校验
+        function sfzjy(){
+            let val = $("#Idcard").val();
+            if(!isNullTeshu(val)){
+                return false;
+            }
+            return true;
+        }
 
         //触发隐藏的file表单
         function makeThisfile(){
             $('#thisfile').click();
         }
         $(function () {
+            //自定义弹出框位置
+            toastr.options = {
+                "positionClass": "toast-top-center"//弹出窗的位置上方居中
+            };
+
             //file表单选中文件时,让file表单的val展示到showname这个展示框
             $('#thisfile').change(function(){
                 let filepath=$('#thisfile').val();
                 $('#showname').val($('#thisfile').val());
                 $("#idpic").attr("src",URL.createObjectURL($("#thisfile")[0].files[0]));
-            })
+            });
 
             //设置所有文本框/按钮/下拉框为不可用
             $("input[type='text']").attr("disabled","true");
@@ -30,13 +89,16 @@
 
             //给修改按钮设置单击事件
             $("#xiugai").click(function () {
-                alert(1);
+
                 //设置所有文本框/按钮/下拉框为可用
                 $("input[type='text']").removeAttr("disabled");
                 $("select").removeAttr("disabled");
                 $("#browse").removeAttr("disabled");
                 $("button").removeAttr("disabled");
                 $("textarea").removeAttr("disabled");
+
+                //设置触发按钮为不可用
+                $("#xiugai").attr("disabled","true");
             })
         })
 
@@ -48,17 +110,28 @@
 
 
 
-<form role="form" action="UpdDetails" method="post" style="margin-left:200px;">
+<form role="form" id="" action="UpdDetails" method="post" style="margin-left:200px;" enctype="multipart/form-data">
     <input type="hidden" name="dmid" th:value="${Dlist.dmid}">
     <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
 
+    <div class="form-group" style="margin-left:210px;">
+        <img id="idpic" th:src="${Dlist.pic}" width="100" height="140">
+    </div>
+    <div class="form-group" style="margin-left:215px;">
+        <!-- 真正的文件上传表单 -->
+        <input th:value="${Dlist.pic}" name="file" type="file" id="thisfile" style="display: none" />
+        <input th:value="${Dlist.pic}" name="filesrc" type="hidden">
+        <!-- 点击触发表单按钮 -->
+        <a class="btn btn-success" onclick="makeThisfile()" id="browse">修改头像</a>
+    </div>
+
     <div class="form-group">
         <label for="truename">真实名称</label>
-        <input type="text" name="truename" th:value="${Dlist.truename}" class="form-control" id="truename" style="width: 500px">
+        <input type="text" onblur="namejy()" name="truename" th:value="${Dlist.truename}" class="form-control" id="truename" style="width: 500px">
     </div>
     <div class="form-group">
         <label for="natives">籍贯</label>
-        <input type="text" name="natives" th:value="${Dlist.natives}" class="form-control" id="natives" style="width: 500px">
+        <input type="text" onblur="jiguanjy()" name="natives" th:value="${Dlist.natives}" class="form-control" id="natives" style="width: 500px">
     </div>
 
     <div class="form-group">
@@ -81,7 +154,14 @@
 
     <div class="form-group">
         <label for="education">学历</label>
-        <input type="text" name="education" th:value="${Dlist.education}" class="form-control" id="education" style="width: 500px">
+        <select class="form-control" id="education" name="education" style="width: 500px">
+            <option value="无" th:selected="${Dlist.education=='无'}">无</option>
+            <option value="小学" th:selected="${Dlist.education=='小学'}">小学</option>
+            <option value="中学" th:selected="${Dlist.education=='中学'}">中学</option>
+            <option value="高中" th:selected="${Dlist.education=='高中'}">高中</option>
+            <option value="本科" th:selected="${Dlist.education=='本科'}">本科</option>
+            <option value="大专" th:selected="${Dlist.education=='大专'}">大专</option>
+        </select>
     </div>
 
     <div class="form-group">
@@ -105,33 +185,34 @@
 
     <div class="form-group">
         <label for="monthly">月收入</label>
-        <input type="text" name="monthly" th:value="${Dlist.monthly}" class="form-control" id="monthly" style="width: 500px">
+        <select class="form-control" id="monthly" name="monthly" style="width: 500px">
+            <option value="0" th:selected="${Dlist.monthly==0}">3000以下</option>
+            <option value="3000" th:selected="${Dlist.monthly==3000}">3k-4k</option>
+            <option value="4000" th:selected="${Dlist.monthly==4000}">4k-5k</option>
+            <option value="5000" th:selected="${Dlist.monthly==5000}">5k-6k</option>
+            <option value="6000" th:selected="${Dlist.monthly==6000}">6k-8k</option>
+            <option value="8000" th:selected="${Dlist.monthly==8000}">8k-1k</option>
+            <option value="10000" th:selected="${Dlist.monthly==10000}">10k-20k</option>
+            <option value="20000" th:selected="${Dlist.monthly==20000}">20k-50k</option>
+            <option value="10000" th:selected="${Dlist.monthly==10000}">50k以上</option>
+        </select>
     </div>
 
     <div class="form-group">
         <label for="Idcard">身份证</label>
-        <input type="text" name="Idcard" th:value="${Dlist.Idcard}" class="form-control" id="Idcard"style="width: 500px">
+        <input type="text" onblur="sfzjy()" name="Idcard" th:value="${Dlist.Idcard}" class="form-control" maxlength="18" id="Idcard"style="width: 500px">
     </div>
-    <div class="form-group">
-        <label for="thisfile">上传身份证照片</label><br>
-        <!-- 真正的文件上传表单 -->
-        <input th:value="${Dlist.pic}" type="file" id="thisfile" style="display: none" />
-        <!-- 用于展示上传文件名的表单 暂时把name放在这里 修改好文件上传记得改------------------------------------------------------------------>
-        <input name="pic" id="showname" th:value="${Dlist.pic}" class="form-control input-large" type="text" style="width:440px;display: inline-block">
-        <!-- 点击触发表单按钮 -->
-        <a class="btn btn-success" onclick="makeThisfile()" id="browse">浏览</a>
-    </div>
-    <div class="form-group">
-    <img id="idpic" th:src="${Dlist.pic}" width="500" height="300">
-    </div>
+
 
     <div class="form-group">
         <label for="soliloquy">内心独白</label>
         <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
         <textarea name="soliloquy" th:text="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 500px"></textarea>
     </div>
-    <button type="submit" class="btn btn-success">提交</button>
-    <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+    <div style="margin-left: 190px">
+        <button type="submit" class="btn btn-success">提交</button>
+        <input type="button" id="xiugai" value="修改" class="btn btn-success"/>
+    </div>
 </form>
 
 </body>

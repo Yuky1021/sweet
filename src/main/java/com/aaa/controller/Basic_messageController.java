@@ -152,12 +152,14 @@ public class Basic_messageController {
                 final int bmid = basic_messageDao.getBmidByNumber(bm.getNumber());
                 System.out.println("bmid:"+bmid);
                 BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
             }
             if(j==1){
                 final int bmid = basic_messageDao.getBmidByPhone(bm.getNumber());
                 System.out.println("bmid:"+bmid);
                 BmidCookie=new Cookie("bmid",Integer.toString(bmid));
+                BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
             }
 
