@@ -42,4 +42,11 @@ public class Class_vidoController {
         System.out.println("add");
         return class_vidoDao.insert(class_vido);
     }
+
+    @RequestMapping("showTV")
+    public String showTV(){
+        System.out.println("123123123showTV");
+        return "tvClassroom";
+    }
+
 }

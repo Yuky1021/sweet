@@ -100,6 +100,13 @@
                 //设置触发按钮为不可用
                 $("#xiugai").attr("disabled","true");
             })
+
+            $("#dejy").submit(function () {
+                if(jiguanjy()&&namejy()&&sfzjy()){
+                    return true;
+                }
+                return false;
+            })
         })
 
     </script>
@@ -110,7 +117,7 @@
 
 
 
-<form role="form" id="" action="UpdDetails" method="post" style="margin-left:200px;" enctype="multipart/form-data">
+<form role="form" id="dejy" action="UpdDetails" method="post" style="margin-left:200px;" enctype="multipart/form-data">
     <input type="hidden" name="dmid" th:value="${Dlist.dmid}">
     <input type="hidden" name="bmid" th:value="${Dlist.bmid}">
 
