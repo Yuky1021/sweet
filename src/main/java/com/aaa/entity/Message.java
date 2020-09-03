@@ -8,7 +8,7 @@ public class Message {
     @Column
     private Integer meid;
     @Column
-    private Integer one;
+    private String one;
 
     @Column
     private Integer tow;
@@ -31,11 +31,11 @@ public class Message {
         this.meid = meid;
     }
 
-    public Integer getOne() {
+    public String getOne() {
         return one;
     }
 
-    public void setOne(Integer one) {
+    public void setOne(String one) {
         this.one = one;
     }
 
@@ -75,7 +75,7 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "meid=" + meid +
-                ", one=" + one +
+                ", one='" + one + '\'' +
                 ", tow=" + tow +
                 ", context='" + context + '\'' +
                 ", mstate=" + mstate +

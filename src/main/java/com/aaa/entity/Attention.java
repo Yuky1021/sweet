@@ -10,7 +10,7 @@ public class Attention {
     @Column
     private Integer baid;
     @Column
-    private Integer aid;
+    private String aid;
 
     public Integer getAttid() {
         return attid;
@@ -28,11 +28,11 @@ public class Attention {
         this.baid = baid;
     }
 
-    public Integer getAid() {
+    public String getAid() {
         return aid;
     }
 
-    public void setAid(Integer aid) {
+    public void setAid(String aid) {
         this.aid = aid;
     }
 
@@ -41,7 +41,7 @@ public class Attention {
         return "Attention{" +
                 "attid=" + attid +
                 ", baid=" + baid +
-                ", aid=" + aid +
+                ", aid='" + aid + '\'' +
                 '}';
     }
 }

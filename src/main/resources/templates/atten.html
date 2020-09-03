@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Contact :: W3layouts</title>
+<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Codes :: W3layouts</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +18,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for-mobile-apps -->
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/font-awesome.css" rel="stylesheet">
-<link href="../css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
@@ -65,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 			</nav>
 			<div class="header-right-w3ls">
-				<a href="..basic_message/tologin">登录</a>
+				<a href="../basic_message/tologin">登录</a>
 				<a href="../basic_message/toRegister">注册</a>
 			</div>
 			<div class="clearfix"></div>
@@ -81,88 +80,99 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul>
 				<li><a href="index.html">主页</a><span>&#187;</span></li>
 									
-				<li>举报</li>
+				<li>关注</li>
 				</ul>
 		</div>
 	</div>
 </div>
 <!-- //breadcrumbs -->
-<div class="login elite-app contact-page">
-		<div class="container">
-		<div class="tittle-agileinfo">
-					<h3>举报</h3>
-				</div>
-				<div class="col-md-6 regstr-r-w3-agileits">
-				<div class="form-bg-w3ls">
-					<h3 class="subhead-agileits white-w3ls">举报该用户</h3>
-					<form action="../dispose/tianjia" method="post" id="fm">
-						<span th:each="t : ${typess}">
-							<!--被举报人id-->
-							<input type="hidden" name="bid" th:value="${t.dmid}" id="bjbid">
+<!-- typography -->
+<div class="typography elite-app">
+	<div class="container">
+	<div class="tittle-agileinfo">
+		<h3>我 的 关 注</h3>
+	</div>
+		<div class="grid_3 grid_5 wow fadeInUp animated" data-wow-delay=".5s">
+			<!--<h3 class="hdg">Tabs</h3>-->
+			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home1" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">我的关注<span th:text="${gss}" style="color: red"></span></a></li>
+					<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">我的粉丝<span th:text="${fcs}" style="color: red"></span></a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div role="tabpanel" class="tab-pane fade in active" id="home1" aria-labelledby="home-tab">
+						<!--我的关注-->
+						<span th:each="m : ${my}">
+						<table>
+							<tr style="background: #d4d4d4">
+								<td><img th:src="${m.pic}" style="width: 100px;height: 100px;"></td>
+								<td th:text="${m.bmname}" style="width: 380px;"></td>
+								<td th:text="${m.address}" style="width: 380px;"></td>
+								<td style="width: 380px;"><a th:href="@{../basic_message/findAllById(bmid=${m.baid})}"><span class="label label-info" style="float: right;background: darksalmon;width: 90px;height: 30px;line-height: 30px;">查看详情</span></a></td>
+							</tr>
+						</table>
 						</span>
-						<!--举报人id-->
-						<input type="hidden" name="bmid" id="jbid">
-						<p style="color: white">举报类型:</p>
-						<select name="types" style="width: 310px; height: 45px" id="lx">
-							<option value="0">请选择</option>
-							<option value="1">色情</option>
-							<option value="2">骚扰信息</option>
-							<option value="3">诈骗钱财</option>
-							<option value="4">其他</option>
-						</select>
-						<textarea name="reason" placeholder="请填写举报理由，详细描述你所遇到的情况，以便客服人员快速为你进行处理" required="" id="yuanyin"></textarea>
-						<input type="button" value="取消" style="width: 80px;height: 40px;" onclick="tiao()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="提交" style="width: 80px;height: 40px;" onclick="tijiao()">
-					</form>
-				</div>
-				</div>
-				<div class="col-md-6 contact-agileits-w3layouts">
-					<div id="horizontalTab">
-							<ul class="resp-tabs-list">
-							<li>
-								<h6>California</h6>
-							</li>
-							<li>
-								<h6>USA</h6>
-							</li>
-							<li>
-								<h6>New York</h6>
-							</li>
-							<li>
-								<h6>UK</h6>
-							</li>
-							</ul>
-							<div class="resp-tabs-container">
-							<div class="tab1">
-								<p class="para-agileits-w3layouts"><span>Location : </span>1600 Exposition Blvd, Sacramento, CA 95815, USA</p>
-								<p class="para-agileits-w3layouts"><span>Call Us : </span>505-606-5432</p>
-								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99824.8709286373!2d-121.33074619389458!3d38.567705354191816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x280fd5261e96d7e6!2sCalifornia+State+Fair!5e0!3m2!1sen!2sin!4v1490439507422"></iframe>
-							</div>
-
-							<div class="tab2">
-								<p class="para-agileits-w3layouts"><span>Location : </span>25095 Blue Ravine Rd, Folsom, CA 95630, USA</p>
-								<p class="para-agileits-w3layouts"><span>Call Us : </span>032-625-4592</p>
-								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3114.2088705425613!2d-121.12137568485247!3d38.6900461667452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ae480c563ff67%3A0xd5aa0569c974a0a6!2sMexquite+Mexican+Restaurant!5e0!3m2!1sen!2sin!4v1490439685562"></iframe>
-							</div>
-							<div class="tab3">
-								<p class="para-agileits-w3layouts"><span>Location : </span>253 Church St, New York, NY 10013, USA</p>
-								<p class="para-agileits-w3layouts"><span>Call Us : </span>077-961-5426</p>
-								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.0051536537085!2d-74.00760038479508!3d40.7179030451917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a2016ad0821%3A0xa6bb46d566a740b7!2sKori+Tribeca!5e0!3m2!1sen!2sin!4v1490440032827"></iframe>
-							</div>
-							<div class="tab4">
-								<p class="para-agileits-w3layouts"><span>Location : </span>Sacramento, Welwyn, UK</p>
-								<p class="para-agileits-w3layouts"><span>Call Us : </span>505-792-2654</p>
-								<p class="para-agileits-w3layouts"><span>Email : </span><a href="mailto:info@example.com">info@example.com</a></p>
-								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39445.20117152928!2d-0.23465869969804293!3d51.83675868651679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487624b0caefa34f%3A0x246a752af1fed599!2sWelwyn%2C+UK!5e0!3m2!1sen!2sin!4v1490439907190"></iframe>
-							</div>
-							</div>
+					</div>
+					<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+						<!--我的粉丝-->
+						<span th:each="r : ${myr}">
+						<table>
+							<tr style="background: #d4d4d4">
+								<td><img th:src="${r.pic}" style="width: 100px;height: 100px;"></td>
+								<td th:text="${r.bmname}" style="width: 380px;"></td>
+								<td th:text="${r.address}" style="width: 380px;">
+								</td>
+								<td style="width: 380px;"><a th:href="@{../basic_message/findAllById(bmid=${r.aid})}"><span class="label label-info" style="float: right;background: darksalmon;width: 90px;height: 30px;line-height: 30px;">查看详情</span></a></td>
+							</tr>
+						</table>
+						</span>
 					</div>
 				</div>
+			</div>
 		</div>
+	</div>
 </div>
-<!--login-inner-->
+<!--模态框-->
+<div class="modal fade" id="Infos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					消息
+				</h4>
+			</div>
+			<div class="modal-body">
+				<!--主体内容-->
+				<form role="form" action="../message/add" method="post" id="Infofm">
+					<span th:each="q : ${qs}">
+						<!--<span th:text="${q.bmname}"></span>:-->
+						<!--<p th:text="${q.context}" style="padding: 0px 0px 0px;color: #3a87ad"></p>-->
+						<!--<p th:text="${q.ftime}" style="padding: 0px 0px 0px"></p>-->
+						<div id="con"></div>
+						<!--当前用户-->
+						<input type="hidden" name="one" id="dqid">
+						<!--回复的用户-->
+						<input type="hidden" name="tow" th:value="${q.dmid}" id="hfid">
+					</span>
+					<div class="form-group">
+						<!--<label for="modPhone">内容</label>-->
+						<textarea name="context" maxlength="100" id="context" placeholder="请输入你要回复的内容" style="width: 563px;height: 100px"></textarea>
+					</div>
+					<!--<button type="submit" class="btn btn-default">发送</button>-->
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="reply()">回复</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- //typography -->
 <!-- footer -->
 <div class="w3l_footer">
 	<div class="container">
@@ -225,73 +235,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!--/footer -->
+
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
-<script type="text/javascript">
-	function GetCookie(name) {
-		var ck = document.cookie;
-		var exp1 = new RegExp(name + "=.*?(?=;|$)");
-		var mch = ck.match(exp1);
-		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
-	}
-	let d=GetCookie("bmid");
-	/*alert("举报人id:"+d);*/
-	$("#jbid").val(d);
-	function tijiao() {
-		alert(1);
-		let yy=$("#yuanyin").val();
-		let l=$("#lx").val();
-		let bjb=$("#bjbid").val();
-		/*alert("原因:"+yy);
-		alert("类型:"+l);
-		alert("被举报Id:"+bjb);*/
-		if(yy==null || yy=='' || yy==undefined){
-			alert("举报原因不能为空");
-		}else if(l==0){
-			alert("举报类型不能为空  请选择")
-		} else{
-			let f=$("#fm").submit();
-			if(f!=null){
-				alert("举报成功");
-			}
-		}
-	}
-	function tiao() {
-		alert("tiao");
-		window.location.href="listAll";
-	}
-</script>
-<!-- script for responsive tabs -->						
-<script src="../js/easy-responsive-tabs.js"></script>
-<script>
-$(document).ready(function () {
-$('#horizontalTab').easyResponsiveTabs({
-type: 'default', //Types: default, vertical, accordion           
-width: 'auto', //auto or any width like 600px
-fit: true,   // 100% fit in a container
-closed: 'accordion', // Start closed if in accordion view
-activate: function(event) { // Callback function if tab is switched
-var $tab = $(this);
-var $info = $('#tabInfo');
-var $name = $('span', $info);
-$name.text($tab.text());
-$info.show();
-}
-});
-$('#verticalTab').easyResponsiveTabs({
-type: 'vertical',
-width: 'auto',
-fit: true
-});
-});
 
-</script>
-<!-- script for responsive tabs -->		
-
+<style type="text/css">
+	td{
+		text-align: center;
+        line-height: 100px;
+	}
+</style>
 
 <script src="../js/SmoothScroll.min.js"></script>
 <!-- smooth scrolling -->
 	<script type="text/javascript">
+
 		$(document).ready(function() {
 		/*
 			var defaults = {
@@ -303,6 +261,28 @@ fit: true
 		*/								
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
+		//查看信息
+		function xinxis() {
+			let h=$("#hfid").val();
+			let ss;
+			$.ajaxSettings.async = false;
+			$.post("infos",
+					{"tow":h},
+					function (data) {
+						ss=data;
+					}
+			);
+			$.ajaxSettings.async = true;
+			let c=$("#con");
+			let str="";
+			for (let i=0;i<ss.length;i++){
+				let t=ss[i].context;
+				let f=ss[i].ftime;
+				str=str+"<p style=\"padding: 0px 0px 0px;color: #3a87ad\">"+t+"</p><p style=\"padding: 0px 0px 0px\">"+f+"</p>";
+			}
+			c.html(str);
+		}
+
 	</script>
 	
 	
@@ -312,6 +292,7 @@ fit: true
 	<!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/move-top.js"></script>
 <script type="text/javascript" src="../js/easing.js"></script>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -319,6 +300,30 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
+
+	//获取当前登录人id
+	function GetCookie(name) {
+		var ck = document.cookie;
+		var exp1 = new RegExp(name + "=.*?(?=;|$)");
+		var mch = ck.match(exp1);
+		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
+	}
+	let d=GetCookie("bmid");
+	$("#dqid").val(d);
+	function reply() {
+		/*alert(1);*/
+		/*let h=$("#hfid").val();*/
+		/*alert("当前登录人Id:"+d);
+		alert("回复人id:"+h);*/
+		let c=$("#context").val();
+		if(c==null || c=='' || c==undefined){
+			alert("回复信息不能为空");
+		}else {
+			$("#Infofm").submit();
+			alert("回复成功");
+		}
+	}
+
 
 </script>
 <!-- start-smoth-scrolling -->

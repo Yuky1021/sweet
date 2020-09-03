@@ -91,7 +91,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 		<div class="tittle-agileinfo">
 			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;<a href="#" style="color: red;">关注</a>
+			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;
+			<!--<form>
+				<p>关注</p>
+			</form>-->
 		</div>
 		<div class="matches-main-agileinfo">
 			<!--<div class="col-md-6 profile1">
@@ -116,7 +119,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><span>身高:<p th:text="${l.height}"></p></span></li>
 					<li><span>工资:<p th:text="${l.monthly}"></p></span></li>
 					<li><span>地址:<p th:text="${l.address}"></p></span></li>
-					<li><a href="#">打招呼</a> <a data-toggle="modal" href="#FaMessage" >发消息</a></li>
+					<!--<li><a href="#">打招呼</a><a data-toggle="modal" href="#FaMessage" >发消息</a></li>-->
+					<li>
+						<form action="../attention/guanzhur" method="post" id="guanzhu">
+							<!--被关注人id-->
+							<input type="hidden" name="baid" th:value="${l.dmid}" id="bgj"/>
+							<!--登录人id-->
+							<!--<input type="hidden" name="aid" id="dlr"/>-->
+							<a href="#" onclick="gz()">关注</a>
+						</form>
+						<a data-toggle="modal" href="#FaMessage" >发消息</a>
+					</li>
 				</ul>
 			</div>
 			<div class="clearfix"> </div>
@@ -173,14 +186,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!--主体内容-->
 				<form role="form" action="../message/add" method="post" id="messagefm">
 					<!--当前用户-->
-					<input type="hidden" name="one" id="dqid">
+					<!--<input type="hidden" name="one" id="dqid">-->
 					<!--发送的用户-->
 					<input type="hidden" name="tow" th:value="${l.dmid}" id="fsid">
 					<div class="form-group">
-						<!--<label for="modPhone">内容</label>-->
 						<textarea name="context" maxlength="100" id="context" placeholder="请输入你要发送的内容" style="width: 563px;height: 100px"></textarea>
 					</div>
-					<!--<button type="submit" class="btn btn-default">发送</button>-->
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -315,6 +326,27 @@ fit: true
 		});
 	});
 	//获取当前登录人id
+	/*function GetCookie(name) {
+		var ck = document.cookie;
+		var exp1 = new RegExp(name + "=.*?(?=;|$)");
+		var mch = ck.match(exp1);
+		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
+	}
+	let d=GetCookie("bmid");
+	$("#dqid").val(d);*/
+	function send() {
+
+		let f=$("#fsid").val();
+		let c=$("#context").val();
+		if(c==undefined || c==null || c==''){
+			alert("消息不能为空")
+		}else {
+			$("#messagefm").submit();
+			alert("发送成功")
+		}
+
+	}
+	/*//获取当前登录人id
 	function GetCookie(name) {
 		var ck = document.cookie;
 		var exp1 = new RegExp(name + "=.*?(?=;|$)");
@@ -323,13 +355,17 @@ fit: true
 	}
 	let d=GetCookie("bmid");
 	$("#dqid").val(d);
+
+	/!*$("#dlr").val(d);*!/
+	alert(d);
+	//发送消息
 	function send() {
-		/*alert(1);*/
-		/*alert("登录人id:"+d);*/
+		/!*alert(1);*!/
+		/!*alert("登录人id:"+d);*!/
 		let f=$("#fsid").val();
 		let c=$("#context").val();
-		/*alert("要发送的id:"+f);
-		alert("要发送的内容:"+c);*/
+		/!*alert("要发送的id:"+f);
+		alert("要发送的内容:"+c);*!/
 		if(c==undefined || c==null || c==''){
 			alert("消息不能为空")
 		}else {
@@ -337,6 +373,25 @@ fit: true
 			alert("发送成功")
 		}
 
+	}*/
+	//关注
+	function gz() {
+		/*alert(1);
+		$("#dlr").val(d);
+		let zb=$("#bgj").val();
+		alert("登录人id:"+d);
+		alert("被关注人id:"+z);
+
+		let z=$("#bgj").val();*/
+		alert("1");
+		let xy=$("#bgj").val();
+		alert(xy);
+		let cg=$("#guanzhu").submit();
+		if(xy!=null || xy!='' || xy!=undefined){
+			alert("关注成功");
+		}else {
+			alert("关注失败");
+		}
 	}
 </script>
 <script type="text/css">

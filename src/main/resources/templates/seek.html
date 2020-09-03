@@ -79,9 +79,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    <div class="container">
 		<div class="w3l_agileits_breadcrumbs_inner">
 			<ul>
-				<li><a href="index.html">Home</a><span>&#187;</span></li>
+				<li><a href="index.html">主页</a><span>&#187;</span></li>
 									
-				<li>About</li>
+				<li>搜索</li>
 				</ul>
 		</div>
 	</div>
@@ -92,23 +92,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section class="w3ls-team text-center">
     <div class="container">
         <div class="tittle-agileinfo">
-            <h3>找 女 友</h3>
+            <h3>搜索意中人</h3>
+        </div>
+        <div style="width: 1090px;height: 200px;background: #fff3cd;margin-bottom: 30px">
+            <form action="../attention/mhncid2" method="post" style="margin-bottom: 20px;">
+                意中人:<input type="text" name="params"  placeholder="请输入ID或昵称精准搜索" style="width: 380px;margin-top: 40px">
+                <!--意中人:<input type="text" name="bmname"  placeholder="请输入昵称精准搜索" style="width: 380px;margin-top: 40px">-->
+                <input type="submit" value="搜索" class="btn btn-info" style="width: 85px;height: 30px">
+            </form>
+            <hr/>
+            <form action="../attention/much" method="post">
+                <!--下拉框-->
+                条件搜索:<select style="width: 120px;" name="height">
+                            <option value="1" >身高不限</option>
+                            <option value=150>150cm-160cm</option>
+                            <option value=160>161cm-170cm</option>
+                            <option value=170>171cm-180cm</option>
+                            <option value=180>180以上</option>
+                        </select>
+                        <select style="width: 120px;" name="sex">
+                            <option value=2>性别不限</option>
+                            <option value=1>男</option>
+                            <option value=0>女</option>
+                        </select>
+                        <select style="width: 120px;" name="education">
+                            <option value="随便">学历不限</option>
+                            <option value="初中">初中</option>
+                            <option value="高中">高中</option>
+                            <option value="大专">大专</option>
+                            <option value="本科">本科</option>
+                        </select>
+                        <select style="width: 120px;" name="monthly">
+                            <option value=4>月收入不限</option>
+                            <option value=2000>4000以下</option>
+                            <option value=4000>4000-6000</option>
+                            <option value=6000>6001-8000</option>
+                            <option value=8000>8001-10000</option>
+                            <option value=10000>10000以上</option>
+                        </select>
+                        <select style="width: 120px;" name="marriage">
+                            <option value=5>婚姻状况不限</option>
+                            <option value=0>离婚</option>
+                            <option value=1>未婚</option>
+                            <option value=2>丧偶</option>
+                        </select><br/><br/>
+                <input type="submit" value="搜索" class="btn btn-info" style="width: 110px;">
+            </form>
         </div>
         <div class="team-row">
-            <span th:each="g : ${girls}">
+            <span th:each="g : ${mh}">
                 <div class="col-md-3 w3ls-team-grids" style="margin-right: 20px;margin-bottom: 10px;">
                         <h5 th:text="${g.bmname}"></h5>
-                        <!--<p th:if="${b.soliloquy} == null">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p>-->
                         <p th:text="${g.soliloquy}"></p>
                         <div class="agileits-social">
                             <ul>
                                 <li><a th:href="@{'../basic_message/findAllById?bmid='+${g.bmid}}"><i class="fa fa-twitter">详情信息</i></a></li>
-                                <!--<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-rss"></i></a></li>-->
                             </ul>
                         </div>
-                        <div class="team-img" style="background:url(../images/love2.png) no-repeat">
+                        <div class="team-img">
 						    <img th:src="${g.pic}" alt="">
 					    </div>
                 </div>
