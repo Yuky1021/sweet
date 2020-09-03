@@ -14,7 +14,6 @@ import java.util.Map;
 
 public interface adminsDao extends Mapper<admins> {
 
-
     @Select("select  * from admins where adname=#{adname} and pwd=#{pwd} and state=0")
     List<Map<String,Object>> login(@Param("adname") String adname, @Param("pwd") String pwd);
 

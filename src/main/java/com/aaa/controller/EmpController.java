@@ -63,6 +63,7 @@ public class EmpController {
         System.out.println("add");
         return empDao.insert(emp);
     }
+
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
     public int del(Integer id){

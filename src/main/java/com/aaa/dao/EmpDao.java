@@ -18,7 +18,6 @@ public interface EmpDao extends tk.mybatis.mapper.common.Mapper<Emp> {
     @Select("select * from emp where ename=#{ename}")
     List<Emp> findByName(String ename);
 
-
     @Update("update emp set ename=#{ename},epwd=#{epwd},truename=#{truename},sex=#{sex},phone=#{phone},address=#{address},state=0 where emid=#{emid}")
     int update(Emp emp);
 

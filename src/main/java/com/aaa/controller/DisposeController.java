@@ -35,6 +35,7 @@ public class DisposeController {
         model.addAttribute("list",basic_messageDao.findAll());
         return "index";
     }
+
     @RequestMapping(value ="findAll",produces = "application/json")
     @ResponseBody
     public List<Map<String,Object>> findAll(){
