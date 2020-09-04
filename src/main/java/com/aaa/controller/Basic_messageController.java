@@ -35,10 +35,10 @@ public class Basic_messageController {
             Object s = a.get("soliloquy");
             System.out.println("图片:"+p);
             System.out.println("内心独白:"+s);
-            if(p==null){
+            if(p==null||p.equals("")){
                 a.put("pic","../images/timg3.jpg");
             }
-            if(s==null){
+            if(s==null||s.equals("")){
                 a.put("soliloquy","暂未填写内心独白");
             }
         }
