@@ -52,7 +52,6 @@
             /*toastr.warning("弹出框居中");*/
             //总校验
             $("#bzjy").submit( function () {
-                alert(1);
                 if(mc()&&sjh()){
                     return true;
                 }
@@ -68,7 +67,6 @@
 
             //给修改按钮设置单击事件
             $("#xiugai").click(function () {
-                alert(1);
                 //设置所有文本框/按钮/下拉框为可用
                 $("input[type='text']").removeAttr("disabled");
                 $("select").removeAttr("disabled");
@@ -93,8 +91,7 @@
     <input type="hidden" name="age" th:value="${Dlist.age}">
     <input type="hidden" name="vip" th:value="${Dlist.vip}">
     <input type="hidden" name="number" th:value="${Dlist.number}">
-
-    <div class="form-group">
+    <div class="form-group" style="margin-top:20px;">
         <label for="vip">您是</label>
         <input type="text" th:value="${Dlist.vip==0?'会员':'非会员'}" class="form-control" id="vip" style="width: 210px;display: inline-block">
         <label for="number">账号是</label>

@@ -104,7 +104,7 @@ public class life_messageDaoController {
     //修改个人生活信息
     @RequestMapping("UpdLife")
     public String UpdLife(life_message det) {
-        System.out.println("修改详细信息get");
+        System.out.println("修改详细信息get!");
         System.out.println(det);
         final int i = life_messagedao.updateByPrimaryKey(det);
         System.out.println(i);

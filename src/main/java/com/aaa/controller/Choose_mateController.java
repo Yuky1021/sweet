@@ -74,7 +74,7 @@ public class Choose_mateController {
     //修改个人择偶信息
     @RequestMapping("UpdChoose")
     public String UpdChoose(Choose_mate det) {
-        System.out.println("修改详细信息get");
+        System.out.println("修改详细信息get!");
         System.out.println(det);
         final int i = choose_mateDao.updateByPrimaryKey(det);
         System.out.println(i);

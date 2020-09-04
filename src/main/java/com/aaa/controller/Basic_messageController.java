@@ -281,7 +281,7 @@ public class Basic_messageController {
     //修改个人基本信息
     @RequestMapping("UpdBasic")
     public String UpdBasic(Basic_message det) {
-        System.out.println("修改详细信息get");
+        System.out.println("修改详细信息get!");
         System.out.println(det);
         final int i = basic_messageDao.updateByPrimaryKey(det);
         System.out.println(i);
