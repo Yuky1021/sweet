@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
-<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Single :: W3layouts</title>
+<title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Contact :: W3layouts</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- navbar-header -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="../basic_message/listAll" class="active">首页</a></li>
+						<li><a href="index.html" class="active">首页</a></li>
 						<li><a href="../basic_message/zhaoboy">找男友</a></li>
 						<li><a href="../basic_message/zhaogirl">找女友</a></li>
 						<li class="dropdown menu__item">
@@ -65,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 			</nav>
 			<div class="header-right-w3ls">
-				<a href="../basic_message/tologin">登录</a>
+				<a href="..basic_message/tologin">登录</a>
 				<a href="../basic_message/toRegister">注册</a>
 			</div>
 			<div class="clearfix"></div>
@@ -74,136 +74,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--//home-->
 <!--banner end here-->
-
 <!-- breadcrumbs -->
 <div class="w3l_agileits_breadcrumbs">
    <div class="container">
 		<div class="w3l_agileits_breadcrumbs_inner">
 			<ul>
-				<li><a href="index.html">Home</a><span>&#187;</span></li>
+				<li><a href="index.html">主页</a><span>&#187;</span></li>
 									
-				<li>详情</li>
+				<li>联系我们</li>
 				</ul>
 		</div>
 	</div>
 </div>
 <!-- //breadcrumbs -->
-<span th:each="l : ${listId}">
-<div class="matches elite-app">
-		<div class="container">
-		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;
-			<!--<form>
-				<p>关注</p>
-			</form>-->
+<div style="height: 600px;">
+		<div id="lianxi">
+			<h1 style="margin-left: 100px">祝您能早日找到自己的另一半，一起幸福的走下去.</h1>
+			<h3 style="margin-left: 100px;margin-top: 100px">邮箱:qwert@san.com</h3>
+			<h3 style="margin-left: 100px;margin-top: 100px">电话:16758932234</h3>
+			<h3 style="margin-left: 100px;margin-top: 100px">QQ:2178965467</h3>
 		</div>
-		<div class="matches-main-agileinfo">
-			<!--<div class="col-md-6 profile1">
-
-			</div>-->
-			<div>
-				<img th:src="${l.pic}" style="height: 382px;width:380px">
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:380px">
-				<ul>
-					<li><span>年龄:<p th:text="${l.age}"></p></span></li>
-					<li><span>性别:<p th:text="${l.sex==0?'女':'男'}"></p></span></li>
-					<li><span>ID:<p th:text="${l.number}"></p></span></li>
-					<li><span>学历:<p th:text="${l.education}"></p></span></li>
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>身高:<p th:text="${l.height}"></p></span></li>
-					<li><span>工资:<p th:text="${l.monthly}"></p></span></li>
-					<li><span>地址:<p th:text="${l.address}"></p></span></li>
-					<!--<li><a href="#">打招呼</a><a data-toggle="modal" href="#FaMessage" >发消息</a></li>-->
-					<li>
-						<form action="../attention/guanzhur" method="post" id="guanzhu">
-							<!--被关注人id-->
-							<input type="hidden" name="baid" th:value="${l.dmid}" id="bgj"/>
-							<!--登录人id-->
-							<!--<input type="hidden" name="aid" id="dlr"/>-->
-							<a href="#" onclick="gz()">关注</a>
-						</form>
-						<a data-toggle="modal" href="#FaMessage" >发消息</a>
-					</li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="about-person">
-				<h6>内心独白:</h6>
-				<p class="para-agileits-w3layouts"><span>Hi!, Iam <span th:text="${l.truename}"></span></span><p th:if="${l.soliloquy} == null ">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p><p>Wish to get a heart white head not to separate</p></p>
-			</div>
-		</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>工作 生活</h3>
-				<ul>
-					<li><span>买房情况</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}"></p></li>
-					<li><span>买车情况</span><p th:text="${l.buycar==0?'未买车':'已买车'}"></p></li>
-					<li><span>是否抽烟</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}"></p></li>
-					<li><span>是否喝酒</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}"></p></li>
-					<li><span>喜欢的城市</span><p th:text="${l.city}"></p></li>
-					<li><span>喜欢的书</span><p th:text="${l.book}"></p></li>
-					<li><span>爱好</span><p th:text="${l.hobby}"></p></li>
-				</ul>
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
-				<h3>择偶 条件</h3>
-				<ul>
-					<li><span>最大年龄</span><p th:text="${l.lage}"></p></li>
-					<li><span>最小年龄</span><p th:text="${l.bage}"></p></li>
-					<li><span>身高</span><p th:text="${l.height}"></p></li>
-					<li><span>学历</span><p th:text="${l.education}"></p></li>
-					<li><span>婚姻状况</span>
-						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
-						</td>
-					</li>
-					<li><span>月收入</span><p th:text="${l.monthly}"></p></li>
-				</ul>
-			</div>
-		</div>
-
+		<!--<div style="background: #d4d4d4;width: 200px;height: 200px;position: relative">
+			<img src="../images/xianrenzhang.jpg" style="width: 1400px;height: 800px;">
+			<h1 style="float: left;position: absolute;top: 50px;left: 60px;">祝您能早日找到自己的另一半，一起幸福的走下去.</h1>
+			<h3 style="position: absolute;top: 50px;left: 60px">邮箱:qwert@san.com</h3>
+			<h3 style="position: absolute;top: 50px;left: 60px">电话:16758932234</h3>
+			<h3 style="position: absolute;top: 50px;left: 60px;bottom: 30px;">QQ:2178965467</h3>
+		</div>-->
+		<!--<div style="background: yellow;width: 700px;height: 500px;float: right;">
+			<p>祝您能早日找到自己的另一半，一起幸福的走下去</p>
+			<p>邮箱:qwert@san.com</p>
+			<p>电话:16758932234</p>
+			<p>QQ:2178965467</p>
+		</div>-->
 </div>
-<!--模态框-->
-<div class="modal fade" id="FaMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					消息
-				</h4>
-			</div>
-			<div class="modal-body">
-				<!--主体内容-->
-				<form role="form" action="../message/add" method="post" id="messagefm">
-					<!--当前用户-->
-					<!--<input type="hidden" name="one" id="dqid">-->
-					<!--发送的用户-->
-					<input type="hidden" name="tow" th:value="${l.dmid}" id="fsid">
-					<div class="form-group">
-						<textarea name="context" maxlength="100" id="context" placeholder="请输入你要发送的内容" style="width: 563px;height: 100px"></textarea>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal" onclick="send()">发送</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
-</span>
 <!--login-inner-->
 <!-- footer -->
 <div class="w3l_footer">
@@ -234,8 +138,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-heart-o heart2" aria-hidden="true"></i>
 					</div>
 				</div>
-				<div class="sim-button button12"><a href="contact.html">联系我们</a></div>
-				<h2>我们致力于提供卓越的服务</h2>
+				<div class="sim-button button12"><a href="../vip/men">联系我们</a></div>
+				<h2>我们致力于提供卓越的服务.</h2>
 			</div>
 		</div>
 		<!-- footer-button-info -->
@@ -267,9 +171,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!--/footer -->
-
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+<script type="text/javascript">
+</script>
+<style type="text/css">
+	#lianxi{
+		width:1500px ;
+		height: 600px;
+		background: url("../images/xianrenzhang.jpg");
+	}
+</style>
 <!-- script for responsive tabs -->						
 <script src="../js/easy-responsive-tabs.js"></script>
 <script>
@@ -293,6 +205,7 @@ width: 'auto',
 fit: true
 });
 });
+
 </script>
 <!-- script for responsive tabs -->		
 
@@ -327,79 +240,7 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
-	//获取当前登录人id
-	/*function GetCookie(name) {
-		var ck = document.cookie;
-		var exp1 = new RegExp(name + "=.*?(?=;|$)");
-		var mch = ck.match(exp1);
-		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
-	}
-	let d=GetCookie("bmid");
-	$("#dqid").val(d);*/
-	function send() {
 
-		let f=$("#fsid").val();
-		let c=$("#context").val();
-		if(c==undefined || c==null || c==''){
-			alert("消息不能为空")
-		}else {
-			$("#messagefm").submit();
-			alert("发送成功")
-		}
-
-	}
-	/*//获取当前登录人id
-	function GetCookie(name) {
-		var ck = document.cookie;
-		var exp1 = new RegExp(name + "=.*?(?=;|$)");
-		var mch = ck.match(exp1);
-		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
-	}
-	let d=GetCookie("bmid");
-	$("#dqid").val(d);
-
-	/!*$("#dlr").val(d);*!/
-	alert(d);
-	//发送消息
-	function send() {
-		/!*alert(1);*!/
-		/!*alert("登录人id:"+d);*!/
-		let f=$("#fsid").val();
-		let c=$("#context").val();
-		/!*alert("要发送的id:"+f);
-		alert("要发送的内容:"+c);*!/
-		if(c==undefined || c==null || c==''){
-			alert("消息不能为空")
-		}else {
-			$("#messagefm").submit();
-			alert("发送成功")
-		}
-
-	}*/
-	//关注
-	function gz() {
-		/*alert(1);
-		$("#dlr").val(d);
-		let zb=$("#bgj").val();
-		alert("登录人id:"+d);
-		alert("被关注人id:"+z);
-
-		let z=$("#bgj").val();*/
-		alert("1");
-		let xy=$("#bgj").val();
-		alert(xy);
-		let cg=$("#guanzhu").submit();
-		if(xy!=null || xy!='' || xy!=undefined){
-			alert("关注成功");
-		}else {
-			alert("关注失败");
-		}
-	}
-</script>
-<script type="text/css">
-	/*#info{
-		float:right;
-	}*/
 </script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>

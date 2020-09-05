@@ -41,4 +41,10 @@ public class VipController {
         System.out.println("add");
         return vipDao.insert(vip);
     }
+
+    //前台显示联系我们
+    @RequestMapping("men")
+    public String men(){
+        return "relation";
+    }
 }

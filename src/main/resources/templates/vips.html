@@ -1,0 +1,297 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template  | Codes :: W3layouts</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elite Match Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+    <!--//fonts-->
+
+</head>
+<body>
+<!--banner start here-->
+<div class="banner-w3ls inner-banner-agileits" id="home">
+    <div class="container">
+        <!-- header -->
+        <div class="header-inner">
+            <h1 class="logo">
+                <a href="index.html">甜蜜<span>Sweet</span></a></h1>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- navbar-header -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="../basic_message/zhaoboy">找男友</a></li>
+                        <li><a href="../basic_message/zhaogirl">找女友</a></li>
+                        <li class="dropdown menu__item">
+                            <a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">消息中心<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../message/qlists">消息列表</a></li>
+                                <li><a href="icons.html">我的关注</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a href="geren.html">会员</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </nav>
+            <div class="header-right-w3ls">
+                <a href="../basic_message/tologin">登录</a>
+                <a href="../basic_message/toRegister">注册</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--//home-->
+<!--banner end here-->
+<!-- breadcrumbs -->
+<div class="w3l_agileits_breadcrumbs">
+    <div class="container">
+        <div class="w3l_agileits_breadcrumbs_inner">
+            <ul>
+                <li><a href="index.html">主页</a><span>&#187;</span></li>
+
+                <li>会员</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- typography -->
+<div class="typography elite-app">
+    <div class="container">
+        <div class="tittle-agileinfo">
+            <h3>甜 蜜 会 员</h3>
+        </div>
+        <div style="width: 1180px;height: 900px;background: darkorchid">
+            <h2 style="color: white;margin-left: 75px;margin-top: 30px">解锁收信/发信&nbsp;&nbsp;快速找对象</h2><br/>
+            <h3 style="color: white;margin-left: 75px;">甜蜜会员多项超实用特权,总有一项帮到你</h3>
+            <span th:each="v : ${vs}">
+            <div style="border: 5px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: yellow">
+                <input type="hidden" th:value="${v.coid}" name="vd" >
+                <p style="margin-top: 25px;margin-left: 50px;color: #8a6d3b;font-size: 20px;" th:text="${v.coname}"></p><br>
+                <p style="font-size: 40px;margin-left: 50px;color: #8a6d3b;display: inline-block" th:text="${v.days}"></p><span style="color: #8a6d3b;font-size: 40px">元/天</span><br>
+                <span style="margin-left: 50px;color: #8a6d3b;">超值会员价</span><p style="font-size: 35px;display: inline-block;color: #8a6d3b" th:text="${v.price}"></p><span style="color: #8a6d3b">元</span><br><br>
+                <!--<a href="#" style="margin-left: 60px;color: #8a6d3b;width: 100px;height: 100px" class="btn-info" >立即开通</a>-->
+                <h2><a href="#"><span class="label label-warning" style="margin-left: 70px;color: #8a6d3b; background: white;width:120px;">立即开通</span></a></h2>
+            </div>
+            </span>
+            <p style="margin-left: 60px;margin-top: 60px;color: yellow;font-size: 20px">----------------------------------------------------------------------------------&nbsp;&nbsp;会员权益&nbsp;&nbsp;-------------------------------------------------------------------------</p><br><br><br>
+            <span style="margin-left: 70px;margin-top:50px">解锁你的收件箱</span><span style="margin-left:120px;margin-top:50px">解锁你的消息发送</span><span style="margin-left: 120px;margin-top:50px">尊贵甜蜜会员勋章</span><span style="margin-left: 120px;margin-top:50px">更多精准筛选条件</span><br><br><br><br><br>
+            <h1><a href="#"><span class="label label-warning" style="margin-left: 420px;color: #8a6d3b; background: yellow;width:120px;">立即开通&nbsp;&nbsp;388元/年</span></a></h1>
+        </div>
+
+    </div>
+</div>
+<!--模态框-->
+<div class="modal fade" id="Infos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    消息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!--主体内容-->
+                <form role="form" action="../message/add" method="post" id="Infofm">
+					<span th:each="q : ${qs}">
+						<!--<span th:text="${q.bmname}"></span>:-->
+                        <!--<p th:text="${q.context}" style="padding: 0px 0px 0px;color: #3a87ad"></p>-->
+                        <!--<p th:text="${q.ftime}" style="padding: 0px 0px 0px"></p>-->
+						<div id="con"></div>
+                        <!--当前用户-->
+						<input type="hidden" name="one" id="dqid">
+                        <!--回复的用户-->
+						<input type="hidden" name="tow" th:value="${q.dmid}" id="hfid">
+					</span>
+                    <div class="form-group">
+                        <!--<label for="modPhone">内容</label>-->
+                        <textarea name="context" maxlength="100" id="context" placeholder="请输入你要回复的内容" style="width: 563px;height: 100px"></textarea>
+                    </div>
+                    <!--<button type="submit" class="btn btn-default">发送</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="reply()">回复</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- //typography -->
+<!-- footer -->
+<div class="w3l_footer">
+    <div class="container">
+        <div class="w3ls_footer_grid">
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>位置:</h4>
+                <p>Matrimonium Elite, Ipswich,<br> Foxhall Road, UK</p>
+            </div>
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>联系我们:</h4>
+                <p><span>电话 : </span>505-222-5432</p>
+                <p><span>电子邮箱 : </span><a href="mailto:info@example.com">info@example.com</a></p>
+            </div>
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>营业时间:</h4>
+                <p>工作日（上午8点至晚上9点）</p>
+                <p>周日 (上午9点-下午1点)</p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- footer-button-info -->
+        <div class="footer-middle-agileinfo">
+            <div class="footer-button">
+                <div class="button-top-w3layouts">
+                    <div class="logo-icons-w3ls">
+                        <i class="fa fa-heart heart1" aria-hidden="true"></i>
+                        <i class="fa fa-heart-o heart2" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="sim-button button12"><a href="contact.html">联系我们</a></div>
+                <h2>我们致力于提供卓越的服务.</h2>
+            </div>
+        </div>
+        <!-- footer-button-info -->
+    </div>
+</div>
+
+<div class="botttom-nav-agileits">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="matches.html">Matches</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+<div class="footer-w3layouts">
+    <div class="container">
+        <div class="agile-copy">
+            <p>? 2017 Elite Match. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+        </div>
+        <div class="agileits-social">
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                <li><a href="#"><i class="fa fa-vk"></i></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!--/footer -->
+
+<!-- js -->
+<script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+
+<style type="text/css">
+    td{
+        text-align: center;
+        line-height: 100px;
+    }
+</style>
+
+<script src="../js/SmoothScroll.min.js"></script>
+<!-- smooth scrolling -->
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+        $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+
+
+</script>
+
+
+<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<!-- //for-Clients -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="../js/move-top.js"></script>
+<script type="text/javascript" src="../js/easing.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+
+
+    $(document).ready(function () {
+        let vipd=$("input[name='vd']");
+        for (let i=0;i<vipd.length;i++){
+            let zhi=vipd.eq(i);
+            let dd=zhi.parent("div");
+            let hai=zhi.next().next().next().next().children("a").children("span");
+            console.log(zhi.val());
+            if(zhi.val()!=3){
+                dd.attr("style","border: 5px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 120px;margin-left: 60px;background: white;background: white");
+                hai.attr("style","margin-left: 60px;color: #8a6d3b; background: yellow;width:120px;")
+            }
+        }
+    });
+
+
+    //获取当前登录人id
+    function GetCookie(name) {
+        var ck = document.cookie;
+        var exp1 = new RegExp(name + "=.*?(?=;|$)");
+        var mch = ck.match(exp1);
+        return mch ? unescape(mch[0].substring(name.length + 1)) : null;
+    }
+    let d=GetCookie("bmid");
+    $("#dqid").val(d);
+
+
+</script>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
+
+
+</body>
+</html>

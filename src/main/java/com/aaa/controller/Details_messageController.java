@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @CrossOrigin
@@ -83,5 +85,16 @@ public class Details_messageController {
         System.out.println("i: "+i);
         if(i>0){System.out.println("UpdateYes");}
         return "redirect:SelDetails";
+    }
+
+
+    //前台根据id查询数据
+    @RequestMapping("ajid")
+    @ResponseBody
+    public Map<String,Object> ajid(String bmid){
+        System.out.println("进入ajaxid方法");
+        List<Map<String,Object>> as=dm.showajid(bmid);
+        System.out.println("数据:"+as.get(0));
+        return as.get(0);
     }
 }

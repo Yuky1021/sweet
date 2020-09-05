@@ -44,4 +44,14 @@ public class ComboController {
         System.out.println("update");
         return comboDao.updateByPrimaryKey(combo);
     }
+
+    //前台查询VIP套餐表
+    @RequestMapping("viptc")
+    public String viptc(Model model){
+        System.out.println("进入VIP套餐查询方法");
+        List<Combo> v=comboDao.showtVIP();
+        System.out.println("VIP套餐数据:"+v);
+        model.addAttribute("vs",v);
+        return "vips";
+    }
 }
