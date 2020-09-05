@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.dao.Class_vidoDao;
 import com.aaa.entity.Class_vido;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,8 +45,10 @@ public class Class_vidoController {
     }
 
     @RequestMapping("showTV")
-    public String showTV(){
-        System.out.println("123123123showTV");
+    public String showTV(Model mo){
+        //获取所有视频信息
+        final List<Class_vido> cv = class_vidoDao.selectAll();
+        mo.addAttribute("cv",cv);
         return "tvClassroom";
     }
 

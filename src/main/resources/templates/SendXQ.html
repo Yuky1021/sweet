@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>评论区</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jquery-2.2.3.min.js"></script>
+    <script src="../js/bootstrap-3.1.1.min.js"></script>
+    <script>
+        //转换时间格式
+        function transferTime(cTime) {     //将json串的一串数字进行解析
+            var jsonDate = new Date(parseInt(cTime));
+            //       alert(jsonDate);
+            //为Date对象添加一个新属性，主要是将解析到的时间数据转换为我们熟悉的“yyyy-MM-dd hh:mm:ss”样式
+            Date.prototype.format = function(format) {
+                var o = {
+                    //获得解析出来数据的相应信息，可参考js官方文档里面Date对象所具备的方法
+                    "y+": this.getFullYear(), //得到对应的年信息
+                    "M+": this.getMonth() + 1, //得到对应的月信息，得到的数字范围是0~11，所以要加一
+                    "d+": this.getDate(), //得到对应的日信息
+                    "h+": this.getHours(), //得到对应的小时信息
+                    "m+": this.getMinutes(), //得到对应的分钟信息
+                    "s+": this.getSeconds(), //得到对应的秒信息
+                }
+                //将年转换为完整的年形式
+                if(/(y+)/.test(format)) {
+                    format = format.replace(RegExp.$1,    (this.getFullYear() + "") .substr(4 - RegExp.$1.length));
+                }
+                //连接得到的年月日 时分秒信息
+                for(var k in o) {
+                    if(new RegExp("(" + k + ")").test(format)) {
+                        format = format.replace(RegExp.$1,  RegExp.$1.length == 1 ? o[k] : ("00" + o[k]) .substr(("" + o[k]).length));
+                    }
+                }
+                return format;
+            }
+            var newDate = jsonDate.format("yyyy-MM-dd hh:mm:ss");
+            return newDate;
+        }
+
+        //获取回复内容
+        function huifu(){
+            let val = $("#sid").val();
+            let f;
+            //设置为同步
+            $.ajaxSettings.async = false;
+            $.post("SelBC",
+                {spid: val},
+                function (data) {
+                    f=data;
+                },);
+            //恢复为异步
+            $.ajaxSettings.async = true;
+            let col="<table class=\"table\"><caption style=\"font-weight: bold;font-size: 24px\">回帖区</caption>";
+            for (let i=0;i<f.length;i++){
+                let row=f[i];
+                let drow='<div><tr><td>用户名:'+row.bmname+'</td></tr><tr><td style="font-size: 16px">&nbsp;&nbsp;&nbsp;&nbsp;'+row.context+'</td></tr><tr><td style="text-align:right">'+transferTime(row.commention)+'</td></tr><tr><td><hr></td></tr></div>';
+                col=col+drow;
+
+            }
+            col=col+"</table>";
+            $("#huitie").html(col);
+        }
+        $(function () {
+            //加载时调用获取评论方法
+            huifu();
+
+            //点击提交按钮时调用方法并刷新
+            $("#fs").click(function () {
+                //获取评论内容和主贴Id
+                let plv = $("#pl").val();
+                let spid=$("#sid").val();
+                $.post("AddCP",
+                    {con: plv,spid:spid},
+                    function (data) {
+                        let f=data;
+                        if(f>0){
+                            huifu();
+                            $("#pl").val("");
+                        }
+                    });
+            });
+
+        })
+    </script>
+</head>
+
+<style>
+    .table tr td {
+        border: 1px solid white;
+    }
+</style>
+<body>
+<ul class="breadcrumb">
+    <li><a href="#">主页</a></li>
+    <li><a href="#">交友论坛</a></li>
+    <li class="active">评论区</li>
+</ul>
+<div class="container">
+    <div class="row text-center h3" th:text="${send.title}"></div>
+    <div class="row h5" style="font-size: 16px">
+        <input type="hidden" id="sid" th:value="${send.spid}">
+        发帖人:<span th:text="${send.bmname}"></span><br>
+        回帖数:<span th:text="${send.comcount}"></span><br>
+        发帖时间:<span th:text="${send.sendtime}"></span>
+    </div>
+    <br>
+    <div class="row h5" style="font-size: 20px">
+        &nbsp; &nbsp; &nbsp; &nbsp;<span th:text="${send.context}"></span>
+    </div>
+    <br><br>
+</div>
+<!---评论区------>
+
+<div id="huitie">
+
+</div>
+<!---写评论------>
+<div class="form-group">
+    <label for="pl">内心独白</label>
+    <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
+    <textarea class="form-control" id="pl" style="height: 100px" placeholder="写下您的评论...."></textarea>
+    <div align="right"><input id="fs" type="button" class="btn btn-success" value="发送"></div>
+</div>
+</body>
+</html>

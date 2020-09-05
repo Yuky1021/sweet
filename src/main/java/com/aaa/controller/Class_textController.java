@@ -45,4 +45,13 @@ public class Class_textController {
         System.out.println("update");
         return class_textDao.updateByPrimaryKey(class_text);
     }
+
+    @RequestMapping("showTest")
+    public String showTest(Model mo){
+        //获取所有视频信息
+        final List<Class_text> ct = class_textDao.selectAll();
+        mo.addAttribute("ct",ct);
+        System.out.println(ct);
+        return "testClassroom";
+    }
 }

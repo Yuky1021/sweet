@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="team-row">
             <span th:each="g : ${girls}">
-                <div class="col-md-3 w3ls-team-grids" style="margin-right: 20px;margin-bottom: 10px;">
+                <div class="col-md-3 w3ls-team-grids" style="margin-right: 20px;margin-bottom: 10px;height: 365px">
                         <h5 th:text="${g.bmname}"></h5>
                         <!--<p th:if="${b.soliloquy} == null">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p>-->
                         <p th:text="${g.soliloquy}"></p>
@@ -108,7 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a href="#"><i class="fa fa-rss"></i></a></li>-->
                             </ul>
                         </div>
-                        <div class="team-img" style="background:url(../images/love2.png) no-repeat">
+                        <div class="team-img" style="background:url(../images/love2.png) no-repeat;height: 363px">
 						    <img th:src="${g.pic}" alt="">
 					    </div>
                 </div>
