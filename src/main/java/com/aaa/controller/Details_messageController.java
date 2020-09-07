@@ -2,6 +2,9 @@ package com.aaa.controller;
 
 import com.aaa.dao.Details_messageDao;
 import com.aaa.entity.Details_message;
+import com.aaa.util.PageHelpers;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +29,20 @@ import java.util.logging.Logger;
 public class Details_messageController {
     @Resource
     Details_messageDao dm;
+
+    @RequestMapping(value ="findAll",produces = "application/json")
+    @ResponseBody
+    public PageHelpers<Map<String,Object>> findAll(PageHelpers<Map<String,Object>> ph){
+        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+        List<Map<String,Object>> details_messages = dm.findAll();
+        ph.setRows(details_messages);
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(details_messages);
+        int pages = pageInfo.getPages();
+        ph.setLastPage(pages);
+        ph.setTotalCount(dm.totalCount());
+        System.out.println("totalCount:"+dm.totalCount());
+        return ph;
+    }
 
     //根据cookie中Id查询详细信息
     @RequestMapping("SelDetails")
@@ -85,16 +102,5 @@ public class Details_messageController {
         System.out.println("i: "+i);
         if(i>0){System.out.println("UpdateYes");}
         return "redirect:SelDetails";
-    }
-
-
-    //前台根据id查询数据
-    @RequestMapping("ajid")
-    @ResponseBody
-    public Map<String,Object> ajid(String bmid){
-        System.out.println("进入ajaxid方法");
-        List<Map<String,Object>> as=dm.showajid(bmid);
-        System.out.println("数据:"+as.get(0));
-        return as.get(0);
     }
 }
