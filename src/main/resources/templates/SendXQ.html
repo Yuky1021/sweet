@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <script src="../js/jquery-2.2.3.min.js"></script>
     <script src="../js/bootstrap-3.1.1.min.js"></script>
+    <!-- //for-mobile-apps -->
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/jquery-ui.css"/>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+
+
     <script>
         //转换时间格式
         function transferTime(cTime) {     //将json串的一串数字进行解析
@@ -91,11 +102,65 @@
     }
 </style>
 <body>
-<ul class="breadcrumb">
+<div class="banner-w3ls inner-banner-agileits" id="home">
+    <div class="container">
+        <!-- header -->
+        <div class="header-inner">
+            <h1 class="logo">
+                <a href="index.html">甜蜜<span>Sweet</span></a></h1>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- navbar-header -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../basic_message/listAll" class="active">首页</a></li>
+                        <li><a href="../basic_message/zhaoboy">找男友</a></li>
+                        <li><a href="../basic_message/zhaogirl">找女友</a></li>
+                        <li class="dropdown menu__item">
+                            <a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">消息中心<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../message/qlists">消息列表</a></li>
+                                <li><a href="../attention/mygz">我的关注</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../send_paste/pinglun">交友论坛</a></li>
+                        <li><a href="../combo/viptc">会员</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </nav>
+            <div class="header-right-w3ls">
+                <a href="../basic_message/tologin">退出</a>
+                <a href="../basic_message/toRegister">注册</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="w3l_agileits_breadcrumbs">
+    <div class="container">
+        <div class="w3l_agileits_breadcrumbs_inner">
+            <ul>
+                <li>主页<span>&#187;</span></li>
+                <li>交友论坛<span>&#187;</span></li>
+                <li>评论区</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<ul class="breadcrumb">
     <li><a href="#">主页</a></li>
     <li><a href="#">交友论坛</a></li>
     <li class="active">评论区</li>
-</ul>
+</ul>-->
 <div class="container">
     <div class="row text-center h3" th:text="${send.title}"></div>
     <div class="row h5" style="font-size: 16px">
@@ -119,8 +184,43 @@
 <div class="form-group">
     <label for="pl">内心独白</label>
     <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
-    <textarea class="form-control" id="pl" style="height: 100px" placeholder="写下您的评论...."></textarea>
+    <textarea class="form-control" id="pl" style="height: 100px; color: black!important" placeholder="写下您的评论...."></textarea>
     <div align="right"><input id="fs" type="button" class="btn btn-success" value="发送"></div>
+</div>
+<div class="w3l_footer">
+    <div class="container">
+        <div class="w3ls_footer_grid">
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>位置:</h4>
+                <p>Matrimonium Elite, Ipswich,<br> 河南郑州市</p>
+            </div>
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>联系我们:</h4>
+                <p><span>电话 : </span>505-222-5432</p>
+                <p><span>电子邮箱 : </span><a href="mailto:info@example.com">info@example.com</a></p>
+            </div>
+            <div class="col-md-4 w3ls_footer_grid_left">
+                <h4>营业时间:</h4>
+                <p>工作日（上午8点至晚上9点）</p>
+                <p>周日 (上午9点-下午1点)</p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- footer-button-info -->
+        <div class="footer-middle-agileinfo">
+            <div class="footer-button">
+                <div class="button-top-w3layouts">
+                    <div class="logo-icons-w3ls">
+                        <i class="fa fa-heart heart1" aria-hidden="true"></i>
+                        <i class="fa fa-heart-o heart2" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="sim-button button12"><a href="../vip/men">联系我们</a></div>
+                <h2>我们致力于提供卓越的服务.</h2>
+            </div>
+        </div>
+        <!-- footer-button-info -->
+    </div>
 </div>
 </body>
 </html>
