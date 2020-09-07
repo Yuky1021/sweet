@@ -189,4 +189,25 @@ public class AttentionController {
         model.addAttribute("mh",list);
         return "seek";
     }
+
+
+    //校验关注提示已经关注过了
+    @RequestMapping("jygzr")
+    @ResponseBody
+    public String jygzr(HttpServletRequest request,String baid){
+            String bmid="0";
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null && cookies.length > 0){
+                for (Cookie cookie : cookies){
+                    System.out.println(cookie.getName());
+                    if(cookie.getName().equals("bmid")){
+                        bmid=cookie.getValue();
+                    }
+                }
+            }
+            System.out.println("bmid:"+bmid);
+            String mingid=baid=bmid;
+        System.out.println(mingid);
+        return "redirect:listAll";
+    }
 }

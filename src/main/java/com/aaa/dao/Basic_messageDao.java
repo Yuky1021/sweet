@@ -66,4 +66,10 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     //客户基本信息表查询id!
     @Select("select * from basic_message where bmid=#{bmid}")
     List<Basic_message> SelbyBmid(@Param("bmid") String bmid);
+
+
+    //前台首页显示男友
+    @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.sex=1 limit 4")
+    public List<Map<String,Object>> findmen();
+
 }

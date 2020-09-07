@@ -288,4 +288,29 @@ public class Basic_messageController {
         if(i>0){System.out.println("UpdateYes");}
         return "redirect:Selmate";
     }
+
+
+
+
+    //前台首页显示男友
+    @RequestMapping("showMen")
+    public String showMen(HttpServletRequest request){
+        try{
+            String bmid="0";
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null && cookies.length > 0){
+                for (Cookie cookie : cookies){
+                    System.out.println(cookie.getName());
+                    if(cookie.getName().equals("bmid")){
+                        bmid=cookie.getValue();
+                    }
+                }
+            }
+            System.out.println("bmid:"+bmid);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return "index";
+    }
 }

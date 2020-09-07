@@ -50,4 +50,9 @@ public interface AttentionDao extends tk.mybatis.mapper.common.Mapper<Attention>
             "</where>" +
             "</script>")
     List<Map<String,Object>> mulit(@Param("height") Integer height,@Param("sex") Integer sex,@Param("monthly") Integer monthly,@Param("education") String education,@Param("marriage") Integer marriage);
+
+
+    //校验已经关注的人
+    @Select("select * from attention where baid=#{baid} and aid=#{aid}")
+    Integer jycf(@Param("baid") String baid,@Param("aid") String aid);
 }

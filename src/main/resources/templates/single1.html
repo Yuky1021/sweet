@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 		<div class="tittle-agileinfo">
 			<h3 th:text="${l.truename}"></h3>
-			<a href="#">屏蔽此人</a>&nbsp;&nbsp;&nbsp;<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;
+			<a href="#" style="margin-right: 60px;margin-left: 50px;">屏蔽此人</a><!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;
 			<!--<form>
 				<p>关注</p>
 			</form>-->
@@ -105,22 +105,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div>
 				<img th:src="${l.pic}" style="height: 382px;width:380px">
 			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:380px">
+			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:460px">
 				<ul>
-					<li><span>年龄:<p th:text="${l.age}"></p></span></li>
-					<li><span>性别:<p th:text="${l.sex==0?'女':'男'}"></p></span></li>
-					<li><span>ID:<p th:text="${l.number}"></p></span></li>
-					<li><span>学历:<p th:text="${l.education}"></p></span></li>
-					<li><span>婚姻状况</span>
+					<li><span style="width: 50px;">年龄:</span><p th:text="${l.age}" style="display: inline-block"></p></li>
+					<li><span style="width: 50px;">性别:</span><p th:text="${l.sex==0?'女':'男'}" style="display: inline-block"></p></li>
+					<li><span style="width: 50px;">ID:</span><p th:text="${l.number}" style="display: inline-block"></p></li>
+					<li><span style="width: 50px;">学历:</span><p th:text="${l.education}" style="display: inline-block"></p></li>
+					<li><span style="width: 100px;">婚姻状况:</span>
 						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
+							<p th:case="0" style="display: inline-block">未婚</p>
+							<p th:case="1" style="display: inline-block">已婚</p>
+							<p th:case="2" style="display: inline-block">丧偶</p>
 						</td>
 					</li>
-					<li><span>身高:<p th:text="${l.height}"></p></span></li>
-					<li><span>工资:<p th:text="${l.monthly}"></p></span></li>
-					<li><span>地址:<p th:text="${l.address}"></p></span></li>
+					<li><span style="width: 50px;">身高:</span><p th:text="${l.height}" style="display: inline-block"></p></li>
+					<li><span style="width: 50px;">工资:</span><p th:text="${l.monthly}" style="display: inline-block"></p></li>
+					<li><span style="width: 50px;">地址:</span><p th:text="${l.address}" style="display: inline-block"></p></li>
 					<!--<li><a href="#">打招呼</a><a data-toggle="modal" href="#FaMessage" >发消息</a></li>-->
 					<li>
 						<form action="../attention/guanzhur" method="post" id="guanzhu">
@@ -128,8 +128,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<input type="hidden" name="baid" th:value="${l.dmid}" id="bgj"/>
 							<!--登录人id-->
 							<!--<input type="hidden" name="aid" id="dlr"/>-->
-							<a href="#" onclick="gz()">关注</a>
+
 						</form>
+						<a href="#" onclick="gz()">关注</a>
 						<a data-toggle="modal" href="#FaMessage" >发消息</a>
 					</li>
 				</ul>
@@ -140,33 +141,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p class="para-agileits-w3layouts"><span>Hi!, Iam <span th:text="${l.truename}"></span></span><p th:if="${l.soliloquy} == null ">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p><p>Wish to get a heart white head not to separate</p></p>
 			</div>
 		</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
+			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;">
 				<h3>工作 生活</h3>
 				<ul>
-					<li><span>买房情况</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}"></p></li>
-					<li><span>买车情况</span><p th:text="${l.buycar==0?'未买车':'已买车'}"></p></li>
-					<li><span>是否抽烟</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}"></p></li>
-					<li><span>是否喝酒</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}"></p></li>
-					<li><span>喜欢的城市</span><p th:text="${l.city}"></p></li>
-					<li><span>喜欢的书</span><p th:text="${l.book}"></p></li>
-					<li><span>爱好</span><p th:text="${l.hobby}"></p></li>
+					<li><span>买房情况:</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}" style="display: inline-block"></p></li>
+					<li><span>买车情况:</span><p th:text="${l.buycar==0?'未买车':'已买车'}" style="display: inline-block"></p></li>
+					<li><span>是否抽烟:</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}" style="display: inline-block"></p></li>
+					<li><span>是否喝酒:</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}" style="display: inline-block"></p></li>
+					<li><span>喜欢的城市:</span><p th:text="${l.city}" style="display: inline-block"></p></li>
+					<li><span>喜欢的书:</span><p th:text="${l.book}" style="display: inline-block"></p></li>
+					<li><span>爱好:</span><p th:text="${l.hobby}" style="display: inline-block"></p></li>
 				</ul>
 			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:350px;">
+			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;">
 				<h3>择偶 条件</h3>
 				<ul>
-					<li><span>最大年龄</span><p th:text="${l.lage}"></p></li>
-					<li><span>最小年龄</span><p th:text="${l.bage}"></p></li>
-					<li><span>身高</span><p th:text="${l.height}"></p></li>
-					<li><span>学历</span><p th:text="${l.education}"></p></li>
-					<li><span>婚姻状况</span>
+					<li><span>最大年龄:</span><p th:text="${l.lage}" style="display: inline-block"></p></li>
+					<li><span>最小年龄:</span><p th:text="${l.bage}" style="display: inline-block"></p></li>
+					<li><span>身高:</span><p th:text="${l.height}" style="display: inline-block"></p></li>
+					<li><span>学历:</span><p th:text="${l.education}" style="display: inline-block"></p></li>
+					<li><span>婚姻状况:</span>
 						<td th:switch="${l.marriage}">
-							<p th:case="0">未婚</p>
-							<p th:case="1">已婚</p>
-							<p th:case="2">丧偶</p>
+							<p th:case="0" style="display: inline-block">未婚</p>
+							<p th:case="1" style="display: inline-block">已婚</p>
+							<p th:case="2" style="display: inline-block">丧偶</p>
 						</td>
 					</li>
-					<li><span>月收入</span><p th:text="${l.monthly}"></p></li>
+					<li><span>月收入:</span><p th:text="${l.monthly}" style="display: inline-block"></p></li>
 				</ul>
 			</div>
 		</div>
