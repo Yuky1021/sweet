@@ -25,26 +25,27 @@ public class life_messageDaoController {
     @Resource
     life_messageDao life_messagedao;
 
-    @RequestMapping(value ="findAll",produces = "application/json")
-    @ResponseBody
-    public List<Map<String,Object>> findAll(){
-        System.out.println("findAll");
-        return life_messagedao.listAll();
-    }
 
 //    @RequestMapping(value ="findAll",produces = "application/json")
 //    @ResponseBody
-//    public PageHelpers<Map<String,Object>> findAll(PageHelpers<Map<String,Object>> ph){
-//        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
-//        List<Map<String,Object>> lift_messages = life_messagedao.listAll();
-//        ph.setRows(lift_messages);
-//        PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(lift_messages);
-//        int pages = pageInfo.getPages();
-//        ph.setLastPage(pages);
-//        ph.setTotalCount(life_messagedao.totalCount());
-//        System.out.println("totalCount:"+life_messagedao.totalCount());
-//        return ph;
+//    public List<Map<String,Object>> findAll(){
+//        System.out.println("findAll");
+//        return life_messagedao.listAll();
 //    }
+
+    @RequestMapping(value ="findAll",produces = "application/json")
+    @ResponseBody
+    public PageHelpers<Map<String,Object>> findAll(PageHelpers<Map<String,Object>> ph){
+        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+        List<Map<String,Object>> lift_messages = life_messagedao.listAll();
+        ph.setRows(lift_messages);
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(lift_messages);
+        int pages = pageInfo.getPages();
+        ph.setLastPage(pages);
+        ph.setTotalCount(life_messagedao.totalCount());
+        System.out.println("totalCount:"+life_messagedao.totalCount());
+        return ph;
+    }
 
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
