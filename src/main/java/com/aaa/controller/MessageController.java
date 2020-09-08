@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,113 +26,136 @@ public class MessageController {
     MessageDao messageDao;
     @Resource
     Basic_messageDao basic_messageDao;
+
     //图片和内心独白校验
-    public void setpics( List<Map<String,Object>> l){
-        for (Map<String,Object> a : l
+    public void setpics(List<Map<String, Object>> l) {
+        for (Map<String, Object> a : l
         ) {
-            Object p=a.get("pic");
+            Object p = a.get("pic");
             Object s = a.get("soliloquy");
-            System.out.println("图片:"+p);
-            System.out.println("内心独白:"+s);
-            if(p==null || p.equals("")){
-                a.put("pic","../images/timg3.jpg");
+            System.out.println("图片:" + p);
+            System.out.println("内心独白:" + s);
+            if (p == null || p.equals("")) {
+                a.put("pic", "../images/timg3.jpg");
             }
-            if(s==null || s.equals("")){
-                a.put("soliloquy","暂未填写内心独白,暂未填写内心独白");
+            if (s == null || s.equals("")) {
+                a.put("soliloquy", "暂未填写内心独白,暂未填写内心独白");
             }
         }
     }
-    @RequestMapping(value ="findAll",produces = "application/json")
+
+    @RequestMapping(value = "findAll", produces = "application/json")
     @ResponseBody
-    public List<Map<String,Object>> findAll(){
+    public List<Map<String, Object>> findAll() {
         System.out.println("findAll()");
         return messageDao.listAll();
     }
-    @RequestMapping(value ="del",produces = "application/json")
+
+    @RequestMapping(value = "del", produces = "application/json")
     @ResponseBody
-    public int del(Integer id){
+    public int del(Integer id) {
         System.out.println("del");
         return messageDao.deleteByPrimaryKey(id);
     }
-    @RequestMapping(value ="update",produces = "application/json")
+
+    @RequestMapping(value = "update", produces = "application/json")
     @ResponseBody
-    public int update(Message message){
+    public int update(Message message) {
         System.out.println("update");
         return messageDao.updateByPrimaryKey(message);
     }
+
     //前台主页面查询
     @RequestMapping("listAll")
-    public String listAll(Model model){
-        List<Map<String,Object>> l=basic_messageDao.findAll();
+    public String listAll(Model model) {
+        List<Map<String, Object>> l = basic_messageDao.findAll();
         setpics(l);
-        model.addAttribute("list",l);
+        model.addAttribute("list", l);
         return "index";
     }
+
     //前台发送消息
-    @RequestMapping("add")
-    public String add(Message message,HttpServletRequest request){
+    @RequestMapping("Add")
+    @ResponseBody
+    public Map<String, Object> Add(Message message, HttpServletRequest request) {
         System.out.println("进入前台发送消息方法");
-        String bmid="0";
+        String bmid = "0";
         Cookie[] cookies = request.getCookies();
-        if(cookies != null && cookies.length > 0){
-            for (Cookie cookie : cookies){
-                System.out.println(cookie.getName());
-                if(cookie.getName().equals("bmid")){
-                    bmid=cookie.getValue();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
                 }
             }
         }
-        System.out.println("bmid:"+bmid);
-        Date date=new Date();
+        System.out.println("bmid:" + bmid);
+        Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String str = format.format(date);
-        System.out.println("时间:"+str);
+        System.out.println("时间:" + str);
         message.setFtime(str);
         message.setMstate(1);
-        message.setOne(bmid);
-        Integer count=messageDao.insert(message);
-        return "redirect:listAll";
+        message.setTow(Integer.valueOf(bmid));
+        final int im = messageDao.insert(message);
+        Map<String,Object> m=new HashMap<String, Object>();
+        m.put("time",str);
+        m.put("con",message.getContext());
+        if(im==1){
+            return m;
+        }
+        return null;
     }
+
     //前台消息列表查询
     @RequestMapping("qlists")
-    public String qlists(HttpServletRequest request,Model model){
-        try{
-            String bmid="0";
+    public String qlists(HttpServletRequest request, Model model) {
+        try {
+            String bmid = "0";
             Cookie[] cookies = request.getCookies();
-            if(cookies != null && cookies.length > 0){
-                for (Cookie cookie : cookies){
+            if (cookies != null && cookies.length > 0) {
+                for (Cookie cookie : cookies) {
                     System.out.println(cookie.getName());
-                    if(cookie.getName().equals("bmid")){
-                        bmid=cookie.getValue();
+                    if (cookie.getName().equals("bmid")) {
+                        bmid = cookie.getValue();
                     }
                 }
             }
-            System.out.println("bmid:"+bmid);
-            final List<Map<String,Object>> maps;
+            System.out.println("bmid:" + bmid);
+            final List<Map<String, Object>> maps;
             System.out.println(!bmid.equals("0"));
-            if(!bmid.equals("0")) {
+            if (!bmid.equals("0")) {
                 maps = messageDao.qlists(bmid);
-                System.out.println("maps:"+maps);
-            }else {maps=null;}
-
-            for (Map<String,Object> m:
-                    maps) {
-
+                System.out.println("maps:" + maps);
+            } else {
+                maps = null;
             }
 
-            model.addAttribute("qs",maps);
-            System.out.println("消息列表查询:"+maps);
-        }catch (Exception ex){
+            model.addAttribute("qs", maps);
+            System.out.println("消息列表查询:" + maps);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return "lists";
     }
+
     //前台查看消息
     @RequestMapping("infos")
     @ResponseBody
-    public List<Message> infos(String tow){
-        System.out.println("进入前台查看消息");
-        List<Message> s=messageDao.infos(tow);
+    public List<Map<String, Object>> infos(String tow, HttpServletRequest request) {
+        String bmid = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:" + bmid);
+        System.out.println("查看消息");
+        List<Map<String, Object>> s = messageDao.infos(tow, bmid);
+        System.out.println("消息:" + s);
         return s;
     }
 }
