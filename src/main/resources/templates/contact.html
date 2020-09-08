@@ -20,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="../css/font-awesome.css" rel="stylesheet">
 <link href="../css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../css/toastr.min.css" rel='stylesheet' type='text/css'/>
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -158,6 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--/footer -->
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+<script type="text/javascript" src="../js/toastr.min.js"></script>
 <script type="text/javascript">
 	function GetCookie(name) {
 		var ck = document.cookie;
@@ -168,34 +170,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	let d=GetCookie("bmid");
 	/*alert("举报人id:"+d);*/
 	$("#jbid").val(d);
+	let bjb=$("#bjbid").val();
 	function tijiao() {
-		alert(1);
 		let yy=$("#yuanyin").val();
 		let l=$("#lx").val();
-		let bjb=$("#bjbid").val();
 		/*alert("原因:"+yy);
 		alert("类型:"+l);
 		alert("被举报Id:"+bjb);*/
-		if(yy==null || yy=='' || yy==undefined){
-			alert("举报原因不能为空");
-		}else if(l==0){
-			alert("举报类型不能为空  请选择")
-		} else{
-			let f=$("#fm").submit();
-			if(f!=null){
-				alert("举报成功");
+		//判断自己不能举报自己
+		$.ajax({
+			url:"../attention/jyinfos",
+			data:{"one":bjb},
+			success:function (data) {
+				if(data==1){
+					toastr.warning("自己不能举报自己哦!");
+				}
+				if(data==0){
+					if(yy==null || yy=='' || yy==undefined){
+                        toastr.warning("举报原因不能为空");
+					}else if(l==0){
+                        toastr.warning("举报类型不能为空  请选择")
+					} else{
+					    //判断不能重复举报
+                        $.ajax({
+                            url:"../attention/jyjbs",
+                            data:{"bid":bjb},
+                            success:function (data) {
+                                if(data==1){
+                                    toastr.warning("您已经举报过了哦,不能重复举报!")
+                                }
+                                if(data==0){
+                                    let f=$("#fm").submit();
+                                    if(f!=null){
+                                        toastr.warning("举报成功");
+                                    }
+                                }
+                            }
+                        });
+					}
+				}
 			}
-		}
+		});
 	}
+	//模态框点击取消跳到个人详情页面
 	function tiao() {
-		alert("tiao");
-		window.location.href="listAll";
+		window.location.href="../basic_message/findAllById?bmid="+bjb;
 	}
 </script>
 <!-- script for responsive tabs -->						
 <script src="../js/easy-responsive-tabs.js"></script>
 <script>
 $(document).ready(function () {
+	toastr.options = {
+		"positionClass": "toast-top-center"//弹出窗的位置上方居中
+	};
 $('#horizontalTab').easyResponsiveTabs({
 type: 'default', //Types: default, vertical, accordion           
 width: 'auto', //auto or any width like 600px

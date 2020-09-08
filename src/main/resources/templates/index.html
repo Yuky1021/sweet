@@ -156,11 +156,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="form-bg-w3ls" >
 				<h3 class="subhead-agileits white-w3ls">我的资料</h3>
 				<form action="#" method="post">
-					<img src="sss" id="zp" style="height: 140px;width: 140px;"><br><br>
-					<span style="color: white">昵称:</span><p id="nc" style="color: white;display: inline-block"></p><br><br>
-					<span style="color: white">ID:</span><p id="num" style="color: white;display: inline-block"></p><br><br>
-					<a href="../basic_message/GeRen">完善资料</a>&nbsp;&nbsp;&nbsp;
-					<a href="#" id="lujing">预览</a>
+					<img src="../images/zwdl.png" id="zp" style="height: 140px;width: 140px;"><br><br>
+					<span style="color: white;" id="spnc">昵称:</span><p id="nc" style="color: white;display: inline-block"></p><br><br>
+					<span style="color: white;" id="spid">ID:</span><p id="num" style="color: white;display: inline-block"></p><br><br>
+					<a href="../basic_message/GeRen" >完善资料</a>&nbsp;&nbsp;&nbsp;
+					<a href="../basic_message/tologin" id="lujing" >预览</a>
 				</form>
 			</div>
 		</div>
@@ -370,28 +370,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			return mch ? unescape(mch[0].substring(name.length + 1)) : null;
 		}
 		let d=GetCookie("bmid");
-		$.ajax({
-			url:"../Details_message/ajid",
-			type: "post",
-			data:{bmid:d},
-			success:function (data) {
-				let p=data["pic"];
-				console.log("p:"+p);
-				let n=data["bmname"];
-				console.log("昵称:"+n);
-				let d=data["number"];
-				console.log("ID:"+d);
-				let bmid=data["bmid"];
-				console.log("bmid:"+bmid);
-				$("#zp").attr("src",p);
-				$("#nc").html(n);
-				$("#num").html(d);
-				$("#lujing").attr("href","../basic_message/findAllById?bmid="+bmid);
-			},
-			error:function (err) {
-				console.log(err);
-			}
-		})
+		if(d!=null){
+			$.ajax({
+				url:"../Details_message/ajid",
+				type: "post",
+				data:{bmid:d},
+				success:function (data) {
+					let p=data["pic"];
+					console.log("p:"+p);
+					let n=data["bmname"];
+					console.log("昵称:"+n);
+					let d=data["number"];
+					console.log("ID:"+d);
+					let bmid=data["bmid"];
+					console.log("bmid:"+bmid);
+					$("#zp").attr("src",p);
+					$("#nc").html(n);
+					$("#num").html(d);
+					$("#lujing").attr("href","../basic_message/findAllById?bmid="+bmid);
+				},
+				error:function (err) {
+					console.log(err);
+				}
+			})
+		}
+
 	});
 </script>
 <script type="text/javascript" src="../js/jquery.flexisel.js"></script>

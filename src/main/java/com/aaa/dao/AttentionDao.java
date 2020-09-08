@@ -1,6 +1,8 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Attention;
+import com.aaa.entity.Dispose;
+import com.aaa.entity.Message;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -54,5 +56,9 @@ public interface AttentionDao extends tk.mybatis.mapper.common.Mapper<Attention>
 
     //校验已经关注的人
     @Select("select * from attention where baid=#{baid} and aid=#{aid}")
-    Integer jycf(@Param("baid") String baid,@Param("aid") String aid);
+    List<Map<String,Object>> jycf(@Param("baid") String baid,@Param("aid") String aid);
+    //校验不能重复举报
+    @Select("select * from dispose where bid=#{bid} and bmid=#{bmid}")
+    List<Dispose> jyjb(@Param("bid") String bid,@Param("bmid") String bmid);
+
 }

@@ -3,6 +3,8 @@ package com.aaa.controller;
 import com.aaa.dao.AttentionDao;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.entity.Attention;
+import com.aaa.entity.Dispose;
+import com.aaa.entity.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -104,7 +106,7 @@ public class AttentionController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:listAll";
+        return "redirect:mygz";
     }
     //前台我的关注
     @RequestMapping("mygz")
@@ -194,7 +196,8 @@ public class AttentionController {
     //校验关注提示已经关注过了
     @RequestMapping("jygzr")
     @ResponseBody
-    public String jygzr(HttpServletRequest request,String baid){
+    public Integer jygzr(HttpServletRequest request,String baid){
+            //从cook中获取当前登录人id
             String bmid="0";
             Cookie[] cookies = request.getCookies();
             if(cookies != null && cookies.length > 0){
@@ -206,8 +209,58 @@ public class AttentionController {
                 }
             }
             System.out.println("bmid:"+bmid);
-            String mingid=baid=bmid;
-        System.out.println(mingid);
-        return "redirect:listAll";
+            //判断是否是自己关注自己
+            if(bmid.equals(baid)){
+                return 1;
+            }
+        List<Map<String,Object>> is = attentionDao.jycf(baid, bmid);
+        System.out.println("关注是否重复数据:"+is.size());
+        //判断是否重复关注
+        if(is.size()>0){
+            return 2;
+        }
+        return 0;
+    }
+    //校验自己不能给自己发消息
+    @RequestMapping("jyinfos")
+    @ResponseBody
+    public Integer jyinfos(HttpServletRequest request,String one){
+        String bmid="0";
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length > 0){
+            for (Cookie cookie : cookies){
+                System.out.println(cookie.getName());
+                if(cookie.getName().equals("bmid")){
+                    bmid=cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:"+bmid);
+        if (one.equals(bmid)){
+            return 1;
+        }
+        return 0;
+    }
+    //校验不能重复举报
+    @RequestMapping("jyjbs")
+    @ResponseBody
+    public Integer jyjbs(HttpServletRequest request,String bid){
+        String bmid="0";
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length > 0){
+            for (Cookie cookie : cookies){
+                System.out.println(cookie.getName());
+                if(cookie.getName().equals("bmid")){
+                    bmid=cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:"+bmid);
+        List<Dispose> list = attentionDao.jyjb(bid, bmid);
+        //如果查询到数据就代表你已经举报过来
+        if(list.size()>0){
+            return 1;
+        }
+        return 0;
     }
 }

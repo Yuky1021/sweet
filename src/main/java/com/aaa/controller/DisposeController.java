@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.DisposeDao;
 import com.aaa.entity.Dispose;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,13 +23,38 @@ public class DisposeController {
     DisposeDao disposeDao;
     @Resource
     Basic_messageDao basic_messageDao;
-    //前台添加
+
+    public void setpics( List<Map<String,Object>> l){
+        for (Map<String,Object> a : l
+        ) {
+            Object p=a.get("pic");
+            Object s = a.get("soliloquy");
+            System.out.println("图片:"+p);
+            System.out.println("内心独白:"+s);
+            if(p==null||p.equals("")){
+                a.put("pic","../images/timg3.jpg");
+            }
+            if(s==null||s.equals("")){
+                a.put("soliloquy","暂未填写内心独白");
+            }
+        }
+    }
+    @RequestMapping("findAllById")
+    public String findAllById(Model model,@Param("bmid") Integer bmid){
+        System.out.println("bid:"+bmid);
+        List<Map<String,Object>> fid=basic_messageDao.findAllById(bmid);
+        setpics(fid);
+        model.addAttribute("listId",fid);
+        System.out.println(basic_messageDao.findAllById(bmid));
+        return "single1";
+    }
+    //前台添加举报
     @RequestMapping("tianjia")
     public String tianjia(Dispose dispose){
         System.out.println("进入tianjia方法");
         Integer count=disposeDao.add(dispose);
         System.out.println(count);
-        return "redirect:listAll";
+        return "redirect:../basic_message/findAllById?bmid="+dispose.getBid();
     }
     @RequestMapping("listAll")
     public String listAll(Model model){

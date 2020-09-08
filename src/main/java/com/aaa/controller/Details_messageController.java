@@ -103,4 +103,14 @@ public class Details_messageController {
         if(i>0){System.out.println("UpdateYes");}
         return "redirect:SelDetails";
     }
+
+    //前台根据id查询数据
+    @RequestMapping("ajid")
+    @ResponseBody
+    public Map<String,Object> ajid(String bmid){
+        System.out.println("进入ajaxid方法");
+        List<Map<String,Object>> as=dm.showajid(bmid);
+        System.out.println("数据:"+as.get(0));
+        return as.get(0);
+    }
 }

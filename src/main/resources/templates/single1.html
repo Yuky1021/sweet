@@ -20,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="../css/font-awesome.css" rel="stylesheet">
 <link href="../css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../css/toastr.min.css" rel='stylesheet' type='text/css'/>
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
@@ -93,19 +94,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 		<div class="tittle-agileinfo">
 			<h3 th:text="${l.truename}"></h3>
-			<a href="#" style="margin-right: 60px;margin-left: 50px;">屏蔽此人</a><!--<a href="../basic_message/findAllByIdt">举报此人</a>--><a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>&nbsp;&nbsp;&nbsp;
-			<!--<form>
-				<p>关注</p>
-			</form>-->
+			<!--<a href="../basic_message/findAllByIdt">举报此人</a>--><!--<a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>-->
 		</div>
 		<div class="matches-main-agileinfo">
-			<!--<div class="col-md-6 profile1">
-
-			</div>-->
 			<div>
 				<img th:src="${l.pic}" style="height: 382px;width:380px">
 			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:460px">
+			<div class="col-md-6 person-info-agileits-w3layouts" style="position:absolute;right: 10px;top:410px">
 				<ul>
 					<li><span style="width: 50px;">年龄:</span><p th:text="${l.age}" style="display: inline-block"></p></li>
 					<li><span style="width: 50px;">性别:</span><p th:text="${l.sex==0?'女':'男'}" style="display: inline-block"></p></li>
@@ -121,17 +116,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><span style="width: 50px;">身高:</span><p th:text="${l.height}" style="display: inline-block"></p></li>
 					<li><span style="width: 50px;">工资:</span><p th:text="${l.monthly}" style="display: inline-block"></p></li>
 					<li><span style="width: 50px;">地址:</span><p th:text="${l.address}" style="display: inline-block"></p></li>
-					<!--<li><a href="#">打招呼</a><a data-toggle="modal" href="#FaMessage" >发消息</a></li>-->
 					<li>
 						<form action="../attention/guanzhur" method="post" id="guanzhu">
 							<!--被关注人id-->
 							<input type="hidden" name="baid" th:value="${l.dmid}" id="bgj"/>
-							<!--登录人id-->
-							<!--<input type="hidden" name="aid" id="dlr"/>-->
-
 						</form>
 						<a href="#" onclick="gz()">关注</a>
 						<a data-toggle="modal" href="#FaMessage" >发消息</a>
+						<a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>
 					</li>
 				</ul>
 			</div>
@@ -188,8 +180,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-body">
 				<!--主体内容-->
 				<form role="form" action="../message/add" method="post" id="messagefm">
-					<!--当前用户-->
-					<!--<input type="hidden" name="one" id="dqid">-->
 					<!--发送的用户-->
 					<input type="hidden" name="tow" th:value="${l.dmid}" id="fsid">
 					<div class="form-group">
@@ -250,6 +240,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="../js/easy-responsive-tabs.js"></script>
 <script>
 $(document).ready(function () {
+	toastr.options = {
+		"positionClass": "toast-top-center"//弹出窗的位置上方居中
+	};
 $('#horizontalTab').easyResponsiveTabs({
 type: 'default', //Types: default, vertical, accordion           
 width: 'auto', //auto or any width like 600px
@@ -296,6 +289,7 @@ fit: true
 	<!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/move-top.js"></script>
 <script type="text/javascript" src="../js/easing.js"></script>
+<script type="text/javascript" src="../js/toastr.min.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -303,83 +297,58 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
-	//获取当前登录人id
-	/*function GetCookie(name) {
-		var ck = document.cookie;
-		var exp1 = new RegExp(name + "=.*?(?=;|$)");
-		var mch = ck.match(exp1);
-		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
-	}
-	let d=GetCookie("bmid");
-	$("#dqid").val(d);*/
+	//发消息
 	function send() {
-
 		let f=$("#fsid").val();
 		let c=$("#context").val();
-		if(c==undefined || c==null || c==''){
-			alert("消息不能为空")
-		}else {
-			$("#messagefm").submit();
-			alert("发送成功")
-		}
-
+		$.ajax({
+			url:"../attention/jyinfos",
+			data:{"one":f},
+			success:function (data) {
+				if(data==1){
+					toastr.warning("自己不能给自己发消息哦!")
+				}
+				if(data==0){
+					if(c==undefined || c==null || c==''){
+						toastr.warning("消息不能为空")
+					}else {
+						$("#messagefm").submit();
+						toastr.warning("发送成功")
+					}
+				}
+			}
+		});
 	}
-	/*//获取当前登录人id
-	function GetCookie(name) {
-		var ck = document.cookie;
-		var exp1 = new RegExp(name + "=.*?(?=;|$)");
-		var mch = ck.match(exp1);
-		return mch ? unescape(mch[0].substring(name.length + 1)) : null;
-	}
-	let d=GetCookie("bmid");
-	$("#dqid").val(d);
-
-	/!*$("#dlr").val(d);*!/
-	alert(d);
-	//发送消息
-	function send() {
-		/!*alert(1);*!/
-		/!*alert("登录人id:"+d);*!/
-		let f=$("#fsid").val();
-		let c=$("#context").val();
-		/!*alert("要发送的id:"+f);
-		alert("要发送的内容:"+c);*!/
-		if(c==undefined || c==null || c==''){
-			alert("消息不能为空")
-		}else {
-			$("#messagefm").submit();
-			alert("发送成功")
-		}
-
-	}*/
 	//关注
 	function gz() {
-		/*alert(1);
-		$("#dlr").val(d);
-		let zb=$("#bgj").val();
-		alert("登录人id:"+d);
-		alert("被关注人id:"+z);
-
-		let z=$("#bgj").val();*/
-		alert("1");
-		let xy=$("#bgj").val();
-		alert(xy);
-		let cg=$("#guanzhu").submit();
-		if(xy!=null || xy!='' || xy!=undefined){
-			alert("关注成功");
-		}else {
-			alert("关注失败");
-		}
+		let z=$("#bgj").val();
+		$.ajax({
+			url:"../attention/jygzr",
+			data:{"baid":z},
+			success:function (data) {
+				if(data==1){
+					/*alert("自己不能关注自己哦!");*/
+					toastr.warning("自己不能关注自己哦!");
+				}
+				if(data==2){
+					toastr.warning("已经关注过了哦!")
+				}
+				if(data==0){
+					let xy=$("#bgj").val();
+					/*alert(xy);*/
+					let cg=$("#guanzhu").submit();
+					if(xy!=null || xy!='' || xy!=undefined){
+						toastr.warning("关注成功");
+					}else {
+						toastr.warning("关注失败");
+					}
+				}
+			}
+		});
 	}
-</script>
-<script type="text/css">
-	/*#info{
-		float:right;
-	}*/
 </script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
-	
 
 </body>
 </html>
