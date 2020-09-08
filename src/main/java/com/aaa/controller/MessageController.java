@@ -158,4 +158,30 @@ public class MessageController {
         System.out.println("消息:" + s);
         return s;
     }
+
+    //前台发送消息
+    @RequestMapping("add")
+    public String add(Message message,HttpServletRequest request){
+        System.out.println("进入前台发送消息方法");
+        String bmid="0";
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length > 0){
+            for (Cookie cookie : cookies){
+                System.out.println(cookie.getName());
+                if(cookie.getName().equals("bmid")){
+                    bmid=cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:"+bmid);
+        Date date=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = format.format(date);
+        System.out.println("时间:"+str);
+        message.setFtime(str);
+        message.setMstate(1);
+        message.setOne(bmid);
+        Integer count=messageDao.insert(message);
+        return "redirect:listAll";
+    }
 }

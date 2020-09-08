@@ -15,7 +15,7 @@ public interface MessageDao extends tk.mybatis.mapper.common.Mapper<Message> {
 
     //前台消息列表
     /*@Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on m.one=bm.bmid left join details_message dm on m.tow=dm.dmid where m.one=#{one} or m.tow=#{one} group by tow")*/
-    @Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on m.tow=bm.bmid left join details_message dm on m.tow=dm.dmid where m.one=#{one} or m.tow=#{one} group by tow")
+    @Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on m.tow=bm.bmid left join details_message dm on m.tow=dm.dmid where m.one=#{one} group by tow")
     List<Map<String,Object>> qlists(@Param("one") String one);
 
     //前台查询消息

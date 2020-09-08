@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TopDao extends tk.mybatis.mapper.common.Mapper<Top> {
 
+    //前台开通置顶显示
+
+
 }

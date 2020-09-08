@@ -12,4 +12,6 @@ public interface ComboDao  extends tk.mybatis.mapper.common.Mapper<Combo> {
     //前台查询套餐
     @Select("select * from combo order by coid  desc")
     List<Combo> showtVIP();
+
+
 }
