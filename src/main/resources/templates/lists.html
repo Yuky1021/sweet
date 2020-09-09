@@ -101,23 +101,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="bs-docs-example wow fadeInUp animated" data-wow-delay=".5s">
             <table class="table table-hover">
 					<span th:each="q : ${qs}">
-					<tbody>
-						<tr style="height: 100px">
-						  <td><img th:src="${q.pic}" style="height: 110px;width: 110px;"></td>
-							<td>
-								<div style="margin-top: 10px"><b>昵称:</b><b th:text="${q.bmname}"></b></div>
-								<div style="margin-top: 10px"><b>年龄:</b><b th:text="${q.age}"></b></div>
-								<div style="margin-top: 10px"><b>身高:</b><b th:text="${q.height}"></b></div>
-							</td>
-							<td><p style="padding-bottom: 15px;padding-top: 15px">快速找到对象</p>
-                                <a  th:href="@{'../basic_message/findAllById?bmid='+${q.tow}}" ><span class="label label-info" style="padding-bottom: 5px">点击查看</span></a>
-                            </td>
-						  <td><p style="padding-bottom: 15px;padding-top: 15px"><span
-                                  th:text="${q.ct}"></span>条未读</p><input type="hidden" th:value="${q.tow}"><a
-                                  data-toggle="modal" href="#Infos" onclick="xinxis(this)"><span
-                                  class="label label-info">点击查看</span></a></td>
-						</tr>
-					</tbody>
+                        <tbody>
+                            <tr style="height: 100px">
+                              <td><img th:src="${q.pic}" style="height: 110px;width: 110px;"></td>
+                                <td>
+                                    <input type="hidden" th:value="${bmid}">
+                                    <input type="hidden" name="tow" th:value="${q.tow}">
+                                    <input type="hidden" name="one" th:value="${q.one}">
+                                    <div name="bb" style="margin-top: 10px"><b>昵称:</b><b th:text="${q.bmname}" name="b2"></b></div>
+                                    <div style="margin-top: 10px"><b>年龄:</b><b th:text="${q.age}"></b></div>
+                                    <div style="margin-top: 10px"><b>身高:</b><b th:text="${q.height}"></b></div>
+                                </td>
+                                <td><p style="padding-bottom: 15px;padding-top: 15px">快速找到对象</p>
+                                    <a href="#" onclick="tz(this)"><span
+                                            class="label label-info" style="padding-bottom: 5px">点击查看</span></a>
+                                </td>
+                              <td>
+                                  <p style="padding-bottom: 15px;padding-top: 15px">
+                                    <span th:text="${q.ct}"></span>条信息
+                                  </p>
+                                  <input type="hidden" th:value="${q.tow}">
+                                  <a data-toggle="modal" href="#Infos" onclick="xinxis(this)"><span class="label label-info">点击查看</span></a>
+                              </td>
+                            </tr>
+                        </tbody>
 					</span>
             </table>
         </div>
@@ -240,6 +247,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         return newDate;
     }
 
+    let tow;
+    let b;
+
     $(document).ready(function () {
         /*
             var defaults = {
@@ -250,9 +260,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             };
         */
         $().UItoTop({easingType: 'easeOutQuart'});
+        let inp = $("input[name='tow']");
+        let tows=[];
+
+        for (let i = 0; i < inp.length; i++) {
+            let tow1 = inp.eq(i).val();
+            let bmid = inp.eq(i).prev().val();
+            tows.push(tow1);
+            if (tow1 == bmid) {
+                let tby = inp.eq(i).parent("td").parent("tr").parent("tbody");
+                tby.hide();
+            }
+        }
+        for (let i = 0; i < inp.length; i++) {
+            let one=  inp.eq(i).next().val();
+            let tow1 = inp.eq(i).val();
+            if (tows.indexOf(one)<0){
+                let tby = inp.eq(i).parent("td").parent("tr").parent("tbody");
+                inp.eq(i).parent("td").next().next().children("input[type='hidden']").val(one);
+                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name","yes");
+                tby.show();
+            }else{
+                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name","no");
+            }
+        }
     });
-    let tow;
-    let b;
+
+
 
     //查看信息
     function xinxis(th) {
@@ -282,6 +316,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         c.html(str);
     }
 
+    //回复消息
     function reply() {
         let c = $("#context").val();
         if (c == null || c == '' || c == undefined) {
@@ -300,6 +335,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             //恢复为异步
             $.ajaxSettings.async = true;
         }
+    }
+
+    function tz(sd){
+        let hre="../basic_message/findAllById?bmid="+$(sd).parent("td").next().children("input[type='hidden']").val();
+        window.location.href=hre;
     }
 </script>
 <p style="padding: 0px"></p>
