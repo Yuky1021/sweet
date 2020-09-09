@@ -62,10 +62,10 @@
                 },);
             //恢复为异步
             $.ajaxSettings.async = true;
-            let col="<table class=\"table\" style='margin-left: 90px;width: 1170px;margin-top: 10px;'><caption style=\"font-weight: bold;font-size: 24px;background: yellow\">回帖区</caption>";
+            let col="<table class=\"table\" style='margin-left: 90px;width: 1170px;margin-top: 10px;'><caption style=\"font-weight: bold;font-size: 24px;background: black;color: white\">&nbsp;&nbsp;回帖区</caption>";
             for (let i=0;i<f.length;i++){
                 let row=f[i];
-                let drow='<div><tr><td style="font-weight: bold">用户名:'+row.bmname+'</td></tr><tr><td style="font-size: 16px;font-weight: bold">&nbsp;&nbsp;&nbsp;&nbsp;'+row.context+'</td></tr><tr><td style="text-align:right;font-weight: bold">'+transferTime(row.commention)+'</td></tr><tr><td><hr></td></tr></div>';
+                let drow='<div><tr><td style="font-weight: bold;background: grey;color: white">用户名:'+row.bmname+'</td></tr><tr><td style="font-size: 16px;font-weight: bold;background: grey;color: white">&nbsp;&nbsp;&nbsp;&nbsp;'+row.context+'</td></tr><tr><td style="text-align:right;font-weight: bold;background: grey;color: white">'+transferTime(row.commention)+'</td></tr></div>';
                 col=col+drow;
 
             }
@@ -161,18 +161,18 @@
     <li><a href="#">交友论坛</a></li>
     <li class="active">评论区</li>
 </ul>-->
-<div class="row text-center h2" th:text="${send.title}" style="margin-bottom: 20px;color: #0e90d2;font-weight: bold"></div>
-<div class="container" style="background: plum">
+<div class="row text-center h2" th:text="${send.title}" style="margin-bottom: 20px;font-weight: bold"></div>
+<div class="container" style="background: black">
     <div class="row h5" style="font-size: 16px">
         <input type="hidden" id="sid" th:value="${send.spid}">
-        &nbsp;发帖人:&nbsp;<span th:text="${send.bmname}" style="font-weight: bold"></span><br><br/>
-        &nbsp;回帖数:&nbsp;<span th:text="${send.comcount}" style="font-weight: bold"></span><br><br/>
-        &nbsp;发帖时间:&nbsp;<span th:text="${send.sendtime}" style="font-weight: bold"></span>
+        &nbsp;&nbsp;<span style="color: white;margin-top: 15px;">发帖人:</span>&nbsp;<span th:text="${send.bmname}" style="font-weight: bold;color: white;margin-top: 15px;"></span><br><br/>
+        &nbsp;&nbsp;<span style="color: white">回帖数:</span>&nbsp;<span th:text="${send.comcount}" style="font-weight: bold;color: white"></span><br><br/>
+        &nbsp;&nbsp;<span style="color: white">发帖时间:</span>&nbsp;<span th:text="${send.sendtime}" style="font-weight: bold;color: white"></span>
     </div>
     <br>
-    内容:
+    <span style="color: white">内容:</span>
     <div class="row h5" style="font-size: 20px">
-        &nbsp; &nbsp; &nbsp; &nbsp;<span th:text="${send.context}" style="font-weight: bold"></span>
+        &nbsp; &nbsp; &nbsp; &nbsp;<span th:text="${send.context}" style="font-weight: bold;color: white"></span>
     </div>
     <br><br>
 </div>
@@ -182,10 +182,10 @@
 
 </div>
 <!---写评论------>
-<div class="form-group">
-    <label for="pl">回复独白</label>
+<div class="form-group" style="width: 1170px;margin-left: 89px;background: grey">
+    <label for="pl" style="color: white;margin-top: 15px;">&nbsp;&nbsp;回复独白</label>
     <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
-    <textarea class="form-control" id="pl" style="height: 100px; color: black!important" placeholder="写下您的评论...."></textarea>
+    <textarea class="form-control" id="pl" style="height: 100px; color: black!important;color: white" placeholder="写下您的评论...."></textarea>
     <div align="right"><input id="fs" type="button" class="btn btn-success" value="发送"></div>
 </div>
 <div class="w3l_footer">

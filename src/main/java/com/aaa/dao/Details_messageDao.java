@@ -26,7 +26,7 @@ public interface Details_messageDao extends tk.mybatis.mapper.common.Mapper<Deta
 
 
     //前台首页根据id查询
-    @Select("select bm.bmid,bm.bmname,dm.pic,bm.number from details_message dm left join basic_message bm on dm.dmid=bm.bmid where bm.bmid=#{bmid}")
+    @Select("select bm.bmid,bm.bmname,bm.VIP,dm.pic,bm.number from details_message dm left join basic_message bm on dm.dmid=bm.bmid where bm.bmid=#{bmid}")
     List<Map<String,Object>> showajid(@Param("bmid") String bmid);
 
 
