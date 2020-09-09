@@ -23,4 +23,8 @@ public interface Send_pasteDao extends tk.mybatis.mapper.common.Mapper<Send_past
 
     @Select("select cp.cpid,bm.bmid,context,commention,bmname from comment_paste cp left join basic_message bm on cp.bmid=bm.bmid where spid=#{spid}")
     List<Map<String,Object>> SelComAndBasByid(@Param("spid") String spid);
+
+    @Select("select count(emid) from emp")
+    public int totalCount();
+
 }

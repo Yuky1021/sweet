@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -121,6 +122,7 @@ public class Basic_messageController {
         model.addAttribute("typess",basic_messageDao.findAllById(bmid));
         System.out.println(basic_messageDao.findAllById(bmid));
         return "contact";
+
     }
 
     //   重定向:redirect

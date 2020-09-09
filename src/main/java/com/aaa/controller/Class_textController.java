@@ -54,4 +54,10 @@ public class Class_textController {
         System.out.println(ct);
         return "testClassroom";
     }
+
+    @RequestMapping("Byctname")
+    @ResponseBody
+    public int selectByName(String ctname){
+        return class_textDao.selectByName(ctname);
+    }
 }
