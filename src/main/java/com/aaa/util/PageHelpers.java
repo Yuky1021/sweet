@@ -13,7 +13,17 @@ public class PageHelpers<T> {
     private List<T> rows;
     //    搜索关键字
     private String keyword;
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     private int totalCount;
+    private int money;
 
     public int getTotalCount() {
         return totalCount;

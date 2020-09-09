@@ -18,7 +18,7 @@ public interface DisposeDao extends tk.mybatis.mapper.common.Mapper<Dispose> {
     Integer add(Dispose dispose);
 
     //修改
-    @Update("update dispose set state=#{state},way=#{way},dtime=now(),emid=#{emid} where dsid=#{dsid}")
+    @Update("update dispose set state=#{state},way=#{way},dtime=now(),emid=1 where dsid=#{dsid}")
     int update(Dispose dispose);
 
 }

@@ -13,4 +13,7 @@ import java.util.List;
 @Mapper
 public interface Class_textDao  extends tk.mybatis.mapper.common.Mapper<Class_text> {
 
+    @Select("select * from class_text where ctname=#{ctname}")
+    int selectByName(String ctname);
+
 }
