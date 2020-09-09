@@ -336,6 +336,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--/footer -->
 
+<a href="#YesOrNo" data-toggle="modal" id="tcBox">click</a>
+<!--确认取消提示框-->
+<div class="modal fade" id="YesOrNo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">会员续费</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label class="control-label">您的会员已到期是否续费？</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+				<a class="btn btn-primary" href="../combo/viptc">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
 <!-- flexisel -->
@@ -427,7 +450,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				$('.events').append("<li>after event fired.</li>");
 			}
 		});
-
+		//初始化时判断会员是否到期
+		$.post("../vip/VipTimelimit",function (data) {
+			if(data==0){
+				$("#tcBox").click();
+			}
+		})
+		
 	});
 </script>
 <!--//responsive slider -->

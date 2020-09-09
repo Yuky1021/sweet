@@ -1,9 +1,7 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Vip;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,4 +18,13 @@ public interface VipDao extends tk.mybatis.mapper.common.Mapper<Vip> {
     //前台根据ID查询是否开通过会员
     @Select("select count(bmid) ct from vip where bmid=#{bmid}")
     Integer ById(@Param("bmid") String bmid);
+
+    @Update("update vip set vtime=#{vtime} where bmid=#{bmid}")
+    int Upd(Vip vip);
+
+    @Select("select * from vip where bmid=#{bmid}")
+    Vip SelBybmid(String bmid);
+
+    @Delete("delete from vip where bmid=#{bmid}")
+    int Delbybmid(String bmid);
 }

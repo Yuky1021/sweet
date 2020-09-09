@@ -1,10 +1,7 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Basic_message;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -71,5 +68,8 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     //前台首页显示男友
     @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.sex=1 limit 4")
     public List<Map<String,Object>> findmen();
+
+    @Update("update basic_message set vip=#{vip} where bmid=#{bmid}")
+    int UpdVipBybmid(@Param("vip") int vip,@Param("bmid") String bmid);
 
 }

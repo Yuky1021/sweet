@@ -105,11 +105,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <form action="../vip/kthy" method="post" id="fms">
                     <div style="border: 5px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: yellow">
                         <input type="hidden" th:value="${v.coid}" name="vd" >
+                        <input type="hidden" th:value="${v.coname}" name="coname" >
+                        <input type="hidden" th:value="${v.price}" name="price" >
                         <p style="margin-top: 25px;margin-left: 50px;color: #8a6d3b;font-size: 20px;" th:text="${v.coname}"></p><br>
                         <p style="font-size: 40px;margin-left: 50px;color: #8a6d3b;display: inline-block" th:text="${v.days}"></p><span style="color: #8a6d3b;font-size: 40px">元/天</span><br>
                         <span style="margin-left: 50px;color: #8a6d3b;">超值会员价</span><p style="font-size: 35px;display: inline-block;color: #8a6d3b" th:text="${v.price}"></p><span style="color: #8a6d3b">元</span><br><br>
                         <input type="hidden" name="coid" th:value="${v.coid}">
-                        <h2><a href="#" onclick="zf()"><span class="label label-warning" style="margin-left: 70px;color: #8a6d3b; background: white;width:120px;">立即开通</span></a></h2>
+                        <h2><a href="#" onclick="zf(this)"><span class="label label-warning" style="margin-left: 70px;color: #8a6d3b; background: white;width:120px;">立即开通</span></a></h2>
                     </div>
                 </form>
             </span>
@@ -230,9 +232,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     let d = GetCookie("bmid");
     $("#dqid").val(d);
 
-    function zf() {
-        alert(1);
-        $("#fms").submit();
+    function zf(fm) {
+        $(fm).parent().parent().parent().submit();
     }
 
 
