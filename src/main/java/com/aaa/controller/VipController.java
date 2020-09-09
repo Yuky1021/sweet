@@ -67,7 +67,10 @@ public class VipController {
             }
         }
         System.out.println("bmid:"+bmid);
+        vip.setBmid(bmid);
+        //判断之前有没有开通过会员
         Integer id = vipDao.ById(bmid);
+        System.out.println("数据查询:"+id);
         //之前没有开通过会员
         if(id!=1){
             //获取当前日期转成字符串
@@ -77,26 +80,37 @@ public class VipController {
             System.out.println("时间:"+str);
             //2020-12-11 11:12:10
             //截取月
-            String s = str.substring(5, 2);
+            //12-11
+            String s = str.substring(5, 5);
             System.out.println("截取后的时间月:"+s);
-            //转成整数
+            //转成整数  12-11
             int myint = Integer.parseInt(s);
             System.out.println("转成整数后:"+myint);
             //开通一个月
             if(coid.equals(1)){
+                //当前月加上一个月
                 int i = myint + 1;
                 if(i>12){
-                    int yue = i - 12;
-
+                    int yue = i - 12; // 2020 10 4 14  2021 2
+                    System.out.println("如果大于int yue = i - 12:"+yue);
+                    //截取年份
+                    String nian = str.substring(0, 4);
+                    System.out.println("截取年份:"+nian);
+                    //当前年份加1 2021
+                    String ni = nian + 1;
+                    System.out.println("截取过的年份加1年:"+ni);
+                    //2021 +4 =2020年4月
                 }
                 String s2 = str.replace(s, Integer.toString(i));
                 System.out.println("改过后:"+s2);
+                //最终保存在数据库中的日期
+                vip.setVtime(s2);
             }
 
         }else{
 
         }
-        vip.setBmid(bmid);
+
 
         return "";
     }
