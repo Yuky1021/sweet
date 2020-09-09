@@ -184,4 +184,11 @@ public class MessageController {
         Integer count=messageDao.insert(message);
         return "redirect:qlists?bmid="+bmid;
     }
+
+    @RequestMapping(value ="addmes",produces = "application/json")
+    @ResponseBody
+    public int add(String context,String one) {
+        System.out.println("add");
+        return messageDao.addMes(context, one);
+    }
 }

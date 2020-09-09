@@ -1,6 +1,7 @@
 package com.aaa.dao;
 
 import com.aaa.entity.Message;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -21,4 +22,7 @@ public interface MessageDao extends tk.mybatis.mapper.common.Mapper<Message> {
     //前台查询消息
     @Select("select m.*,b.bmname,(case when one=#{one} then (0) else(1) end) state from message m left join basic_message b on m.tow=b.bmid where one=#{one} and tow=#{tow} or one=#{tow} and tow=#{one} order by ftime")
     List<Map<String,Object>> infos(@Param("tow") String tow,@Param("one") String one);
+
+    @Insert("insert into message(one,tow,context,ftime,mstate) values (#{one},null,#{context},now(),1)")
+   int addMes(@Param("context") String context,@Param("one") String one);
 }

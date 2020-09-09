@@ -4,6 +4,9 @@ import com.aaa.dao.Send_pasteDao;
 import com.aaa.dao.comment_pasteDao;
 import com.aaa.entity.Send_paste;
 import com.aaa.entity.comment_paste;
+import com.aaa.util.PageHelpers;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,11 +30,19 @@ public class Send_pasteController {
     @Resource
     comment_pasteDao cp;
 
-    @RequestMapping(value ="findAll",produces = "application/json")
+
+    @RequestMapping(value ="findAll",produces =" application/json")
     @ResponseBody
-    public List<Map<String,Object>> findAll(){
-        System.out.println("findAll()");
-        return send_pasteDao.listAll();
+    public PageHelpers<Map<String,Object>> findAll(PageHelpers<Map<String,Object>> ph){
+        PageHelper.startPage(ph.getPageNum(),ph.getPageSize());
+        List<Map<String,Object>> pastes = send_pasteDao.listAll();
+        ph.setRows(pastes);
+        PageInfo<Map<String,Object>> pageInfo = new PageInfo<Map<String,Object>>(pastes);
+        int pages = pageInfo.getPages();
+        ph.setLastPage(pages);
+        ph.setTotalCount(send_pasteDao.totalCount());
+        System.out.println("totalCount:"+send_pasteDao.totalCount());
+        return ph;
     }
     @RequestMapping(value ="del",produces = "application/json")
     @ResponseBody
