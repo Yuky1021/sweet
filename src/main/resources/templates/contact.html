@@ -119,6 +119,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		</div>
 </div>
+<!--判断当前登陆人的会员状态-->
+<span th:each="lvs : ${sfvip}">
+	<select name="vip" style="display: none">
+		<option th:value="${lvs.vip}"></option>
+	</select>
+</span>
 <!--login-inner-->
 <!-- footer -->
 <div class="w3l_footer">
@@ -172,45 +178,53 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	$("#jbid").val(d);
 	let bjb=$("#bjbid").val();
 	function tijiao() {
-		let yy=$("#yuanyin").val();
-		let l=$("#lx").val();
-		/*alert("原因:"+yy);
-		alert("类型:"+l);
-		alert("被举报Id:"+bjb);*/
-		//判断自己不能举报自己
-		$.ajax({
-			url:"../attention/jyinfos",
-			data:{"one":bjb},
-			success:function (data) {
-				if(data==1){
-					toastr.warning("自己不能举报自己哦!");
-				}
-				if(data==0){
-					if(yy==null || yy=='' || yy==undefined){
-                        toastr.warning("举报原因不能为空");
-					}else if(l==0){
-                        toastr.warning("举报类型不能为空  请选择")
-					} else{
-					    //判断不能重复举报
-                        $.ajax({
-                            url:"../attention/jyjbs",
-                            data:{"bid":bjb},
-                            success:function (data) {
-                                if(data==1){
-                                    toastr.warning("您已经举报过了哦,不能重复举报!")
-                                }
-                                if(data==0){
-                                    let f=$("#fm").submit();
-                                    if(f!=null){
-                                        toastr.warning("举报成功");
-                                    }
-                                }
-                            }
-                        });
+		//获取当前登陆人的vip状态
+		let gzv=$("select[name=vip]").val();
+		//如果不是会员
+		if(gzv==1) {
+			//跳转开通会员页面
+			location.href = "../combo/viptc";
+		}else {
+			let yy=$("#yuanyin").val();
+			let l=$("#lx").val();
+			/*alert("原因:"+yy);
+			alert("类型:"+l);
+			alert("被举报Id:"+bjb);*/
+			//判断自己不能举报自己
+			$.ajax({
+				url:"../attention/jyinfos",
+				data:{"one":bjb},
+				success:function (data) {
+					if(data==1){
+						toastr.warning("自己不能举报自己哦!");
+					}
+					if(data==0){
+						if(yy==null || yy=='' || yy==undefined){
+							toastr.warning("举报原因不能为空");
+						}else if(l==0){
+							toastr.warning("举报类型不能为空  请选择")
+						} else{
+							//判断不能重复举报
+							$.ajax({
+								url:"../attention/jyjbs",
+								data:{"bid":bjb},
+								success:function (data) {
+									if(data==1){
+										toastr.warning("您已经举报过了哦,不能重复举报!")
+									}
+									if(data==0){
+										let f=$("#fm").submit();
+										if(f!=null){
+											toastr.warning("举报成功");
+										}
+									}
+								}
+							});
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 	//模态框点击取消跳到个人详情页面
 	function tiao() {

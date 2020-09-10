@@ -108,6 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <input type="hidden" th:value="${bmid}">
                                     <input type="hidden" name="tow" th:value="${q.tow}">
                                     <input type="hidden" name="one" th:value="${q.one}">
+                                    <input type="hidden" name="VIP" th:value="${q.VIP}">
                                     <div name="bb" style="margin-top: 10px"><b>昵称:</b><b th:text="${q.bmname}" name="b2"></b></div>
                                     <div style="margin-top: 10px"><b>年龄:</b><b th:text="${q.age}"></b></div>
                                     <div style="margin-top: 10px"><b>身高:</b><b th:text="${q.height}"></b></div>
@@ -341,6 +342,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         let hre="../basic_message/findAllById?bmid="+$(sd).parent("td").next().children("input[type='hidden']").val();
         window.location.href=hre;
     }
+
 </script>
 <p style="padding: 0px"></p>
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>myvip</title>
+    <!--*导入bootstarp的css-->
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <!--*先导入jQuery-->
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <!--*再导入以jQuery为基础的bootstrap的js-->
+    <script src="../js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+<body>
+
+<div>
+    <div style="margin-top: 85px;margin-left: 100px">
+        <span style="font-size: 20px;font-weight: bold">尊贵的会员</span><p th:text="${myvip[0].bmname}" style="font-weight: bold;color: red;margin-left: 80px;font-size: 15px;"></p><br>
+        <span style="font-size: 20px;font-weight: bold">到期时间</span><p th:text="${myvip[0].vtime}" style="color:red;font-weight: bold;margin-left: 80px;font-size: 15px;"></p>
+        <a href="../combo/viptc" target="_blank"><span class="label label-default">点击续会员</span></a>
+      <!--  <a href="../combo/viptc" target="_blank" style="border: 1px groove black;background: black;color: white">点击续会员</a>-->
+    </div>
+</div>
+
+</body>
+</html>

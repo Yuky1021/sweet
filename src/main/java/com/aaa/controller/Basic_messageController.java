@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.ForeignKeyAddDao;
+import com.aaa.dao.VipDao;
 import com.aaa.entity.Basic_message;
 import com.aaa.util.PageHelpers;
 import com.github.pagehelper.PageHelper;
@@ -32,6 +33,9 @@ public class Basic_messageController {
     Basic_messageDao basic_messageDao;
     @Resource
     ForeignKeyAddDao fkd;
+    @Resource
+    VipDao vipDao;
+
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
@@ -105,22 +109,57 @@ public class Basic_messageController {
         model.addAttribute("list",basic_messageDao.findAll());
         return "login";
     }
-
+    //前台详情
     @RequestMapping("findAllById")
-    public String findAllById(Model model,@Param("bmid") Integer bmid){
+    public String findAllById(HttpServletRequest request,Model model,@Param("bmid") Integer bmid){
+
+        //获取当前登录人id
+        String bmids = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmids = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("当前登陆人:" + bmids);
+
         System.out.println("bid:"+bmid);
         List<Map<String,Object>> fid=basic_messageDao.findAllById(bmid);
         setpics(fid);
         model.addAttribute("listId",fid);
         System.out.println(basic_messageDao.findAllById(bmid));
+
+        //根据当前登陆人查询是否是会员
+        List<Basic_message> vv=basic_messageDao.vipId(bmids);
+        System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
+        model.addAttribute("sfvip",vv);
         return "single1";
     }
-
+    //前台根据id进入举报页面
     @RequestMapping("findAllByIdt")
-    public String findAllByIdt(Model model,@Param("bmid") Integer bmid){
+    public String findAllByIdt(HttpServletRequest request,Model model,@Param("bmid") Integer bmid){
         System.out.println("bid:"+bmid);
+        //获取当前登录人id
+        String bmids = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmids = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("当前登陆人:" + bmids);
         model.addAttribute("typess",basic_messageDao.findAllById(bmid));
         System.out.println(basic_messageDao.findAllById(bmid));
+        //根据当前登陆人查询是否是会员
+        List<Basic_message> vv=basic_messageDao.vipId(bmids);
+        System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
+        model.addAttribute("sfvip",vv);
         return "contact";
 
     }
@@ -255,8 +294,23 @@ public class Basic_messageController {
 
     //显示个人中心
     @RequestMapping("/GeRen")
-    public String GeRen(HttpServletRequest request) {
+    public String GeRen(HttpServletRequest request,Model model) {
         System.out.println("个人中心get");
+        //获取当前登录人id
+        String bmid = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:" + bmid);
+        List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
+        System.out.println("到期数据:"+vipdq);
+        model.addAttribute("myvip",vipdq);
         return "GeRen";
     }
 
@@ -326,4 +380,7 @@ public class Basic_messageController {
         }
         return "index";
     }
+
+    ////前台根据当前登陆人id获取是否是会员
+
 }

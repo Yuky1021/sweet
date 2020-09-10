@@ -6,6 +6,7 @@ import com.aaa.dao.VipDao;
 import com.aaa.entity.Pay_fees;
 import com.aaa.entity.Vip;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -229,4 +230,24 @@ public class VipController {
         return 1;
     }
 
+    //前台个人中心我的会员
+    @RequestMapping("myvip")
+    public String myvip(HttpServletRequest request, Model model){
+        //获取当前登录人id
+        String bmid = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:" + bmid);
+        List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
+        System.out.println("到期数据:"+vipdq);
+        model.addAttribute("myvip",vipdq);
+        return "vipdqtime";
+    }
 }

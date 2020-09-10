@@ -75,7 +75,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--//home-->
 <!--banner end here-->
-
+<!--判断当前登陆人的会员状态-->
+<span th:each="lvs : ${sfvip}">
+	<select name="vip" style="display: none">
+		<option th:value="${lvs.vip}"></option>
+	</select>
+</span>
 <!-- breadcrumbs -->
 <div class="w3l_agileits_breadcrumbs">
    <div class="container">
@@ -93,7 +98,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="matches elite-app">
 		<div class="container">
 		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}" style="display: inline-block;margin-left: 500px;"></h3><img src="../images/SVIP2.jpg" style="width: 20px;height: 20px;">
+			<h3 th:text="${l.truename}" style="display: inline-block;margin-left: 500px;"></h3>&nbsp;<img src="../images/baitu.png" style="width: 20px;height: 20px;" name="sss">
+			<!--用于获取会员状态-->
+            <input type="hidden" name="VIP" th:value="${l.VIP}">
 		</div>
 		<div class="matches-main-agileinfo">
 			<div>
@@ -278,6 +285,13 @@ fit: true
 			};
 		*/								
 		$().UItoTop({ easingType: 'easeOutQuart' });
+		//获取name等于vip的input框
+		let vips=$("input[name='VIP']").val();
+		//如果是会员
+		if(vips==0){
+			//设置会员图标
+		    $("img[name='sss']").attr("src","../images/SVIP2.jpg");
+        }
 		});
 	</script>
 	
@@ -298,52 +312,68 @@ fit: true
 	});
 	//发消息
 	function send() {
-		let f=$("#fsid").val();
-		let c=$("#context").val();
-		$.ajax({
-			url:"../attention/jyinfos",
-			data:{"one":f},
-			success:function (data) {
-				if(data==1){
-					toastr.warning("自己不能给自己发消息哦!")
-				}
-				if(data==0){
-					if(c==undefined || c==null || c==''){
-						toastr.warning("消息不能为空")
-					}else {
-						$("#messagefm").submit();
-						toastr.warning("发送成功")
+		//获取当前登陆人的vip状态
+		let gzv=$("select[name=vip]").val();
+		//如果不是会员
+		if(gzv==1) {
+			//跳转开通会员页面
+			location.href = "../combo/viptc";
+		}else {
+			let f=$("#fsid").val();
+			let c=$("#context").val();
+			$.ajax({
+				url:"../attention/jyinfos",
+				data:{"one":f},
+				success:function (data) {
+					if(data==1){
+						toastr.warning("自己不能给自己发消息哦!")
+					}
+					if(data==0){
+						if(c==undefined || c==null || c==''){
+							toastr.warning("消息不能为空")
+						}else {
+							$("#messagefm").submit();
+							toastr.warning("发送成功")
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 	//关注
 	function gz() {
-		let z=$("#bgj").val();
-		$.ajax({
-			url:"../attention/jygzr",
-			data:{"baid":z},
-			success:function (data) {
-				if(data==1){
-					/*alert("自己不能关注自己哦!");*/
-					toastr.warning("自己不能关注自己哦!");
-				}
-				if(data==2){
-					toastr.warning("已经关注过了哦!")
-				}
-				if(data==0){
-					let xy=$("#bgj").val();
-					/*alert(xy);*/
-					let cg=$("#guanzhu").submit();
-					if(xy!=null || xy!='' || xy!=undefined){
-						toastr.warning("关注成功");
-					}else {
-						toastr.warning("关注失败");
+		//获取当前登陆人的vip状态
+		let gzv=$("select[name=vip]").val();
+		//如果不是会员
+		if(gzv==1){
+			//跳转开通会员页面
+			location.href="../combo/viptc";
+		}else {
+			let z=$("#bgj").val();
+			$.ajax({
+				url:"../attention/jygzr",
+				data:{"baid":z},
+				success:function (data) {
+					if(data==1){
+						/*alert("自己不能关注自己哦!");*/
+						toastr.warning("自己不能关注自己哦!");
+					}
+					if(data==2){
+						toastr.warning("已经关注过了哦!")
+					}
+					if(data==0){
+						let xy=$("#bgj").val();
+						/*alert(xy);*/
+						let cg=$("#guanzhu").submit();
+						if(xy!=null || xy!='' || xy!=undefined){
+							toastr.warning("关注成功");
+						}else {
+							toastr.warning("关注失败");
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 	}
 </script>
 <!-- start-smoth-scrolling -->

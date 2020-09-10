@@ -102,8 +102,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h2 style="color: white;margin-left: 75px;margin-top: 30px">解锁收信/发信&nbsp;&nbsp;快速找对象</h2><br/>
             <h3 style="color: white;margin-left: 75px;">甜蜜会员多项超实用特权,总有一项帮到你</h3>
             <span th:each="v : ${vs}">
-                <form action="../vip/kthy" method="post" id="fms">
-                    <div style="border: 5px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: yellow">
+                <form action="../vip/kthy" method="post" id="fms" style="display: inline-block">
+                    <div style="border: 5px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: yellow;">
                         <input type="hidden" th:value="${v.coid}" name="vd" >
                         <input type="hidden" th:value="${v.coname}" name="coname" >
                         <input type="hidden" th:value="${v.price}" name="price" >
@@ -234,6 +234,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     function zf(fm) {
         $(fm).parent().parent().parent().submit();
+        toastr.warning("成功开通会员哦!");
     }
 
 
