@@ -27,4 +27,8 @@ public interface VipDao extends tk.mybatis.mapper.common.Mapper<Vip> {
 
     @Delete("delete from vip where bmid=#{bmid}")
     int Delbybmid(String bmid);
+
+    //前台查询个人中心我的会员什么时候到期
+    @Select("select v.vtime,b.bmname,b.VIP from vip v left join basic_message b on v.bmid=b.bmid where v.bmid=#{bmid}")
+    List<Map<String,Object>> vipdq(@Param("bmid") String bmid);
 }

@@ -234,4 +234,24 @@ public class VipController {
         return 1;
     }
 
+    //前台个人中心我的会员
+    @RequestMapping("myvip")
+    public String myvip(HttpServletRequest request, Model model){
+        //获取当前登录人id
+        String bmid = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
+                }
+            }
+        }
+        System.out.println("bmid:" + bmid);
+        List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
+        System.out.println("到期数据:"+vipdq);
+        model.addAttribute("myvip",vipdq);
+        return "vipdqtime";
+    }
 }

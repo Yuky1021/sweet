@@ -14,7 +14,7 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("select count(bmid) from basic_message")
     public int totalCount();
 
-    @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid limit 4")
+    @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid limit 8")
     public List<Map<String,Object>> findAll();
     //根据用户状态查询
     @Select("select  * from basic_message where state=1")
@@ -67,9 +67,14 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
 
     //前台首页显示男友
     @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.sex=1 limit 4")
-    public List<Map<String,Object>> findmen();
+    List<Map<String,Object>> findmen();
 
     @Update("update basic_message set vip=#{vip} where bmid=#{bmid}")
     int UpdVipBybmid(@Param("vip") int vip,@Param("bmid") String bmid);
+
+
+    //前台根据当前登陆人id获取是否是会员
+    @Select("select * from basic_message where bmid=#{bmid}")
+    List<Basic_message> vipId(@Param("bmid") String bmid);
 
 }

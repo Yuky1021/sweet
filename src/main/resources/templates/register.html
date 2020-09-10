@@ -19,7 +19,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     function hideURLbar() {
         window.scrollTo(0, 1);
-    } </script>
+    }
+    </script>
     <!-- //for-mobile-apps -->
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="../css/font-awesome.css" rel="stylesheet">
@@ -109,6 +110,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span>密码</span>
                     <input id="Pwdd" type="password" onblur="Pwdjy()" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" required />
                 </div>
+                <div class="w3_form_body_grid w3_form_body_grid1">
+                    <span>确认密码</span>
+                    <input id="qrPwdd" type="password" onblur="qrPwdjy()" name="qrPwd" placeholder="请输入确认密码,保证两次秘密要一致" required />
+                </div>
                 <div class="w3_form_body_grid">
                     <input type="text" id="VCD" style="margin-left: 97px" name="Vcode" placeholder="请输入您的验证码" required />
                     <span class="sim-button button12" id="getVcode" style="margin-top: 0px;width: 100px;height: 50px;line-height: 22px;text-align: center">
@@ -189,6 +194,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         */
         $().UItoTop({easingType: 'easeOutQuart'});
     });
+
+
 </script>
 
 
@@ -258,7 +265,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         if(!isPwd(param)){
             return false;
         }
-
+        return true;
+    }
+    function qrPwdjy(){
+        let param = $("#Pwdd").val();
+        let qrparam=$("#qrPwdd").val();
+        if (param!=qrparam)
+        {
+            toastr.warning("两次密码不一致");
+            return false;
+        }
         return true;
     }
 
@@ -298,7 +314,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             if (Tcode==Vcode){
                 flag=true;
             }
-            if(Phonejy()&&Pwdjy()&&flag){
+            if(qrPwdjy()&&Phonejy()&&Pwdjy()&&flag){
                 return true;
             }
             return false;

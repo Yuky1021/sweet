@@ -174,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="team-row">
 			<span th:each="b : ${list}">
-				<div class="col-md-3 w3ls-team-grids" style="margin-right: 20px">
+				<div class="col-md-3 w3ls-team-grids" style="margin-right: 20px;margin-bottom: 15px">
 					<h5 th:text="${b.bmname}"></h5>
 					<p th:text="${b.soliloquy}"></p>
 					<div class="agileits-social">
@@ -182,7 +182,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a th:href="@{'../basic_message/findAllById?bmid='+${b.bmid}}"><i class="fa fa-twitter">详情信息</i></a></li>
 						</ul>
 					</div>
-					<div class="team-img" style="background:url(../images/love2.png) no-repeat;height: 363px">
+					<div class="team-img" style="background:url(../images/love2.png) no-repeat;height: 363px;">
 						<img th:src="${b.pic}" alt="">
 					</div>
 				</div>
