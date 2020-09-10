@@ -96,13 +96,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <h2 style="color: white;margin-left: 75px;margin-top: 30px">优先排序在最前</h2><br/>
             <h3 style="color: white;margin-left: 75px;">吸引更多的关注，增加相亲成功概率</h3>
             <span th:each="t : ${ts}">
-            <div style="border: 8px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: white">
-
-                <p style="margin-top: 25px;margin-left: 50px;color: #8a6d3b;font-size: 20px;" th:text="${t.tname}"></p><br>
-                <!--<p style="font-size: 40px;margin-left: 50px;color: #8a6d3b;display: inline-block" th:text="${t.days}"></p><span style="color: #8a6d3b;font-size: 40px">元/天</span><br>-->
-                <span style="margin-left: 50px;color: #8a6d3b;">超值会员价</span><p style="font-size: 35px;display: inline-block;color: #8a6d3b" th:text="${t.price}"></p><span style="color: #8a6d3b">元</span><br><br>
-                <h2><a data-toggle="modal" href="#kaitong"><span class="label label-warning" style="margin-left: 70px;color: #8a6d3b; background: yellow;width:120px;">立即开通</span></a></h2>
-            </div>
+                <form method="post" action="../Top/ktzd" style="display: inline-block">
+                    <div style="border: 8px solid yellow;width: 300px;height: 280px;display: inline-block;margin-top: 80px;margin-left: 60px;background: white">
+                        <input type="hidden" th:value="${t.topid}" name="vd" >
+                        <input type="hidden" th:value="${t.tname}" name="tname" >
+                        <input type="hidden" th:value="${t.price}" name="price" >
+                        <p style="margin-top: 25px;margin-left: 50px;color: #8a6d3b;font-size: 20px;" th:text="${t.tname}"></p><br>
+                        <!--<p style="font-size: 40px;margin-left: 50px;color: #8a6d3b;display: inline-block" th:text="${t.days}"></p><span style="color: #8a6d3b;font-size: 40px">元/天</span><br>-->
+                        <span style="margin-left: 50px;color: #8a6d3b;">超值会员价</span><p style="font-size: 35px;display: inline-block;color: #8a6d3b" th:text="${t.price}"></p><span style="color: #8a6d3b">元</span><br><br>
+                        <input type="hidden" name="topid" th:value="${t.topid}">
+                        <h2>
+                            <a href="#" onclick="zf(this)"><span class="label label-warning" style="margin-left: 70px;color: #8a6d3b; background: yellow;width:120px;">立即开通</span></a>
+                        </h2>
+                    </div>
+                </form>
             </span>
             <p style="margin-left: 60px;margin-top: 60px;color: yellow;font-size: 20px">-------------------------------------------------&nbsp;&nbsp;置顶尊享特权&nbsp;&nbsp;-------------------------------------------------</p><br><br><br>
             <span style="margin-left: 70px;margin-top:50px" >优先排序在最前</span><span style="margin-left:120px;margin-top:50px">吸引更多的关注，增加相亲成功概率</span><span style="margin-left: 120px;margin-top:50px">让您飞速脱单</span><span style="margin-left: 120px;margin-top:50px">更多精准筛选条件</span><br><br><br><br><br>
@@ -110,42 +117,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
 
     </div>
-</div>
-<!--模态框-->
-<div class="modal fade" id="kaitong" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    开通置顶
-                </h4>
-            </div>
-            <div class="modal-body">
-                <!--主体内容-->
-                <form role="form" action="" method="post" id="Infofm">
-                    <img src="../images/myzfb.jpg" style="width: 100px;height: 100px;">
-
-					<!--<span th:each="q : ${qs}">
-						<div id="con"></div>
-                        &lt;!&ndash;当前用户&ndash;&gt;
-						<input type="hidden" name="one" id="dqid">
-                        &lt;!&ndash;回复的用户&ndash;&gt;
-						<input type="hidden" name="tow" th:value="${q.dmid}" id="hfid">
-					</span>
-                    <div class="form-group">
-                        <textarea name="context" maxlength="100" id="context" placeholder="请输入你要回复的内容" style="width: 563px;height: 100px"></textarea>
-                    </div>-->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="reply()">前往支付</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
 </div>
 
 <!-- //typography -->
@@ -230,8 +201,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             event.preventDefault();
             $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
         });
-    });
 
+    });
+    function zf(fm) {
+        $(fm).parent().parent().parent().submit();
+    }
 
     /*$(document).ready(function () {
         let vipd=$("input[name='vd']");

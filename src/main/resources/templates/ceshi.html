@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#xiadan").submit();
+        })
+    </script>
+</head>
+<body>
+<form action="../pay" method="post" id="xiadan">
+    <input type="hidden" name="WIDout_trade_no" th:value="${WIDout_trade_no}" required><br/>
+    <input type="hidden" name="WIDsubject" th:value="${WIDsubject}" required><br/>
+    <input type="hidden" name="WIDtotal_amount" th:value="${WIDtotal_amount}" required><br/>
+    <input type="hidden" name="WIDbody"><br/>
+    <input type="submit" value="下单">
+</form>
+</body>
+</html>

@@ -1,6 +1,9 @@
 package com.aaa.entity;
 
+import javax.persistence.Id;
+
 public class Top_basic {
+    @Id
     private String tbid;
     private String bmid;
     private String jstime;

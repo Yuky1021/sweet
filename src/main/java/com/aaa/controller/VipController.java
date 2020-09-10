@@ -6,6 +6,7 @@ import com.aaa.dao.VipDao;
 import com.aaa.entity.Pay_fees;
 import com.aaa.entity.Vip;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,7 +68,7 @@ public class VipController {
 
     //前台开通会员
     @RequestMapping("kthy")
-    public String kthy(HttpServletRequest request, Vip vip, String coid, String coname, Integer price) {
+    public String kthy(Model model, HttpServletRequest request, Vip vip, String coid, String coname, Integer price) {
         //获取当前登录人id
         System.out.println("coid:" + coid + " vip:" + vip);
         String bmid = "0";
@@ -119,7 +120,7 @@ public class VipController {
             } else {
                 stri = Integer.toString(i);
             }
-            str = str.replace(s, stri);
+            str =str.substring(0,4)+"-"+stri+"-"+str.substring(8);
             System.out.println("改过后的日期字符串:" + str);
             //最终保存在数据库中的日期
             vip.setVtime(str);
@@ -139,7 +140,7 @@ public class VipController {
             } else {
                 stri = Integer.toString(i);
             }
-            str = str.replace(s, stri);
+            str =str.substring(0,4)+"-"+stri+"-"+str.substring(8);
             System.out.println("改过后的日期字符串:" + str);
             //最终保存在数据库中的日期
             vip.setVtime(str);
@@ -170,7 +171,10 @@ public class VipController {
         final int insetPay = pay_feesDao.insert(pay_fees);
         System.out.println(insetPay > 0 ? "缴费记录保存成功" : "缴费记录保存失败");
 
-        return "redirect:/basic_message/listAll";
+        model.addAttribute("WIDout_trade_no",new Date().getTime());
+        model.addAttribute("WIDsubject",pay_fees.getPeoject());
+        model.addAttribute("WIDtotal_amount",pay_fees.getMoney());
+        return "ceshi";
     }
 
     //修改日期字符串年份加1
@@ -223,6 +227,7 @@ public class VipController {
                 System.out.println("会员已到期");
                 int delbybmid = vipDao.Delbybmid(bmid);
                 int i = basic_messageDao.UpdVipBybmid(1, bmid);
+                System.out.println(delbybmid + " " + i);
                 return 0;
             }
         };
