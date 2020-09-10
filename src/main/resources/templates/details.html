@@ -152,8 +152,8 @@
     <div class="form-group">
         <label for="children">有无子嗣</label>
         <select class="form-control" id="children" name="children" style="width: 500px">
-            <option value="0" th:selected="${Dlist.children=='0'}">无</option>
-            <option value="1" th:selected="${Dlist.children=='1'}">有</option>
+            <option value="0" th:selected="${Dlist.children==0}">无</option>
+            <option value="1" th:selected="${Dlist.children==1}">有</option>
         </select>
     </div>
 
@@ -191,12 +191,12 @@
     <div class="form-group">
         <label for="monthly">月收入</label>
         <select class="form-control" id="monthly" name="monthly" style="width: 500px">
-            <option value="0" th:selected="${Dlist.monthly==0}">3000以下</option>
+            <option value="0" th:selected="${Dlist.monthly==0}">3k以下</option>
             <option value="3000" th:selected="${Dlist.monthly==3000}">3k-4k</option>
             <option value="4000" th:selected="${Dlist.monthly==4000}">4k-5k</option>
             <option value="5000" th:selected="${Dlist.monthly==5000}">5k-6k</option>
             <option value="6000" th:selected="${Dlist.monthly==6000}">6k-8k</option>
-            <option value="8000" th:selected="${Dlist.monthly==8000}">8k-1k</option>
+            <option value="8000" th:selected="${Dlist.monthly==8000}">8k-10k</option>
             <option value="10000" th:selected="${Dlist.monthly==10000}">10k-20k</option>
             <option value="20000" th:selected="${Dlist.monthly==20000}">20k-50k</option>
             <option value="10000" th:selected="${Dlist.monthly==10000}">50k以上</option>

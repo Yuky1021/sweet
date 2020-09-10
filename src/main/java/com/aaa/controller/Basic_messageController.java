@@ -356,9 +356,6 @@ public class Basic_messageController {
         return "redirect:Selmate";
     }
 
-
-
-
     //前台首页显示男友
     @RequestMapping("showMen")
     public String showMen(HttpServletRequest request){
