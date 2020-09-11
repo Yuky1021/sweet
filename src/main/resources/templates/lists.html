@@ -92,6 +92,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //breadcrumbs -->
+<!--判断当前登陆人的会员状态-->
+<span th:each="lvs : ${sfvip}">
+	<select name="vip" style="display: none">
+		<option th:value="${lvs.vip}"></option>
+	</select>
+</span>
 <!-- typography -->
 <div class="typography elite-app">
     <div class="container">
@@ -372,22 +378,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     //回复消息
     function reply() {
-        let c = $("#context").val();
-        if (c == null || c == '' || c == undefined) {
-            alert("回复信息不能为空");
-        } else {
-            //设置为同步
-            $.ajaxSettings.async = false;
-            $.post("Add",
-                {one: tow, context: c},
-                function (data) {
-                    if (data != null) {
-                        $("#con").append("<div style='text-align: right'><p style=\"padding: 0px;color: #3a87ad\">" + b + "</p><p style=\"padding: 0px;font-size: 16px\">" + data.con + "</p><p style=\"padding: 0px;font-size: 12px;color: grey\">" + data.time + "</p></div><hr>");
-                        $("#context").val("");
-                    }
-                });
-            //恢复为异步
-            $.ajaxSettings.async = true;
+        //获取当前登陆人的vip状态
+        let gzv=$("select[name=vip]").val();
+        //如果不是会员
+        if(gzv==1) {
+            //跳转开通会员页面
+            location.href = "../combo/viptc";
+        }else {
+            let c = $("#context").val();
+            if (c == null || c == '' || c == undefined) {
+                alert("回复信息不能为空");
+            } else {
+                //设置为同步
+                $.ajaxSettings.async = false;
+                $.post("Add",
+                    {one: tow, context: c},
+                    function (data) {
+                        if (data != null) {
+                            $("#con").append("<div style='text-align: right'><p style=\"padding: 0px;color: #3a87ad\">" + b + "</p><p style=\"padding: 0px;font-size: 16px\">" + data.con + "</p><p style=\"padding: 0px;font-size: 12px;color: grey\">" + data.time + "</p></div><hr>");
+                            $("#context").val("");
+                        }
+                    });
+                //恢复为异步
+                $.ajaxSettings.async = true;
+            }
         }
     }
 

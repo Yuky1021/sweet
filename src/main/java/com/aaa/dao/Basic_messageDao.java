@@ -13,14 +13,13 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     //count
     @Select("select count(bmid) from basic_message")
     public int totalCount();
-
-    @Select("select bs.*,ds.soliloquy,ds.pic from basic_message bs left join details_message ds on bs.bmid=ds.bmid limit 8")
+    //前台首页置顶
+    @Select("select * from basic_message b left join details_message d on b.bmid=d.bmid left join top_basic t on b.bmid=t.bmid   where 1=1 and state=0 order by t.tbid desc limit 8")
     public List<Map<String,Object>> findAll();
     //根据用户状态查询
     @Select("select  * from basic_message where state=1")
     public List<Basic_message> findAllByStart();
     //前台找男友查询
-    //    //    @
     @Select("select bs.*,ds.* from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.sex=1")
     public List<Map<String,Object>> zhaoboy();
     //前台找女友

@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.MessageDao;
+import com.aaa.entity.Basic_message;
 import com.aaa.entity.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,6 +108,7 @@ public class MessageController {
     }
 
     //前台消息列表查询
+    //前台消息列表查询
     @RequestMapping("qlists")
     public String qlists(HttpServletRequest request, Model model) {
         try {
@@ -133,17 +135,16 @@ public class MessageController {
             model.addAttribute("qs", maps);
             model.addAttribute("bmid",bmid);
             System.out.println("消息列表查询:" + maps);
-
-            //添加系统信息
-            final List<Message> selmsg = messageDao.Selmsg(bmid);
-            System.out.println("系统信息:"+selmsg);
-            model.addAttribute("selmsg",selmsg);
+            //根据当前登陆人查询是否是会员
+            List<Basic_message> vv=basic_messageDao.vipId(bmid);
+            System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
+            model.addAttribute("sfvip",vv);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return "lists";
     }
+
 
     //前台查看消息
     @RequestMapping("infos")
@@ -160,7 +161,6 @@ public class MessageController {
             }
         }
         System.out.println("bmid:" + bmid);
-        System.out.println("tow:"+tow);
         System.out.println("查看消息");
         List<Map<String, Object>> s = messageDao.infos(tow, bmid);
         System.out.println("消息:" + s);

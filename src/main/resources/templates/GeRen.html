@@ -46,11 +46,11 @@
                             <a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">消息中心<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../message/qlists">消息列表</a></li>
-                                <li><a href="icons.html">我的关注</a></li>
+                                <li><a href="../attention/mygz">我的关注</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">联系我们</a></li>
-                        <li><a href="geren.html">会员</a></li>
+                        <li><a href="../send_paste/pinglun">交友论坛</a></li>
+                        <li><a href="../combo/viptc">会员</a></li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -79,13 +79,15 @@
 </div>
 
 <!--顶部-->
-
+<!--判断会员状态-->
 <span th:each="v : ${myvip}">
     <input type="hidden" th:value="${v.VIP}" name="VIP" id="pvip">
 </span>
-
+<!--判断是否是置顶-->
+<span th:each="z : ${zd}">
+    <input type="hidden" th:value="${z.bmname}" name="bmname" id="myzds">
+</span>
 <!--主体-->
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
@@ -95,6 +97,7 @@
             <a href="../life_message/Selmate" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">生活信息</a>
             <a href="../choose_mate/Selmate" target="myframe" class="list-group-item"><img src="../images/tubiao1.png">择偶标准</a>
             <a href="../vip/myvip" target="myframe" class="list-group-item" id="mya"><img src="../images/tubiao1.png">我的会员</a>
+            <a href="../vip/mydztime" target="myframe" class="list-group-item" id="myzd"><img src="../images/tubiao1.png">我的置顶</a>
         </div>
         <div class="col-sm-10">
             <iframe name="myframe" src="../Details_message/SelDetails" width="1110" height="540" frameborder="0" scrolling="Yes"></iframe>
@@ -106,15 +109,25 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+        //获取会员状态
         let vs=$("#pvip").val();
+        console.log("会员状态:"+vs);
+        //获取是否开过置顶
+        let zddd=$("#myzds").val();
+        console.log("置顶内容:"+zddd);
+        //如果是会员设置会员标志
+        if(vs==0){
+            $("#imgvip").attr("src","../images/SVIP.png");
+        }
         //查询不到数据
         if(vs==undefined){
             //没有开会员，隐藏会员导航
             $("#mya").css("visibility","hidden");
         }
-        //如果是会员设置会员标志
-        if(vs==0){
-            $("#imgvip").attr("src","../images/SVIP.png");
+        //判断是否开了会员
+        if(zddd==undefined || zddd==''){
+            //隐藏置顶导航
+            $("#myzd").css("visibility","hidden");
         }
     });
 

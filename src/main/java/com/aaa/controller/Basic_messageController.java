@@ -3,6 +3,7 @@ package com.aaa.controller;
 import com.aaa.accessAPI.PhoneCode;
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.ForeignKeyAddDao;
+import com.aaa.dao.Top_basicDao;
 import com.aaa.dao.VipDao;
 import com.aaa.entity.Basic_message;
 import com.aaa.util.PageHelpers;
@@ -35,7 +36,9 @@ public class Basic_messageController {
     ForeignKeyAddDao fkd;
     @Resource
     VipDao vipDao;
-
+    @Resource
+    Top_basicDao top_basicDao;
+    //校验如果没有图片设置默认图片，如果没有内心独白设置默认内心独白
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
         ) {
@@ -73,6 +76,7 @@ public class Basic_messageController {
         return basic_messageDao.findAllByStart();
     }
 
+    //前台首页置顶
     @RequestMapping("listAll")
     public String listAll(Model model){
         List<Map<String,Object>> l=basic_messageDao.findAll();
@@ -99,16 +103,6 @@ public class Basic_messageController {
         return "girlfriend";
     }
 
-    @RequestMapping("s")
-    public String s(Model model){
-        return "index";
-    }
-
-    @RequestMapping("c")
-    public String c(Model model){
-        model.addAttribute("list",basic_messageDao.findAll());
-        return "login";
-    }
     //前台详情
     @RequestMapping("findAllById")
     public String findAllById(HttpServletRequest request,Model model,@Param("bmid") Integer bmid){
@@ -313,8 +307,11 @@ public class Basic_messageController {
         }
         System.out.println("bmid:" + bmid);
         List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
-        System.out.println("到期数据:"+vipdq);
+        System.out.println("点个人中心GeRen到期数据:"+vipdq);
         model.addAttribute("myvip",vipdq);
+        List<Map<String,Object>> zds=top_basicDao.sfzd(bmid);
+        System.out.println("点个人中心GeRen置顶数据:"+zds);
+        model.addAttribute("zd",zds);
         return "GeRen";
     }
 

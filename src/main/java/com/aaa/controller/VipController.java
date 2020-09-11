@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.dao.Basic_messageDao;
 import com.aaa.dao.Pay_feesDao;
+import com.aaa.dao.Top_basicDao;
 import com.aaa.dao.VipDao;
 import com.aaa.entity.Pay_fees;
 import com.aaa.entity.Vip;
@@ -32,6 +33,8 @@ public class VipController {
     @Resource
     Basic_messageDao basic_messageDao;
 
+    @Resource
+    Top_basicDao top_basicDao;
     @RequestMapping(value = "findAll", produces = "application/json")
     @ResponseBody
     public List<Map<String, Object>> findAll() {
@@ -252,6 +255,32 @@ public class VipController {
         List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
         System.out.println("到期数据:"+vipdq);
         model.addAttribute("myvip",vipdq);
+        List<Map<String,Object>> zds=top_basicDao.sfzd(bmid);
+        System.out.println("置顶数据:"+zds);
+        model.addAttribute("zd",zds);
         return "vipdqtime";
+    }
+
+    //前台个人中心我的置顶
+    @RequestMapping("mydztime")
+    public String mydztime(HttpServletRequest request,Model model){
+        //获取当前登录人id
+        String bmid = "0";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                if (cookie.getName().equals("bmid")) {
+                    bmid = cookie.getValue();
+                }
+            }
+        }
+        List<Map<String, Object>> vipdq = vipDao.vipdq(bmid);
+        System.out.println("到期数据:"+vipdq);
+        model.addAttribute("myvip",vipdq);
+        List<Map<String,Object>> zds=top_basicDao.sfzd(bmid);
+        System.out.println("置顶数据:"+zds);
+        model.addAttribute("zd",zds);
+        return "zddqtime";
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface ComboDao  extends tk.mybatis.mapper.common.Mapper<Combo> {
 
     //前台查询套餐
-    @Select("select * from combo order by coid  desc")
+    @Select("select * from combo where 1=1 and state=0 order by coid  desc")
     List<Combo> showtVIP();
 
 
