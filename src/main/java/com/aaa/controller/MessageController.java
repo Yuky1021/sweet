@@ -166,7 +166,6 @@ public class MessageController {
         System.out.println("消息:" + s);
         return s;
     }
-
     //前台发送消息
     @RequestMapping("add")
     public String add(Message message,HttpServletRequest request){
