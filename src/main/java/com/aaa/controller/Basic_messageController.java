@@ -167,23 +167,26 @@ public class Basic_messageController {
     //   重定向:redirect
     //跳转登录页面
     @RequestMapping("tologin")
-    public String toLogin(HttpServletRequest request){
+    public String toLogin(HttpServletRequest request,Model model,String mimacw){
         System.out.println("tologin------");
         final HttpSession session = request.getSession();
         final Object loginName = session.getAttribute("loginName");
         final Object loginPwd = session.getAttribute("loginPwd");
         System.out.println(loginName);
         System.out.println(loginPwd);
+        System.out.println("mimacw"+mimacw+" "+(mimacw!=null));
+        if (mimacw!=null){
+            model.addAttribute("mimacw","账号密码不正确");
+        }
         return "login";
     }
 
     @RequestMapping("Login")
-    public String Login(Basic_message bm, HttpServletRequest request,HttpServletResponse response,int checktf){
+    public String Login(Basic_message bm, HttpServletRequest request,HttpServletResponse response,int checktf,Model model){
         //如果账号密码为空
         if (null == bm.getNumber() || null == bm.getPwd()) {
             return "redirect:/";
         }
-
         //查看账号密码是否正确
         //账号密码登录
         final int i = basic_messageDao.UPlogin(bm.getNumber(),bm.getPwd());
@@ -221,6 +224,7 @@ public class Basic_messageController {
             }
             return "redirect:listAll";
         }
+        model.addAttribute("mimacw","账号密码不正确");
         return "redirect:tologin";
     }
 

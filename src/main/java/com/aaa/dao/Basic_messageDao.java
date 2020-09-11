@@ -31,10 +31,10 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     public List<Map<String,Object>> findAllById(@Param("bmid") Integer bmid);
 
     //用户密码登录
-    @Select("SELECT COUNT(bmid) num FROM basic_message WHERE number=#{number} AND pwd=#{pwd}")
+    @Select("SELECT COUNT(bmid) num FROM basic_message WHERE number=#{number} AND pwd=#{pwd} AND state=0")
     public int UPlogin(@Param("number") String number,@Param("pwd") String pwd);
     //手机号密码登录
-    @Select("SELECT COUNT(bmid) num FROM basic_message WHERE phone=#{number} AND pwd=#{pwd}")
+    @Select("SELECT COUNT(bmid) num FROM basic_message WHERE phone=#{number} AND pwd=#{pwd} AND state=0")
     public int PPlogin(@Param("number") String number,@Param("pwd") String pwd);
 
     //根据电话查询id

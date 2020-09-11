@@ -118,6 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                 </div>
                 <input type="submit" value="登录">
+                <input type="hidden" th:value="${mimacw}" id="mimacw"/>
             </form>
 
         </div>
@@ -278,6 +279,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     }
     //验证码
     $(function () {
+        //自定义弹出框位置
+        toastr.options = {
+            "positionClass": "toast-top-center"//弹出窗的位置上方居中
+        };
+        let mimacw=$("#mimacw").val();
+        if(mimacw!=""){
+            toastr.warning(mimacw);
+        };
         let Vcode;
         let flag=false;
 
