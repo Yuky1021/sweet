@@ -139,6 +139,10 @@ public class MessageController {
             List<Basic_message> vv=basic_messageDao.vipId(bmid);
             System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
             model.addAttribute("sfvip",vv);
+            //添加系统信息
+            final List<Message> selmsg = messageDao.Selmsg(bmid);
+            System.out.println("系统信息:"+selmsg);
+            model.addAttribute("selmsg",selmsg);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
