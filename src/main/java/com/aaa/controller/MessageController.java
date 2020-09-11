@@ -133,9 +133,15 @@ public class MessageController {
             model.addAttribute("qs", maps);
             model.addAttribute("bmid",bmid);
             System.out.println("消息列表查询:" + maps);
+
+            //添加系统信息
+            final List<Message> selmsg = messageDao.Selmsg(bmid);
+            System.out.println("系统信息:"+selmsg);
+            model.addAttribute("selmsg",selmsg);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
         return "lists";
     }
 
@@ -154,6 +160,7 @@ public class MessageController {
             }
         }
         System.out.println("bmid:" + bmid);
+        System.out.println("tow:"+tow);
         System.out.println("查看消息");
         List<Map<String, Object>> s = messageDao.infos(tow, bmid);
         System.out.println("消息:" + s);

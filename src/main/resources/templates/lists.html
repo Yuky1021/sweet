@@ -5,7 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Elite Match a Matrimonial Category Bootstrap Responsive Website Template | Codes :: W3layouts</title>
     <!-- for-mobile-apps -->
@@ -100,7 +100,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="bs-docs-example wow fadeInUp animated" data-wow-delay=".5s">
             <table class="table table-hover">
-					<span th:each="q : ${qs}">
+                <tbody id="XTXX">
+                <tr style="height: 100px;background: #bfb992">
+                    <td><img src="../images/glyxx.png" style="height: 110px;width: 110px;"></td>
+                    <td>
+                        <div style="margin-top: 40px;font-size: 20px;font-weight: bold">系统消息</div>
+                    </td>
+                    <td>
+                        <div th:text="${selmsg}" id="SFYC" style="display: none"></div>
+                    </td>
+                    <td>
+                        <p style="padding-bottom: 15px;padding-top: 15px">
+                            查看信息
+                        </p>
+                        <a data-toggle="modal" href="#Infos2"><span class="label label-info">点击查看</span></a>
+                    </td>
+                </tr>
+                </tbody>
+                <span th:each="q : ${qs}">
                         <tbody>
                             <tr style="height: 100px">
                               <td><img th:src="${q.pic}" style="height: 110px;width: 110px;"></td>
@@ -109,7 +126,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <input type="hidden" name="tow" th:value="${q.tow}">
                                     <input type="hidden" name="one" th:value="${q.one}">
                                     <input type="hidden" name="VIP" th:value="${q.VIP}">
-                                    <div name="bb" style="margin-top: 10px"><b>昵称:</b><b th:text="${q.bmname}" name="b2"></b></div>
+                                    <div name="bb" style="margin-top: 10px"><b>昵称:</b><b th:text="${q.bmname}"
+                                                                                         name="b2"></b></div>
                                     <div style="margin-top: 10px"><b>年龄:</b><b th:text="${q.age}"></b></div>
                                     <div style="margin-top: 10px"><b>身高:</b><b th:text="${q.height}"></b></div>
                                 </td>
@@ -119,10 +137,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </td>
                               <td>
                                   <p style="padding-bottom: 15px;padding-top: 15px">
-                                    <span th:text="${q.ct}"></span>条信息
+                                    查看信息
                                   </p>
                                   <input type="hidden" th:value="${q.tow}">
-                                  <a data-toggle="modal" href="#Infos" onclick="xinxis(this)"><span class="label label-info">点击查看</span></a>
+                                  <a data-toggle="modal" href="#Infos" onclick="xinxis(this)"><span
+                                          class="label label-info">点击查看</span></a>
                               </td>
                             </tr>
                         </tbody>
@@ -155,6 +174,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <!--<button type="submit" class="btn btn-default">发送</button>-->
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" onclick="reply()">回复</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--模态框2-->
+<div class="modal fade" id="Infos2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">
+                    消息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="conn" th:each="sel : ${selmsg}">
+                    <div style='text-align: left'>
+                        <p style="padding: 0px;color: #3a87ad">系统消息</p>
+                        <p style="padding: 0px;font-size: 16px" th:text="${sel.context}"></p>
+                        <p style="padding: 0px;font-size: 12px;color: grey" th:text="${sel.ftime}"></p>
+                    </div>
+                    <hr>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -262,7 +311,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         */
         $().UItoTop({easingType: 'easeOutQuart'});
         let inp = $("input[name='tow']");
-        let tows=[];
+        let tows = [];
 
         for (let i = 0; i < inp.length; i++) {
             let tow1 = inp.eq(i).val();
@@ -274,19 +323,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
         }
         for (let i = 0; i < inp.length; i++) {
-            let one=  inp.eq(i).next().val();
+            let one = inp.eq(i).next().val();
             let tow1 = inp.eq(i).val();
-            if (tows.indexOf(one)<0){
+            if (tows.indexOf(one) < 0 && tows.length > 1) {
                 let tby = inp.eq(i).parent("td").parent("tr").parent("tbody");
                 inp.eq(i).parent("td").next().next().children("input[type='hidden']").val(one);
-                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name","yes");
+                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name", "yes");
                 tby.show();
-            }else{
-                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name","no");
+            } else {
+                inp.eq(i).parent("td").next().next().children("input[type='hidden']").attr("name", "no");
             }
         }
+        // 判断是否隐藏系统信息
+        let sfyc=$("#SFYC").html();
+        if(sfyc=="[]"){
+            $("#XTXX").hide();
+        };
     });
-
 
 
     //查看信息
@@ -338,9 +391,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }
     }
 
-    function tz(sd){
-        let hre="../basic_message/findAllById?bmid="+$(sd).parent("td").next().children("input[type='hidden']").val();
-        window.location.href=hre;
+    function tz(sd) {
+        let hre = "../basic_message/findAllById?bmid=" + $(sd).parent("td").next().children("input[type='hidden']").val();
+        window.location.href = hre;
     }
 
 </script>

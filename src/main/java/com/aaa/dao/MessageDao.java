@@ -16,7 +16,7 @@ public interface MessageDao extends tk.mybatis.mapper.common.Mapper<Message> {
 
     //前台消息列表
     /*@Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on m.one=bm.bmid left join details_message dm on m.tow=dm.dmid where m.one=#{one} or m.tow=#{one} group by tow")*/
-    @Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,bm.VIP,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on if(m.tow=#{one},m.one=bm.bmid ,m.tow=bm.bmid ) left join details_message dm on bm.bmid=dm.bmid where m.one=#{one} or m.tow=#{one} group by tow,one")
+    @Select("select m.*,bm.bmid,bm.bmname,bm.age,bm.address,bm.height,bm.VIP,dm.dmid,dm.pic,count(tow) ct from message m left join basic_message bm on if(m.tow=#{one},m.one=bm.bmid ,m.tow=bm.bmid ) left join details_message dm on bm.bmid=dm.bmid where m.one=#{one} or m.tow=#{one} group by tow,one having m.tow is not null")
     List<Map<String,Object>> qlists(@Param("one") String one);
 
     //前台查询消息
@@ -25,4 +25,7 @@ public interface MessageDao extends tk.mybatis.mapper.common.Mapper<Message> {
 
     @Insert("insert into message(one,tow,context,ftime,mstate) values (#{one},null,#{context},now(),1)")
    int addMes(@Param("context") String context,@Param("one") String one);
+
+    @Select("select * from message where tow is null and one=#{one}")
+    List<Message> Selmsg(@Param("one") String one);
 }
