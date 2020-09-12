@@ -76,6 +76,41 @@ public class Basic_messageController {
         return basic_messageDao.findAllByStart();
     }
 
+    //根据账号查询数据
+    @RequestMapping("SelbyNumber")
+    @ResponseBody
+    public Map<String, Object> SelbyNumber(String number){
+        final Map<String, Object> selbynumber = basic_messageDao.Selbynumber(number);
+        System.out.println("SelbyNumber:"+selbynumber);
+        return selbynumber;
+    }
+
+    @RequestMapping("UpdBybmid")
+    @ResponseBody
+    public int UpdBybmid(String bmid,String friendid){
+        System.out.println(bmid+" "+friendid);
+        final int i1 = basic_messageDao.QJWupd(bmid, friendid, "2");
+        final int i2 = basic_messageDao.QJWupd(friendid, bmid, "2");
+        System.out.println(i1+" "+i2);
+        return 1;
+    }
+
+    @RequestMapping("Selbyfriendid")
+    @ResponseBody
+    public Map<String,Object> Selbyfriendid(String friendid){
+        Map<String,Object> selbyfriendid = basic_messageDao.Selbyfriendid(friendid);
+        System.out.println(selbyfriendid);
+        return selbyfriendid;
+    }
+
+    @RequestMapping("UpdFriendBybmid")
+    @ResponseBody
+    public void UpdFriendBybmid(String bmid){
+        int i=basic_messageDao.QJWupd(bmid,"0","0");
+        System.out.println(i);
+    }
+
+
     //前台首页置顶
     @RequestMapping("listAll")
     public String listAll(Model model){
@@ -101,6 +136,23 @@ public class Basic_messageController {
         setpics(gs);
         model.addAttribute("girls",gs);
         return "girlfriend";
+    }
+
+    @RequestMapping("friendisnull")
+    @ResponseBody
+    public int friendisnull(String bmid){
+        final int i = basic_messageDao.SelFriend(bmid);
+        return i;
+    }
+
+    //求交往
+    @RequestMapping("QJW")
+    @ResponseBody
+    public int QJW(String hisId,String thisbmid){
+        System.out.println(hisId+" "+thisbmid);
+        final int i = basic_messageDao.QJWupd(hisId,thisbmid,"1");
+        System.out.println(i);
+        return i;
     }
 
     //前台详情
@@ -130,6 +182,7 @@ public class Basic_messageController {
         List<Basic_message> vv=basic_messageDao.vipId(bmids);
         System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
         model.addAttribute("sfvip",vv);
+        model.addAttribute("bmids",bmids);
         return "single1";
     }
     //前台根据id进入举报页面

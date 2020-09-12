@@ -29,6 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
+<input type="hidden" th:value="${bmids}" id="bmid">
 <!--banner start here-->
 <div class="banner-w3ls inner-banner-agileits" id="home">
 	<div class="container">
@@ -98,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="matches elite-app">
 		<div class="container">
 		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}" style="display: inline-block;margin-left: 500px;"></h3>&nbsp;<img src="../images/baitu.png" style="width: 20px;height: 20px;" name="sss">
+			<h3 th:text="${l.truename}" style="display: inline-block;margin-left: 500px;"></h3><i class="fa fa-heart" th:if="${l.friendstate eq 2}" style="color: red"></i>&nbsp;<img src="../images/baitu.png" style="width: 20px;height: 20px;" name="sss">
 			<!--用于获取会员状态-->
             <input type="hidden" name="VIP" th:value="${l.VIP}">
 		</div>
@@ -130,6 +131,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<a href="#" onclick="gz()">关注</a>
 						<a data-toggle="modal" href="#FaMessage" >发消息</a>
 						<a th:href="@{'../basic_message/findAllByIdt?bmid='+${l.bmid}}">举报此人</a>
+						<a href="#" onclick="qjw(this)" th:name="${l.bmid}">求交往</a>
+						<input type="hidden" th:value="${l.friendstate}">
 					</li>
 				</ul>
 			</div>
@@ -310,6 +313,43 @@ fit: true
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 	});
+	//求交往
+	function qjw(jwval){
+		let hisId=$(jwval).attr("name");
+		let bm=$("#bmid").val();
+		let friendstate=$(jwval).next().val();
+		let friend="0";
+		//查询是否发过邀请
+		$.ajaxSettings.async = false;
+		$.post("friendisnull", {bmid: bm}, function (data) {
+			friend=data;
+		});
+		$.ajaxSettings.async = true;
+
+		//判断是否请求过用户
+		if(friend=="0") {
+			//判断用户是否被请求过
+			if (friendstate == "0") {
+				//判断是否是自己
+				if (hisId == bm) {
+					toastr.warning("这是您自己啊亲");
+				} else {
+					$.ajaxSettings.async = false;
+					$.post("QJW", {hisId: hisId, thisbmid: bm}, function (data) {
+						if (data == "1") {
+							toastr.success("您的交往请求已经提交");
+							$(jwval).next().val("1")
+						}
+					});
+					$.ajaxSettings.async = true;
+				}
+			} else {
+				toastr.warning("已经被邀请过了")
+			}
+		}else{
+			toastr.warning("只能发送一个邀请,不能花心哦!")
+		}
+	}
 	//发消息
 	function send() {
 		//获取当前登陆人的vip状态

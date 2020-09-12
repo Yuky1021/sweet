@@ -76,4 +76,18 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("select * from basic_message where bmid=#{bmid}")
     List<Basic_message> vipId(@Param("bmid") String bmid);
 
+    //交往状态修改
+    @Update("update basic_message set friendstate=#{friendstate},friendid=#{thisbmid} where bmid=#{hisId}")
+    int QJWupd(@Param("hisId") String hisId,@Param("thisbmid") String thisbmid,@Param("friendstate") String friendstate);
+
+    @Select("select count(bmid) from basic_message where friendstate=#{bmid}")
+    int SelFriend(String bmid);
+
+    //查询是否有交往请求
+    @Select("select * from basic_message where number=#{number} and friendstate=1")
+    Map<String,Object> Selbynumber(String number);
+
+    @Select("select * from basic_message where bmid=#{friendid}")
+    Map<String,Object> Selbyfriendid(String friendid);
+
 }

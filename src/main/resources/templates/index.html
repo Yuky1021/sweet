@@ -338,6 +338,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <a href="#YesOrNo" data-toggle="modal" id="tcBox" style="display: none">click</a>
 <a href="#YesOrNo2" data-toggle="modal" id="tpBox" style="display: none">click2</a>
+<a href="#YesOrNo3" data-toggle="modal" id="jwBox" style="display: none">click3</a>
 
 <!--确认取消提示框-->
 <div class="modal fade" id="YesOrNo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -380,6 +381,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
 				<a class="btn btn-primary" href="../Top/showtop">确认</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--确认取消提示框3-->
+<div class="modal fade" id="YesOrNo3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title" id="exampleModalLabel3">交往申请</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label class="control-label"><b id="friendName" style="color: #00acee"></b>对您发出交往申请,是否同意?</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="JJ(this)">拒绝</button>
+				<a class="btn btn-primary"  data-dismiss="modal" onclick="TY(this)">同意</a>
+				<input type="hidden" id="updatebmid">
+				<input type="hidden" id="friendid">
 			</div>
 		</div>
 	</div>
@@ -446,13 +472,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$("#nc").html(n);
 					$("#num").html(d);
 					$("#lujing").attr("href","../basic_message/findAllById?bmid="+bmid);
+
+
+					$.post("SelbyNumber",{number:d},function (data) {
+						if(data.friendstate=="1"){
+							//显示提示框
+							$("#jwBox").click();
+							//设置id
+							$("#updatebmid").val(bmid);
+							$("#friendid").val(data.friendid);
+							$.post("Selbyfriendid",{friendid:data.friendid},function(da) {
+								$("#friendName").html(da.bmname);
+							})
+						}
+					})
 				},
 				error:function (err) {
 					console.log(err);
 				}
 			})
 		}
-
 	});
 </script>
 <script type="text/javascript" src="../js/jquery.flexisel.js"></script>
@@ -495,9 +534,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			if(data==0){
 				$("#tpBox").click();
 			}
-		})
-		
+		});
 	});
+	function TY(th) {
+		let val=$(th).next().val();
+		let val2=$(th).next().next().val();
+		$.post("UpdBybmid",{bmid:val,friendid:val2},function(data) {
+			if(data==1){
+				toastr.success("成功交往");
+			}
+		})
+	}
+	function JJ(th) {
+		let val=$(th).next().next().val();
+		$.post("UpdFriendBybmid",{bmid:val},function(data) {
+		})
+	}
 </script>
 <!--//responsive slider -->
 <!--pop-up-box -->
