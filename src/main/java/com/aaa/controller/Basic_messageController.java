@@ -246,11 +246,13 @@ public class Basic_messageController {
             session.setAttribute("loginName", bm.getNumber());
             session.setAttribute("loginPwd", bm.getPwd());
             if(i==1){
+                System.out.println(bm.getNumber());
                 final int bmid = basic_messageDao.getBmidByNumber(bm.getNumber());
                 System.out.println("bmid:"+bmid);
                 Cookie BmidCookie=new Cookie("bmid",Integer.toString(bmid));
                 BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
+                System.out.println(3);
             }
             if(j==1){
                 final int bmid = basic_messageDao.getBmidByPhone(bm.getNumber());
@@ -258,6 +260,7 @@ public class Basic_messageController {
                 Cookie BmidCookie=new Cookie("bmid",Integer.toString(bmid));
                 BmidCookie.setPath("/");
                 response.addCookie(BmidCookie);
+                System.out.println(4);
             }
 
             //如果选了复选框
@@ -269,6 +272,7 @@ public class Basic_messageController {
                 response.addCookie(NameCookie);
                 response.addCookie(PwdCookie);
             }
+            System.out.println(5);
             return "redirect:listAll";
         }
         model.addAttribute("mimacw","账号密码不正确");

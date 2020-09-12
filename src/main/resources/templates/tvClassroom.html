@@ -94,23 +94,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="tittle-agileinfo">
             <h3>课堂</h3>
         </div>
-        <div class="team-row">
+<!--主题开始-->
+        <div style="width: 1200px;">
             <span th:each="b : ${cv}">
-                <div class="col-md-3 w3ls-team-grids" style="margin-right: 20px;margin-bottom: 10px;height: 324px;width: 254px">
-                    <div th:text="${b.info}"></div>
-                    <input type="hidden" th:value="${b.voids}">
-                    <div class="agileits-social">
-                        <ul>
-                            <li><a onclick="setVoids(this)" href="#openTV"  data-toggle="modal"><i class="fa fa-twitter"><b class="fa fa-caret-square-o-right"></b></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="team-img" style='background:url("/sweet/images/bijiben.jpg") no-repeat;background-size:100% 100%;'>
-                        <h5 th:text="${b.cvname}" style="margin-top: 120px"></h5>
-                    </div>
+                <div style="width: 250px;height: 250px;background: black;margin-left: 40px;margin-bottom: 10px;float: left">
+                    <video width="250" height="200" controls  th:src="${b.voids}" id="TV"  type="video/mp4">
+                        您的浏览器不支持 HTML5 video播放器
+                    </video>
+                    <p style="width: 250px;height: 50px;color: white;font-weight: bold" th:text="${b.cvname}"></p>
                 </div>
             </span>
         </div>
     </div>
+    <!--主题结束-->
 </section>
 <!--//team-->
 <!-- footer -->
@@ -150,22 +146,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--/footer -->
-
-
-<!--模态框-->
-<div class="modal fade" id="openTV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <button type="button" id="closeb" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right: 10px">
-                &times;
-            </button>
-            <video width="600" height="400" controls  src="/sweet/TV/01.mp4" id="TV"  type="video/mp4">
-            您的浏览器不支持 HTML5 video播放器
-            </video>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-
 
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
