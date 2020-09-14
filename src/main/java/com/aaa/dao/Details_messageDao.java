@@ -1,5 +1,6 @@
 package com.aaa.dao;
 
+import com.aaa.entity.Basic_message;
 import com.aaa.entity.Details_message;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,7 @@ public interface Details_messageDao extends tk.mybatis.mapper.common.Mapper<Deta
     List<Map<String,Object>> showajid(@Param("bmid") String bmid);
 
 
+    //前台新用户信息拦截
+    @Select("select height from basic_message where bmid=#{bmid}")
+    List<Basic_message> ljuser(@Param("bmid") String bmid);
 }

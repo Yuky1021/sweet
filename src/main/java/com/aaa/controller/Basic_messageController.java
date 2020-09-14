@@ -1,10 +1,7 @@
 package com.aaa.controller;
 
 import com.aaa.accessAPI.PhoneCode;
-import com.aaa.dao.Basic_messageDao;
-import com.aaa.dao.ForeignKeyAddDao;
-import com.aaa.dao.Top_basicDao;
-import com.aaa.dao.VipDao;
+import com.aaa.dao.*;
 import com.aaa.entity.Basic_message;
 import com.aaa.util.PageHelpers;
 import com.github.pagehelper.PageHelper;
@@ -38,6 +35,8 @@ public class Basic_messageController {
     VipDao vipDao;
     @Resource
     Top_basicDao top_basicDao;
+    @Resource
+    Details_messageDao dm;
     //校验如果没有图片设置默认图片，如果没有内心独白设置默认内心独白
     public void setpics( List<Map<String,Object>> l){
         for (Map<String,Object> a : l
@@ -171,19 +170,27 @@ public class Basic_messageController {
             }
         }
         System.out.println("当前登陆人:" + bmids);
-
         System.out.println("bid:"+bmid);
-        List<Map<String,Object>> fid=basic_messageDao.findAllById(bmid);
-        setpics(fid);
-        model.addAttribute("listId",fid);
-        System.out.println(basic_messageDao.findAllById(bmid));
 
-        //根据当前登陆人查询是否是会员
-        List<Basic_message> vv=basic_messageDao.vipId(bmids);
-        System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
-        model.addAttribute("sfvip",vv);
-        model.addAttribute("bmids",bmids);
-        return "single1";
+        List<Basic_message> lj=dm.ljuser(bmids);
+        System.out.println("前台拦截信息:"+lj);
+        Integer h= lj.get(0).getHeight();
+        System.out.println("身高:"+h);
+        if(h==0){
+            return "redirect:GeRen";
+        }else {
+            List<Map<String,Object>> fid=basic_messageDao.findAllById(bmid);
+            setpics(fid);
+            model.addAttribute("listId",fid);
+            System.out.println("fid:"+fid);
+
+            //根据当前登陆人查询是否是会员
+            List<Basic_message> vv=basic_messageDao.vipId(bmids);
+            System.out.println("根据当前登陆人查询是否是会员信息:"+vv);
+            model.addAttribute("sfvip",vv);
+            model.addAttribute("bmids",bmids);
+            return "single1";
+        }
     }
     //前台根据id进入举报页面
     @RequestMapping("findAllByIdt")

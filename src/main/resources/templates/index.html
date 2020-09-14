@@ -191,7 +191,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </section>
 <!--//mobile-app -->
-
 <!-- testimonials -->
 <div class="test" id="clients">
 	<div class="container">
@@ -228,6 +227,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!-- //testimonials -->
+
 <!--/gallery-->
 <div class="gallery" id="gallery">
 	<div class="tittle-agileinfo">
@@ -482,7 +482,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							$("#updatebmid").val(bmid);
 							$("#friendid").val(data.friendid);
 							$.post("Selbyfriendid",{friendid:data.friendid},function(da) {
-								$("#friendName").html(da.bmname);
+								$("#friendName").html("<a href='../basic_message/findAllById?bmid="+da.bmid+"'>"+da.bmname+"</a>");
 							})
 						}
 					})

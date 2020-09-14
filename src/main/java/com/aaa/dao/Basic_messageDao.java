@@ -26,7 +26,7 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("select bs.*,ds.* from basic_message bs left join details_message ds on bs.bmid=ds.bmid where bs.sex=0")
     public List<Map<String,Object>> zhaogirl();
     //根据ID查询
-    @Select("select ds.*,bs.*,cm.*,lm.* from details_message ds left join basic_message bs on ds.bmid=bs.bmid left join choose_mate cm on bs.bmid=cm.bmid left join life_message lm on bs.bmid=lm.bmid where ds.bmid=#{bmid}")
+    @Select("select ds.*,bs.*,cm.*,lm.* from basic_message bs left join details_message ds on ds.bmid=bs.bmid left join choose_mate cm on bs.bmid=cm.bmid left join life_message lm on bs.bmid=lm.bmid where ds.bmid=#{bmid}")
     public List<Map<String,Object>> findAllById(@Param("bmid") Integer bmid);
 
     //用户密码登录

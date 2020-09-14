@@ -1,6 +1,7 @@
 package com.aaa.controller;
 
 import com.aaa.dao.Details_messageDao;
+import com.aaa.entity.Basic_message;
 import com.aaa.entity.Details_message;
 import com.aaa.util.PageHelpers;
 import com.github.pagehelper.PageHelper;
@@ -113,4 +114,5 @@ public class Details_messageController {
         System.out.println("数据:"+as.get(0));
         return as.get(0);
     }
+
 }
