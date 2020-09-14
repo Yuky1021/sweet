@@ -258,6 +258,9 @@ public class VipController {
         List<Map<String,Object>> zds=top_basicDao.sfzd(bmid);
         System.out.println("置顶数据:"+zds);
         model.addAttribute("zd",zds);
+        List<Map<String,Object>> list=pay_feesDao.list(bmid);
+        System.out.println("繳費数据:"+list);
+        model.addAttribute("list",list);
         return "vipdqtime";
     }
 

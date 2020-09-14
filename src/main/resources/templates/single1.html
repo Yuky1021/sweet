@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="matches elite-app">
 		<div class="container">
 		<div class="tittle-agileinfo">
-			<h3 th:text="${l.truename}" style="display: inline-block;margin-left: 500px;"></h3><i class="fa fa-heart" th:if="${l.friendstate eq 2}" style="color: red"></i>&nbsp;<img src="../images/baitu.png" style="width: 20px;height: 20px;" name="sss">
+			<h3 th:text="${l.bmname}" style="display: inline-block;margin-left: 500px;"></h3><i class="fa fa-heart" th:if="${l.friendstate eq 2}" style="color: red"></i>&nbsp;<img src="../images/baitu.png" style="width: 20px;height: 20px;" name="sss">
 			<!--用于获取会员状态-->
             <input type="hidden" name="VIP" th:value="${l.VIP}">
 		</div>
@@ -142,19 +142,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<p class="para-agileits-w3layouts"><span>Hi!, Iam <span th:text="${l.truename}"></span></span><p th:if="${l.soliloquy} == null ">尚未填写内心独白</p><p th:if="${l.soliloquy} != null "><p th:text="${l.soliloquy}"></p></p><p>Wish to get a heart white head not to separate</p></p>
 			</div>
 		</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;">
-				<h3>工作 生活</h3>
-				<ul>
-					<li><span>买房情况:</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}" style="display: inline-block"></p></li>
-					<li><span>买车情况:</span><p th:text="${l.buycar==0?'未买车':'已买车'}" style="display: inline-block"></p></li>
-					<li><span>是否抽烟:</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}" style="display: inline-block"></p></li>
-					<li><span>是否喝酒:</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}" style="display: inline-block"></p></li>
-					<li><span>喜欢的城市:</span><p th:text="${l.city}" style="display: inline-block"></p></li>
-					<li><span>喜欢的书:</span><p th:text="${l.book}" style="display: inline-block"></p></li>
-					<li><span>爱好:</span><p th:text="${l.hobby}" style="display: inline-block"></p></li>
-				</ul>
-			</div>
-			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;">
+			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;width: 350px;margin-left:50px">
 				<h3>择偶 条件</h3>
 				<ul>
 					<li><span>最大年龄:</span><p th:text="${l.lage}" style="display: inline-block"></p></li>
@@ -171,6 +159,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><span>月收入:</span><p th:text="${l.monthly}" style="display: inline-block"></p></li>
 				</ul>
 			</div>
+			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;width: 350px">
+				<h3>工作 生活</h3>
+				<ul>
+					<li><span>买房情况:</span><p th:text="${l.buyhouse==0?'未买房':'已买房'}" style="display: inline-block"></p></li>
+					<li><span>买车情况:</span><p th:text="${l.buycar==0?'未买车':'已买车'}" style="display: inline-block"></p></li>
+					<li><span>是否抽烟:</span><p th:text="${l.smoking==0?'不抽烟':'抽烟'}" style="display: inline-block"></p></li>
+					<li><span>是否喝酒:</span><p th:text="${l.drink==0?'不喝酒':'喝酒'}" style="display: inline-block"></p></li>
+				</ul>
+			</div>
+			<div class="col-md-6 person-info-agileits-w3layouts" style="height:250px;width: 350px">
+				<h3>兴趣 爱好</h3>
+				<ul>
+					<li><span>最喜欢的城市:</span><p th:text="${l.city}" style="display: inline-block"></p></li>
+					<li><span>最喜欢的书:</span><p th:text="${l.book}" style="display: inline-block"></p></li>
+					<li><span>最喜欢做的事:</span><p th:text="${l.hobby}" style="display: inline-block"></p></li>
+				</ul>
+			</div>
+
 		</div>
 
 </div>

@@ -11,8 +11,6 @@ public class Class_vido {
     private String cvname;
     @Column
     private String voids;
-    @Column
-    private String info;
 
     public Integer getCvid() {
         return cvid;
@@ -38,21 +36,12 @@ public class Class_vido {
         this.voids = voids;
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
     @Override
     public String toString() {
         return "Class_vido{" +
                 "cvid=" + cvid +
                 ", cvname='" + cvname + '\'' +
                 ", voids='" + voids + '\'' +
-                ", info='" + info + '\'' +
                 '}';
     }
 }

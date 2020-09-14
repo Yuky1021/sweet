@@ -102,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="team-row">　
             <span th:each="b : ${ct}">　
-            <div id="left" style="background-color: #0b0b0b;border: 1px solid white;height: 200px;width: 300px;float: left;color: white">
+            <div id="left" style="background-color:plum;border: 1px solid white;height: 200px;width: 300px;float: left;color: white">
                 <h3 th:text="${b.ctname}" style="margin-top: 80px"></h3>
             </div>
              <input type="hidden" th:value="${b.info}">
@@ -112,22 +112,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a onclick="setTest(this)" href="#openTV" data-toggle="modal">展开.....</a>
             </div>
             </span>
-            <!--<span th:each="b : ${ct}">-->
-                <!--<div class="col-md-3 w3ls-team-grids"-->
-                     <!--style="margin-right: 20px;margin-bottom: 10px;height: 324px;width: 254px">-->
-                    <!--<input type="hidden" th:value="${b.info}">-->
-                    <!--<div class="agileits-social">-->
-                        <!--<ul>-->
-                            <!--<li style="margin-top: 50px"><a onclick="setTest(this)" href="#openTV"-->
-                                                            <!--data-toggle="modal"><i class="fa fa-twitter">详</i></a></li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                    <!--<div class="team-img"-->
-                         <!--style='background:url("/sweet/images/bijiben.jpg") no-repeat;background-size:100% 100%;'>-->
-                        <!--<h5 th:text="${b.ctname}" style="margin-top: 120px"></h5>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</span>-->
         </div>
     </div>
 </section>

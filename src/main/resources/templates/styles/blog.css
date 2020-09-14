@@ -102,6 +102,7 @@ p a:hover
 	background: #ffa07f;
 }
 p a:hover::after
+p a:hover::after
 {
 	opacity: 0.2;
 }

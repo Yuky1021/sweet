@@ -62,7 +62,7 @@
                 },);
             //恢复为异步
             $.ajaxSettings.async = true;
-            let col="<table class=\"table\" style='margin-left: 90px;width: 1170px;margin-top: 10px;'><caption style=\"font-weight: bold;font-size: 24px;background: black;color: white\">&nbsp;&nbsp;回帖区</caption>";
+            let col="<table class=\"table\" style='margin-left: 80px;width: 1170px;margin-top: 10px;'><caption style=\"font-weight: bold;font-size: 24px;background: black;color: white\">&nbsp;&nbsp;回帖区</caption>";
             for (let i=0;i<f.length;i++){
                 let row=f[i];
                 let drow='<div><tr><td style="font-weight: bold;background: grey;color: white">用户名:'+row.bmname+'</td></tr><tr><td style="font-size: 16px;font-weight: bold;background: grey;color: white">&nbsp;&nbsp;&nbsp;&nbsp;'+row.context+'</td></tr><tr><td style="text-align:right;font-weight: bold;background: grey;color: white">'+transferTime(row.commention)+'</td></tr></div>';
@@ -182,7 +182,7 @@
 
 </div>
 <!---写评论------>
-<div class="form-group" style="width: 1170px;margin-left: 89px;background: grey">
+<div class="form-group" style="width: 1170px;margin-left: 80px;background: grey">
     <label for="pl" style="color: white;margin-top: 15px;">&nbsp;&nbsp;回复独白</label>
     <!--<input type="text" name="soliloquy" th:value="${Dlist.soliloquy}" class="form-control" id="soliloquy" style="width: 300px">-->
     <textarea class="form-control" id="pl" style="height: 100px; color: black!important;color: white" placeholder="写下您的评论...."></textarea>

@@ -80,7 +80,7 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Update("update basic_message set friendstate=#{friendstate},friendid=#{thisbmid} where bmid=#{hisId}")
     int QJWupd(@Param("hisId") String hisId,@Param("thisbmid") String thisbmid,@Param("friendstate") String friendstate);
 
-    @Select("select count(bmid) from basic_message where friendstate=#{bmid}")
+    @Select("select count(bmid) from basic_message where friendid=#{bmid}")
     int SelFriend(String bmid);
 
     //查询是否有交往请求
