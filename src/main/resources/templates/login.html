@@ -89,6 +89,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
+
+<span th:each="h : ${hx}">
+    <input type="hidden" name="number" th:value="${h.number}" id="hxnum">
+    <input type="hidden" name="pwd" th:value="${h.pwd}" id="hxpwd">
+</span>
 <!-- //breadcrumbs -->
 <div class="login elite-app">
     <div class="container">
@@ -99,8 +104,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <form action="Login" method="post">
                 <input type="hidden" name="checktf" id="checktf" value="1">
                 <div class="w3_form_body_grid">
-                    <span>用户名/电话</span>
-                    <input type="text" onblur="namejy()" id="lname" name="number" placeholder="请输入用户名/电话号" maxlength="15" required>
+                    <span>账号/电话</span>
+                    <input type="text" onblur="namejy()" id="lname" name="number" placeholder="请输入用户名/电话号" maxlength="15" required >
                 </div>
                 <div class="w3_form_body_grid">
                     <span>密码</span>
@@ -209,7 +214,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <span id="phonesfzc" th:text="${Eorr}"></span>
 <!--/footer -->
-
+<a href="#YesOrNo" data-toggle="modal" id="tcBox" style="display: none">click</a>
+<!--确认取消提示框-->
+<div class="modal fade" id="YesOrNo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">新用户</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group" style="text-align: center">
+                        你的账号是:<b id="wpp"></b><br>
+                        你的密码是:<b id="wmm"></b>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
 
@@ -328,6 +355,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     })
 
+
 </script>
 
 
@@ -335,6 +363,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- smooth scrolling -->
 <script type="text/javascript">
     $(document).ready(function() {
+        let hn=$("#hxnum").val();
+        let hp=$("#hxpwd").val();
+        if(hn!=null || hn!=''){
+            $("#tcBox").click();
+        }
         /*
             var defaults = {
             containerID: 'toTop', // fading element id
@@ -344,6 +377,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             };
         */
         $().UItoTop({ easingType: 'easeOutQuart' });
+        let n=$("#hxnum").val();
+        console.log("数据回显账号:"+n);
+        let p=$("#hxpwd").val();
+        console.log("数据回显密码:"+p);
+        $("#wpp").html(n);
+        $("#wmm").html(p);
     });
 </script>
 
