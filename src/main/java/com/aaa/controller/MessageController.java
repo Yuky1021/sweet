@@ -75,7 +75,7 @@ public class MessageController {
         return "index";
     }
 
-    //前台发送消息
+    //前台发送消息2
     @RequestMapping("Add")
     @ResponseBody
     public Map<String, Object> Add(Message message, HttpServletRequest request) {
