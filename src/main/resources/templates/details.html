@@ -42,6 +42,11 @@
             if(!isNullTeshu(val)){
                 return false;
             }
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+            if(pattern.test(val)){
+                toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+                return false;
+            }
             return true;
         }
 
@@ -51,13 +56,23 @@
             if(!isNullTeshu(val)){
                 return false;
             }
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+            if(pattern.test(val)){
+                toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+                return false;
+            }
             return true;
         }
-
         //身份证校验
         function sfzjy(){
             let val = $("#Idcard").val();
+            let re = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/;
+            //调用方法判断是否为空
             if(!isNullTeshu(val)){
+                return false;
+            }
+            if (!re.test(val)) {
+                toastr.warning("身份证号格式错误");
                 return false;
             }
             return true;
@@ -132,11 +147,11 @@
 
     <div class="form-group">
         <label for="truename">真实名称</label>
-        <input type="text" onblur="namejy()" name="truename" th:value="${Dlist.truename}" class="form-control" id="truename" style="width: 500px">
+        <input type="text" onblur="namejy()" name="truename" th:value="${Dlist.truename}" class="form-control" id="truename" style="width: 500px" maxlength="6">
     </div>
     <div class="form-group">
         <label for="natives">籍贯</label>
-        <input type="text" onblur="jiguanjy()" name="natives" th:value="${Dlist.natives}" class="form-control" id="natives" style="width: 500px">
+        <input type="text" onblur="jiguanjy()" name="natives" th:value="${Dlist.natives}" class="form-control" id="natives" style="width: 500px" maxlength="20">
     </div>
 
     <div class="form-group">

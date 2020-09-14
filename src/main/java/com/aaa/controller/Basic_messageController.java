@@ -211,6 +211,10 @@ public class Basic_messageController {
 
     }
 
+    //定义变量接收注册时的账号
+    public String wphone="";
+    //定义变量接收注册时的手密码
+    public String wpwd="";
     //   重定向:redirect
     //跳转登录页面
     @RequestMapping("tologin")
@@ -225,6 +229,10 @@ public class Basic_messageController {
         if (mimacw!=null){
             model.addAttribute("mimacw","账号密码不正确");
         }
+        //回显账号
+        List<Basic_message> hxnumber=basic_messageDao.showNumber(wphone);
+        System.out.println("回显账号数据:"+hxnumber);
+        model.addAttribute("hx",hxnumber);
         return "login";
     }
 
@@ -305,7 +313,12 @@ public class Basic_messageController {
         fkd.IFKdetails_message(bmid);
         fkd.IFKlife_message(bmid);
         fkd.IFKvip(bmid);
-
+        //获取注册人的账号号赋值到外面
+        wphone=bm.getPhone();
+        System.out.println("注册人的账号:"+wphone);
+        //获取注册人的账密码赋值到外面
+        wpwd=bm.getPwd();
+        System.out.println("注册人的密码:"+wpwd);
 
         return "redirect:tologin";
     }
@@ -436,6 +449,5 @@ public class Basic_messageController {
         return "index";
     }
 
-    ////前台根据当前登陆人id获取是否是会员
 
 }

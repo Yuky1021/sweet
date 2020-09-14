@@ -90,4 +90,8 @@ public interface Basic_messageDao extends tk.mybatis.mapper.common.Mapper<Basic_
     @Select("select * from basic_message where bmid=#{friendid}")
     Map<String,Object> Selbyfriendid(String friendid);
 
+
+    //前台注册回显账号
+    @Select("select bmid,number,bmname,pwd from basic_message where phone=#{phone}")
+    List<Basic_message> showNumber(@Param("phone") String phone);
 }
