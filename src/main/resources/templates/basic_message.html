@@ -37,8 +37,14 @@
             if (!isNull(val)){
                 return false;
             }
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+            if(pattern.test(val)){
+                toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+                return false;
+            }
             return true;
         }
+        //日期校验
         function csrqjy(){
             let val=$("#birthday").val();
             //调用方法判断是否为空
@@ -52,6 +58,11 @@
             let val=$("#bmname").val();
             //调用方法判断是否为空
             if (!isNull(val)){
+                return false;
+            }
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+            if(pattern.test(val)){
+                toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
                 return false;
             }
             return true;
@@ -182,7 +193,7 @@
     <div class="form-group">
         <label for="weight">体重</label>
         <select class="form-control" id="weight" name="weight" style="width: 500px">
-            <option value="0" th:selected="${Dlist.weight==0}">不限</option>
+            <option value="0" th:selected="${Dlist.weight==0}">保密</option>
             <option value="35" th:selected="${Dlist.weight==35}">35公斤左右</option>
             <option value="40" th:selected="${Dlist.weight==40}">40公斤左右</option>
             <option value="45" th:selected="${Dlist.weight==45}">45公斤左右</option>
@@ -202,14 +213,14 @@
     <div class="form-group">
         <label for="height">身高</label>
         <select class="form-control" id="height" name="height" style="width: 500px">
-            <option value="0" th:selected="${Dlist.height==0}">不限</option>
-            <option value="140" th:selected="${Dlist.height==140}">140cm以上</option>
-            <option value="150" th:selected="${Dlist.height==150}">150cm以上</option>
-            <option value="160" th:selected="${Dlist.height==160}">160cm以上</option>
-            <option value="170" th:selected="${Dlist.height==170}">170cm以上</option>
-            <option value="180" th:selected="${Dlist.height==180}">180cm以上</option>
-            <option value="190" th:selected="${Dlist.height==190}">190cm以上</option>
-            <option value="200" th:selected="${Dlist.height==200}">200cm以上</option>
+            <option value="0" th:selected="${Dlist.height==0}">保密</option>
+            <option value="140" th:selected="${Dlist.height==140}">140cm左右</option>
+            <option value="150" th:selected="${Dlist.height==150}">150cm左右</option>
+            <option value="160" th:selected="${Dlist.height==160}">160cm左右</option>
+            <option value="170" th:selected="${Dlist.height==170}">170cm左右</option>
+            <option value="180" th:selected="${Dlist.height==180}">180cm左右</option>
+            <option value="190" th:selected="${Dlist.height==190}">190cm左右</option>
+            <option value="200" th:selected="${Dlist.height==200}">200cm左右</option>
         </select>
     </div>
     <div class="form-group">

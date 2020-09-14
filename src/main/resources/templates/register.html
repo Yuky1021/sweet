@@ -104,18 +104,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <form id="reForm" action="Register" method="post">
                 <div class="w3_form_body_grid">
                     <span>手机号</span>
-                    <input id="Phone" onblur="Phonejy()" type="text" name="Phone" placeholder="请输入您的手机号" required />
+                    <input id="Phone" onblur="Phonejy()" type="text" name="Phone" placeholder="请输入您的手机号" maxlength="11"required />
                 </div>
                 <div class="w3_form_body_grid w3_form_body_grid1">
                     <span>密码</span>
-                    <input id="Pwdd" type="password" onblur="Pwdjy()" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" required />
+                    <input id="Pwdd" type="password" onblur="Pwdjy()" name="Pwd" placeholder="请输入您的密码,密码6-12位,由子母和数字组成" maxlength="12" required />
                 </div>
                 <div class="w3_form_body_grid w3_form_body_grid1">
                     <span>确认密码</span>
-                    <input id="qrPwdd" type="password" onblur="qrPwdjy()" name="qrPwd" placeholder="请输入确认密码,保证两次秘密要一致" required />
+                    <input id="qrPwdd" type="password" onblur="qrPwdjy()" name="qrPwd" placeholder="请输入确认密码,保证两次秘密要一致" maxlength="12" required />
                 </div>
                 <div class="w3_form_body_grid">
-                    <input type="text" id="VCD" style="margin-left: 97px" name="Vcode" placeholder="请输入您的验证码" required />
+                    <input type="text" id="VCD" style="margin-left: 97px" name="Vcode" onblur="yzm()" placeholder="请输入您的验证码" maxlength="6" required />
                     <span class="sim-button button12" id="getVcode" style="margin-top: 0px;width: 100px;height: 50px;line-height: 22px;text-align: center">
                         获取验证码
                     </span>
@@ -123,7 +123,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <input type="submit" value="注册"/>
             </form>
         </div>
-
         <div class="col-md-4 login-right-info">
             <h3 class="subhead-agileits">甜蜜APP，助你成功寻爱</h3>
            <p class="para-agileits-w3layouts">你的爱情，我牵线——甜蜜交友网</p>
@@ -175,7 +174,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!--/footer -->
-
 <!-- js -->
 <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
 
@@ -235,13 +233,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             i=30;
         }
     }
+
     //校验手机号
     function Phonejy(){
         let p=$("#Phone").val();
+        let re = /^1[3456789]\d{9}$/;
         //判断是否为空
         if(!isNull(p)){return false;}
         //判断手机号格式是否正确
-        if(!isPhone(p)){return false;}
+        if (!re.test(p)) {
+            toastr.warning("手机号格式错误");
+            return false;
+        }
         //判断手机号是否已注册
         let f=0;
         //设置为同步
@@ -268,6 +271,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         return true;
     }
     function qrPwdjy(){
+        let p=$("#qrPwdd").val();
+        //判断是否为空
+        if(!isNull(p)){return false;}
+        //判断两次密码是否一致
         let param = $("#Pwdd").val();
         let qrparam=$("#qrPwdd").val();
         if (param!=qrparam)
@@ -321,6 +328,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         } );
 
     });
+    //验证码
+    function yzm(){
+        var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
+        if(pattern.test(val)){
+            toastr.warning('不可包含 " . {} <> # $ " 等特殊字符');
+            return false;
+        }
+        return true;
+    }
 </script>
 <!-- //Calendar -->
 <script type="text/javascript" src="../js/bootstrap-3.1.1.min.js"></script>
